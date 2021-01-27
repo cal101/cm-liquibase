@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 
 public class ColumnPositionMappingStrategy<T> extends HeaderColumnNameMappingStrategy<T> {
-   private String[] columnMapping = new String[]{};
+   private String[] columnMapping = {};
 
    /**
     * Default Constructor.

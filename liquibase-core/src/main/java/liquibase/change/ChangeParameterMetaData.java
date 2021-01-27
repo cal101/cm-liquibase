@@ -36,7 +36,7 @@ public class ChangeParameterMetaData {
     private String displayName;
     private String dataType;
     private Class dataTypeClass;
-    private Type[] dataTypeClassParameters = new Type[0];
+    private Type[] dataTypeClassParameters = {};
     private String since;
     private Set<String> requiredForDatabase;
     private Set<String> supportedDatabases;

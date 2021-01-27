@@ -100,7 +100,7 @@ public class MainTest {
     @Test
     public void testLocalProperties() throws Exception {
 
-        String[] args = new String[]{
+        String[] args = {
                 "--driver=DRIVER",
                 "--username=USERNAME",
                 "--password=PASSWORD",
@@ -175,7 +175,7 @@ public class MainTest {
 
     @Test
     public void migrateWithAllParameters() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--driver=DRIVER",
                 "--username=USERNAME",
                 "--password=PASSWORD",
@@ -210,7 +210,7 @@ public class MainTest {
 
     @Test
     public void falseBooleanParameters() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--promptForNonLocalDatabase=false",
                 "update",
         };
@@ -225,7 +225,7 @@ public class MainTest {
 
     @Test
     public void convertMigrateToUpdate() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--promptForNonLocalDatabase=false",
                 "migrate",
         };
@@ -240,7 +240,7 @@ public class MainTest {
 
     @Test
     public void trueBooleanParameters() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--promptForNonLocalDatabase=true",
                 "update",
         };
@@ -256,7 +256,7 @@ public class MainTest {
 
     @Test(expected = CommandLineParsingException.class)
     public void parameterWithoutDash() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "promptForNonLocalDatabase=true",
                 "update",
         };
@@ -267,7 +267,7 @@ public class MainTest {
 
     @Test
     public void emptyUrlParameter() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--changeLogFile=FILE",
                 "--url=",
                 "update",
@@ -281,7 +281,7 @@ public class MainTest {
 
     @Test
     public void misplacedDiffTypesDataOption() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--changeLogFile=FILE",
                 "--url=TESTFILE",
                 "diffChangeLog",
@@ -298,7 +298,7 @@ public class MainTest {
 
     @Test(expected = CommandLineParsingException.class)
     public void unknownParameter() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--promptForNonLocalDatabase=true",
                 "--badParam=here",
                 "migrate",
@@ -310,7 +310,7 @@ public class MainTest {
 
     @Test
     public void statusVerbose() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--url=URL",
                 "--changeLogFile=FILE",
                 "status",
@@ -328,7 +328,7 @@ public class MainTest {
 
     @Test
     public void statusVerboseWithValue() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--url=URL",
                 "--changeLogFile=FILE",
                 "status",
@@ -348,7 +348,7 @@ public class MainTest {
 
     @Test
     public void statusWithoutVerbose() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--url=URL",
                 "--changeLogFile=FILE",
                 "status",
@@ -510,7 +510,7 @@ public class MainTest {
     @Test
     public void propertiesFileParsingShouldIgnoreUnknownArgumentsIfStrictModeIsFalse() throws Exception {
         Main cli = new Main();
-        String[] args = new String[]{"--strict=false"};
+        String[] args = {"--strict=false"};
 
         cli.parseOptions(args);
         Properties props = new Properties();
@@ -699,7 +699,7 @@ public class MainTest {
 
     @Test
     public void tag() throws Exception {
-        String[] args = new String[]{
+        String[] args = {
                 "--driver=DRIVER",
                 "--username=USERNAME",
                 "--password=PASSWORD",
@@ -729,7 +729,7 @@ public class MainTest {
     @Test
     public void migrateWithEqualsInParams() throws Exception {
         String url = "dbc:sqlserver://127.0.0.1;DatabaseName=dev_nn;user=ffdatabase;password=p!88worD";
-        String[] args = new String[]{
+        String[] args = {
                 "--url=" + url,
                 "migrate",
         };

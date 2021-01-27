@@ -85,7 +85,7 @@ public class MissingDataExternalFileChangeGenerator extends MissingDataChangeGen
                     }
                 }
 
-                String[] dataTypes = new String[0];
+                String[] dataTypes = {};
                 try (
                         FileOutputStream fileOutputStream = new FileOutputStream(fileName);
                         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(

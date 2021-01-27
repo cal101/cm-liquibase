@@ -24,7 +24,7 @@ public class DatabaseTestContext {
     public static final String ALT_TABLESPACE = "LIQUIBASE2";
     private static final String TEST_DATABASES_PROPERTY = "test.databases";
     private static DatabaseTestContext instance = new DatabaseTestContext();
-    private final DatabaseTestURL[] DEFAULT_TEST_DATABASES = new DatabaseTestURL[]{
+    private final DatabaseTestURL[] DEFAULT_TEST_DATABASES = {
             /* @todo Extract all remaining connection string examples into liquibase.integrationtest.properties, then delete this code block. */
             /*
                     new DatabaseTestURL("Cache","jdbc:Cache://"+AbstractIntegrationTest.getDatabaseServerHostname("Cache")+":1972/liquibase"),

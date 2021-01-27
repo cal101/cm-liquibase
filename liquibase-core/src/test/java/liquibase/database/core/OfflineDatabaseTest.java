@@ -38,7 +38,7 @@ public class OfflineDatabaseTest {
 		column2.setType("INT");
 		change.addColumn(column2);
 
-		SqlStatement[] statements = new SqlStatement[0];
+		SqlStatement[] statements = {};
 		try {
 			statements = change.generateStatements(createOfflineDatabase("offline:oracle"));
 		} catch (DatabaseException e) {

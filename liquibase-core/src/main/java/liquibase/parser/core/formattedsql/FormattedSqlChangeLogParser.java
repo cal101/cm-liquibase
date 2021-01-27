@@ -316,7 +316,7 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
 
 
     private SqlPrecondition parseSqlCheckCondition(String body) throws ChangeLogParseException{
-        Pattern[] patterns = new Pattern[] {
+        Pattern[] patterns = {
             Pattern.compile("^(?:expectedResult:)?(\\w+) (.*)", Pattern.CASE_INSENSITIVE),
             Pattern.compile("^(?:expectedResult:)?'([^']+)' (.*)", Pattern.CASE_INSENSITIVE),
             Pattern.compile("^(?:expectedResult:)?\"([^\"]+)\" (.*)", Pattern.CASE_INSENSITIVE)

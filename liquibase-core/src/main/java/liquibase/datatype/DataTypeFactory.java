@@ -136,7 +136,7 @@ public class DataTypeFactory {
         }
 
         // unquote delimited identifiers
-        final String[][] quotePairs = new String[][] {
+        final String[][] quotePairs = {
             { "\"", "\"" }, // double quotes
             { "[",  "]"  }, // square brackets (a la mssql)
             { "`",  "`"  }, // backticks (a la mysql)

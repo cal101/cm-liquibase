@@ -270,7 +270,7 @@ public abstract class AbstractIntegrationTest {
              * For us, this means that we have to wipe both ALT_SCHEMA and ALT_CATALOG to be sure we
              * are doing a thorough cleanup.
              */
-            CatalogAndSchema[] alternativeLocations = new CatalogAndSchema[]{
+            CatalogAndSchema[] alternativeLocations = {
                 new CatalogAndSchema(DatabaseTestContext.ALT_CATALOG, null),
                 new CatalogAndSchema(null, DatabaseTestContext.ALT_SCHEMA),
                 new CatalogAndSchema("LBCAT2", database.getDefaultSchemaName()),
