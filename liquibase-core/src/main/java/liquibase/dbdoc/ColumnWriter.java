@@ -17,7 +17,7 @@ public class ColumnWriter extends HTMLWriter {
 
     @Override
     protected String createTitle(Object object) {
-        return "Changes affecting column \""+object.toString() + "\"";
+        return "Changes affecting column \""+object + "\"";
     }
 
     @Override

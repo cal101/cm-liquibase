@@ -150,7 +150,7 @@ public class MissingUniqueConstraintChangeGenerator extends AbstractChangeGenera
                 found = SnapshotGeneratorFactory.getInstance().has(backingIndexCopy, comparisonDatabase);
             }
         } catch (Exception e) {
-            Scope.getCurrentScope().getLog(getClass()).warning("Error checking for backing index "+backingIndex.toString()+": "+e.getMessage(), e);
+            Scope.getCurrentScope().getLog(getClass()).warning("Error checking for backing index "+backingIndex+": "+e.getMessage(), e);
         }
         return found;
     }

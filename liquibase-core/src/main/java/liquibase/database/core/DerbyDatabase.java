@@ -145,7 +145,7 @@ public class DerbyDatabase extends AbstractJdbcDatabase {
     protected void shutdownDerby(String url, String driverName) throws DatabaseException {
         try {
             if (url.contains(";")) {
-                url = url.substring(0, url.indexOf(";")) + ";shutdown=true";
+                url = url.substring(0, url.indexOf(';')) + ";shutdown=true";
             } else {
                 url += ";shutdown=true";
             }

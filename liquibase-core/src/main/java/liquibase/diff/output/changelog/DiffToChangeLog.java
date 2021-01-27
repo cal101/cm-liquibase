@@ -1066,7 +1066,7 @@ public class DiffToChangeLog {
 
             @Override
             public int hashCode() {
-                return (this.from.toString() + "." + this.to.toString()).hashCode();
+                return (this.from + "." + this.to).hashCode();
             }
         }
     }

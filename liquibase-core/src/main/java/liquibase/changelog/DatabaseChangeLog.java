@@ -509,7 +509,7 @@ public class DatabaseChangeLog implements Comparable<DatabaseChangeLog>, Conditi
                 pathName = pathName + '/';
             }
             LOG.fine("includeAll for " + pathName);
-            LOG.fine("Using file opener for includeAll: " + resourceAccessor.toString());
+            LOG.fine("Using file opener for includeAll: " + resourceAccessor);
 
             String relativeTo = null;
             if (isRelativeToChangelogFile) {

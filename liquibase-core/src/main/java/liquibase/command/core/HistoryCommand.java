@@ -102,7 +102,7 @@ public class HistoryCommand extends AbstractCommand {
             outputStream.println(message);
 
             for (RanChangeSet changeSet : changeSets) {
-                outputStream.println("  " + changeSet.toString());
+                outputStream.println("  " + changeSet);
             }
 
             outputStream.println("");

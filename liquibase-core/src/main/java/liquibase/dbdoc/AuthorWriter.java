@@ -16,7 +16,7 @@ public class AuthorWriter extends HTMLWriter {
 
     @Override
     protected String createTitle(Object object) {
-        return "Changes created by author "+object.toString();
+        return "Changes created by author "+object;
     }
 
     @Override

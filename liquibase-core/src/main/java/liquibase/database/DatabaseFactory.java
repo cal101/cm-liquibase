@@ -314,9 +314,9 @@ public class DatabaseFactory {
         LOG.fine("Properties:");
         for (Map.Entry<Object, Object> entry : driverProperties.entrySet()) {
             if (entry.getKey().toString().toLowerCase().contains("password")) {
-                Scope.getCurrentScope().getLog(getClass()).fine("Key:'" + entry.getKey().toString() + "' Value:'**********'");
+                Scope.getCurrentScope().getLog(getClass()).fine("Key:'" + entry.getKey() + "' Value:'**********'");
             } else {
-                LOG.fine("Key:'" + entry.getKey().toString() + "' Value:'" + entry.getValue().toString() + "'");
+                LOG.fine("Key:'" + entry.getKey() + "' Value:'" + entry.getValue() + "'");
             }
         }
         return driverProperties;

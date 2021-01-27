@@ -503,6 +503,6 @@ public class ChangeParameterMetaData {
 
     @Override
     public String toString() {
-        return (change != null ? (change.toString() + ".") : "") + getParameterName();
+        return (change != null ? (change + ".") : "") + getParameterName();
     }
 }

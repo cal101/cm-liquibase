@@ -39,7 +39,7 @@ public abstract class AbstractChangeLogHistoryService implements ChangeLogHistor
         } else {
             if (foundRan.getLastCheckSum() == null) {
                 try {
-                    Scope.getCurrentScope().getLog(getClass()).info("Updating NULL md5sum for " + changeSet.toString());
+                    Scope.getCurrentScope().getLog(getClass()).info("Updating NULL md5sum for " + changeSet);
                     replaceChecksum(changeSet);
                 } catch (DatabaseException e) {
                     throw new DatabaseException(e);

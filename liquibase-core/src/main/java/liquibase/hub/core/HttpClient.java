@@ -213,7 +213,7 @@ class HttpClient {
                                 throw returnException;
                             }
                             else {
-                                String errorMessage = "Unable to parse '" + loadedObject.toString() + "': " + e.getMessage();
+                                String errorMessage = "Unable to parse '" + loadedObject + "': " + e.getMessage();
                                 throw new LiquibaseHubException(errorMessage, e.getCause());
                             }
                         }

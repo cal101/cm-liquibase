@@ -43,10 +43,10 @@ public class LabelChangeSetFilter implements ChangeSetFilter {
         }
 
         if (labelExpression.matches(changeSet.getLabels()) && LabelExpression.matchesAll(inheritableLabels, labelExpression)) {
-            return new ChangeSetFilterResult(true, "Labels matches '" + labelExpression.toString() + "'", this.getClass());
+            return new ChangeSetFilterResult(true, "Labels matches '" + labelExpression + "'", this.getClass());
         }
         else {
-            return new ChangeSetFilterResult(false, "Labels does not match '" + labelExpression.toString() + "'", this.getClass());
+            return new ChangeSetFilterResult(false, "Labels does not match '" + labelExpression + "'", this.getClass());
         }
     }
 }

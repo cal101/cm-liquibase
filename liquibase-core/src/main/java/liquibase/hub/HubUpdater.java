@@ -260,8 +260,8 @@ public class HubUpdater {
           int driverMajorVersion = conn.getMetaData().getDriverMajorVersion();
           int driverMinorVersion = conn.getMetaData().getDriverMinorVersion();
           Scope.getCurrentScope().getLog(getClass()).fine("Database driver version       " +
-                  Integer.toString(driverMajorVersion) + "." + Integer.toString(driverMinorVersion));
-          integrationDetails.setParameter("db__driverVersion", Integer.toString(driverMajorVersion) + "." + Integer.toString(driverMinorVersion));
+                  driverMajorVersion + "." + driverMinorVersion);
+          integrationDetails.setParameter("db__driverVersion", driverMajorVersion + "." + driverMinorVersion);
       }
       else {
           integrationDetails.setParameter("db__driverVersion", "Unable to determine");

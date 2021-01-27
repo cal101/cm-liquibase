@@ -96,7 +96,7 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
             if (hubChangeLog != null) {
                 return new CommandResult("Changelog '" + changeLogFile +
                         "' is already registered with changeLogId '" + changeLogId + "' to project '" +
-                        hubChangeLog.getProject().getName() + "' with project ID '" + hubChangeLog.getProject().getId().toString() + "'.\n" +
+                        hubChangeLog.getProject().getName() + "' with project ID '" + hubChangeLog.getProject().getId() + "'.\n" +
                         "For more information visit https://docs.liquibase.com.", false);
             } else {
                 return new CommandResult("Changelog '" + changeLogFile +
@@ -197,7 +197,7 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
                     //
                     // Add the changeLogId attribute
                     //
-                    final String outputChangeLogString = " changeLogId=\"" + hubChangeLog.getId().toString() + "\"";
+                    final String outputChangeLogString = " changeLogId=\"" + hubChangeLog.getId() + "\"";
                     if (changeLogString.trim().endsWith("/>")) {
                         changeLogString = changeLogString.replaceFirst("/>", outputChangeLogString + "/>");
                     }
@@ -211,7 +211,7 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
                 // Formatted SQL changelog
                 //
                 String newChangeLogString = changeLogString.replaceFirst("--(\\s*)liquibase formatted sql",
-                        "-- liquibase formatted sql changeLogId:" + hubChangeLog.getId().toString());
+                        "-- liquibase formatted sql changeLogId:" + hubChangeLog.getId());
                 if (newChangeLogString.equals(changeLogString)) {
                     return new CommandResult("Unable to update changeLogId in changelog file '" + changeLogFile + "'", false);
                 }
@@ -219,10 +219,10 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
 
         } else if (changeLogFile.toLowerCase().endsWith(".json")) {
             changeLogString = changeLogString.replaceFirst("\\[", "\\[\n" +
-                    "\"changeLogId\"" + ":" + "\"" + hubChangeLog.getId().toString() + "\",\n");
+                    "\"changeLogId\"" + ":" + "\"" + hubChangeLog.getId() + "\",\n");
         } else if (changeLogFile.toLowerCase().endsWith(".yml") || changeLogFile.toLowerCase().endsWith(".yaml")) {
             changeLogString = changeLogString.replaceFirst("^databaseChangeLog:\n", "databaseChangeLog:\n" +
-                    "- changeLogId: " + hubChangeLog.getId().toString() + "\n");
+                    "- changeLogId: " + hubChangeLog.getId() + "\n");
             } else {
                 return new CommandResult("Changelog file '" + changeLogFile + "' is not a supported format", false);
             }

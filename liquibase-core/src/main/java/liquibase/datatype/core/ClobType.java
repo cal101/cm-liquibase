@@ -54,8 +54,8 @@ public class ClobType extends LiquibaseDataType {
                 if(!StringUtil.isEmpty(originalExtraInfo)) {
                     //if we still have something like (25555) remove it
                     //since we already set it to max, otherwise add collate or other info
-                    if(originalExtraInfo.lastIndexOf(")") < (originalExtraInfo.length() - 1)) {
-                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(")") + 1));
+                    if(originalExtraInfo.lastIndexOf(')') < (originalExtraInfo.length() - 1)) {
+                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(')') + 1));
                     }
                 }
                 return type;
@@ -77,8 +77,8 @@ public class ClobType extends LiquibaseDataType {
                 if(!StringUtil.isEmpty(originalExtraInfo)) {
                     //if we still have something like (25555) remove it
                     //since we already set it to max, otherwise add collate or other info
-                    if(originalExtraInfo.lastIndexOf(")") < (originalExtraInfo.length() - 1)) {
-                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(")") + 1));
+                    if(originalExtraInfo.lastIndexOf(')') < (originalExtraInfo.length() - 1)) {
+                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(')') + 1));
                     }
                 }
                 return type;
@@ -94,8 +94,8 @@ public class ClobType extends LiquibaseDataType {
                 if(!StringUtil.isEmpty(originalExtraInfo)) {
                     //if we still have something like (25555) remove it
                     //since we already set it to max, otherwise add collate or other info
-                    if(originalExtraInfo.lastIndexOf(")") < (originalExtraInfo.length() - 1)) {
-                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(")") + 1));
+                    if(originalExtraInfo.lastIndexOf(')') < (originalExtraInfo.length() - 1)) {
+                        type.addAdditionalInformation(originalExtraInfo.substring(originalExtraInfo.lastIndexOf(')') + 1));
                     }
                 }
                 return type;

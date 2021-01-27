@@ -19,7 +19,7 @@ public class TableWriter extends HTMLWriter {
 
     @Override
     protected String createTitle(Object object) {
-        return "Changes affecting table \""+object.toString() + "\"";
+        return "Changes affecting table \""+object + "\"";
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TableWriter extends HTMLWriter {
                 cells.add(Arrays.asList(outgoingForeignKey.getName(),
                         outgoingForeignKey.getForeignKeyColumns().toString().replace(table.getName() + ".", "").replaceAll("[\\[\\]]", ""),
                         outgoingForeignKey.getPrimaryKeyTable().toString(),
-                        outgoingForeignKey.getPrimaryKeyColumns().toString().replace(outgoingForeignKey.getPrimaryKeyTable().toString() + ".", "").replaceAll("[\\[\\]]", "")));
+                        outgoingForeignKey.getPrimaryKeyColumns().toString().replace(outgoingForeignKey.getPrimaryKeyTable() + ".", "").replaceAll("[\\[\\]]", "")));
             }
             writeTable("Current Table Foreign Keys", cells, fileWriter);
         }

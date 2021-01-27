@@ -135,13 +135,13 @@ public class ValidationFailedException extends MigrationFailedException {
         if (!failedPreconditions.isEmpty()) {
             out.println(INDENT_SPACES +failedPreconditions.size()+" preconditions failed");
             for (FailedPrecondition failedPrecondition : failedPreconditions) {
-                out.println("          "+failedPrecondition.toString());
+                out.println("          "+failedPrecondition);
             }
         }
         if (!errorPreconditions.isEmpty()) {
             out.println(INDENT_SPACES +errorPreconditions.size()+" preconditions generated an error");
             for (ErrorPrecondition errorPrecondition : errorPreconditions) {
-                out.println("          "+errorPrecondition.toString());
+                out.println("          "+errorPrecondition);
             }
         }
 

@@ -131,7 +131,7 @@ public class DiffToReport {
                 if (object.getValue().hasDifferences()) {
                     out.println("     " + object.getKey());
                     for (Difference difference : object.getValue().getDifferences()) {
-                        out.println("          " + difference.toString());
+                        out.println("          " + difference);
                     }
                 }
             }

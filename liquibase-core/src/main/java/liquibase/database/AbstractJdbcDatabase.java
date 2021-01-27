@@ -472,12 +472,12 @@ public abstract class AbstractJdbcDatabase implements Database {
     @Override
     public Date parseDate(final String dateAsString) throws DateParseException {
         try {
-            if (dateAsString.indexOf(" ") > 0) {
+            if (dateAsString.indexOf(' ') > 0) {
                 return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateAsString);
-            } else if (dateAsString.indexOf("T") > 0) {
+            } else if (dateAsString.indexOf('T') > 0) {
                 return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateAsString);
             } else {
-                if (dateAsString.indexOf(":") > 0) {
+                if (dateAsString.indexOf(':') > 0) {
                     return new SimpleDateFormat("HH:mm:ss").parse(dateAsString);
                 } else {
                     return new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
@@ -1275,7 +1275,7 @@ public abstract class AbstractJdbcDatabase implements Database {
                 Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", this).execute(statement, sqlVisitors);
             } catch (DatabaseException e) {
                 if (statement.continueOnError()) {
-                    Scope.getCurrentScope().getLog(getClass()).severe("Error executing statement '"+statement.toString()+"', but continuing", e);
+                    Scope.getCurrentScope().getLog(getClass()).severe("Error executing statement '"+statement+"', but continuing", e);
                 } else {
                     throw e;
                 }

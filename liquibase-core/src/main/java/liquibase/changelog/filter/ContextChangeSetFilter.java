@@ -40,9 +40,9 @@ public class ContextChangeSetFilter implements ChangeSetFilter {
         }
 
         if (changeSet.getContexts().matches(contexts) && ContextExpression.matchesAll(inheritableContexts, contexts)) {
-            return new ChangeSetFilterResult(true, "Context matches '"+contexts.toString()+"'", this.getClass());
+            return new ChangeSetFilterResult(true, "Context matches '"+contexts+"'", this.getClass());
         } else {
-            return new ChangeSetFilterResult(false, "Context does not match '"+contexts.toString()+"'", this.getClass());
+            return new ChangeSetFilterResult(false, "Context does not match '"+contexts+"'", this.getClass());
         }
     }
 }

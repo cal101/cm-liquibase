@@ -477,7 +477,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     }
                 }
             } else {
-                throw new ParsedNodeException("Unexpected object: " + value.getClass().getName() + " '" + value.toString() + "'");
+                throw new ParsedNodeException("Unexpected object: " + value.getClass().getName() + " '" + value + "'");
             }
         }
         if (!foundValue) {
@@ -569,12 +569,12 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     skipChange = true;
                     execType = ExecType.SKIPPED;
 
-                    Scope.getCurrentScope().getLog(getClass()).info("Continuing past: " + toString() + " despite precondition failure due to onFail='CONTINUE': " + message);
+                    Scope.getCurrentScope().getLog(getClass()).info("Continuing past: " + this + " despite precondition failure due to onFail='CONTINUE': " + message);
                 } else if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
                     execType = ExecType.MARK_RAN;
                     skipChange = true;
 
-                    log.info("Marking ChangeSet: " + toString() + " ran despite precondition failure due to onFail='MARK_RAN': " + message);
+                    log.info("Marking ChangeSet: " + this + " ran despite precondition failure due to onFail='MARK_RAN': " + message);
                 } else if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
                     execType = null; //already warned
                 } else {
@@ -602,7 +602,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     execType = ExecType.MARK_RAN;
                     skipChange = true;
 
-                    log.info("Marking ChangeSet: " + toString() + " ran despite precondition error: " + message);
+                    log.info("Marking ChangeSet: " + this + " ran despite precondition error: " + message);
                 } else if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
                     execType = null; //already logged
                 } else {
@@ -623,7 +623,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     }
                 }
 
-                log.fine("Reading ChangeSet: " + toString());
+                log.fine("Reading ChangeSet: " + this);
                 for (Change change : getChanges()) {
                     if ((!(change instanceof DbmsTargetedChange)) || DatabaseList.definitionMatches(((DbmsTargetedChange) change).getDbms(), database, true)) {
                         if (listener != null) {
@@ -652,7 +652,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     execType = ExecType.EXECUTED;
                 }
             } else {
-                log.fine("Skipping ChangeSet: " + toString());
+                log.fine("Skipping ChangeSet: " + this);
             }
 
         } catch (Exception e) {
@@ -720,7 +720,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
         Executor originalExecutor = setupCustomExecutorIfNecessary(database);
         try {
             Executor executor = Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", database);
-            executor.comment("Rolling Back ChangeSet: " + toString());
+            executor.comment("Rolling Back ChangeSet: " + this);
 
             database.setObjectQuotingStrategy(objectQuotingStrategy);
 
@@ -740,7 +740,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     }
                     ValidationErrors errors = change.validate(database);
                     if (errors.hasErrors()) {
-                        throw new RollbackFailedException("Rollback statement failed validation: " + errors.toString());
+                        throw new RollbackFailedException("Rollback statement failed validation: " + errors);
                     }
                     //
                     SqlStatement[] changeStatements = change.generateStatements(database);
@@ -766,7 +766,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
             if (runInTransaction) {
                 database.commit();
             }
-            Scope.getCurrentScope().getLog(getClass()).fine("ChangeSet " + toString() + " has been successfully rolled back.");
+            Scope.getCurrentScope().getLog(getClass()).fine("ChangeSet " + this + " has been successfully rolled back.");
         } catch (Exception e) {
             try {
                 database.rollback();
