@@ -65,7 +65,7 @@ public abstract class AbstractPluginFactory<T extends Plugin> implements PluginF
             }
         }
 
-        if (applicable.size() == 0) {
+        if (applicable.isEmpty()) {
             return null;
         }
 

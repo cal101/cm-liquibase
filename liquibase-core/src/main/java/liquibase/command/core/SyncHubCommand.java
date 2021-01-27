@@ -139,7 +139,7 @@ public class SyncHubCommand extends AbstractSelfConfiguratingCommand<CommandResu
                     .setProject(project);
 
             final List<Connection> connections = hubService.getConnections(searchConnection);
-            if (connections.size() == 0) {
+            if (connections.isEmpty()) {
 
                 if (project == null) {
                     return new CommandResult("The url " + url + " does not match any defined connections. To auto-create a connection, please specify a 'changeLogFile=<changeLogFileName>' in liquibase.properties or the command line which contains a registered changeLogId.", false);
@@ -157,7 +157,7 @@ public class SyncHubCommand extends AbstractSelfConfiguratingCommand<CommandResu
             }
         } else {
             final List<Connection> connections = hubService.getConnections(new Connection().setId(UUID.fromString(hubConnectionId)));
-            if (connections.size() == 0) {
+            if (connections.isEmpty()) {
                 return new CommandResult("Hub connection Id "+ hubConnectionId + " was either not found, or you do not have access", false);
             } else {
                 connectionToSync = connections.get(0);

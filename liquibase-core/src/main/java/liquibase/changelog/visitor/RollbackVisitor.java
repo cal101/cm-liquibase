@@ -79,7 +79,7 @@ public class RollbackVisitor implements ChangeSetVisitor {
                 continue;
             }
             String sql = ((SQLFileChange)change).getSql();
-            if (sql.length() == 0) {
+            if (sql.isEmpty()) {
                 Scope.getCurrentScope().getLog(getClass()).info("\nNo rollback logic defined in empty rollback script. Changesets have been removed from\n" +
                                 "the DATABASECHANGELOG table but no other logic was performed.");
             }

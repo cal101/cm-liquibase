@@ -159,7 +159,7 @@ public class ChangeLogParameters {
 
         // if any parameters were found, determine which parameter value to use
         // (even if only one was found, we can not assume it should be used)
-        if (found.size() > 0) {
+        if (!found.isEmpty()) {
             // look for the first global parameter
             for (ChangeLogParameter changeLogParameter : found) {
                 if (changeLogParameter.isGlobal()) {

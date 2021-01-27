@@ -57,7 +57,7 @@ public class MainTest {
         main.url = "jdbc:oracle://localhost:1521/ORCL";
         main.commandParams.add("--outputSchemasAs");
         List<String> messages = main.checkSetup();
-        Assert.assertTrue("There should be no messages from Main.checkSetup", messages.size() == 0);
+        Assert.assertTrue("There should be no messages from Main.checkSetup", messages.isEmpty());
 
         main.command = "update";
         main.changeLogFile = "changelog.xml";

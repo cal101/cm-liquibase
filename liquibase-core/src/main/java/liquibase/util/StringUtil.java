@@ -106,7 +106,7 @@ public class StringUtil {
         List<Object> returnList = new ArrayList<>();
         List<String> possibleMerge = new ArrayList<>();
         for (Object obj : parsedArray) {
-            if (possibleMerge.size() == 0) {
+            if (possibleMerge.isEmpty()) {
                 if ((obj instanceof String) && endDelimiter.startsWith((String) obj)) {
                     possibleMerge.add((String) obj);
                 } else {
@@ -531,7 +531,7 @@ public class StringUtil {
                     return "[" + StringUtil.join((Object[]) obj, ", ", this) + "]";
                 }
             } else if (obj instanceof Collection) {
-                if (((Collection) obj).size() == 0) {
+                if (((Collection) obj).isEmpty()) {
                     return null;
                 } else {
                     return "[" + StringUtil.join((Collection) obj, ", ", this) + "]";

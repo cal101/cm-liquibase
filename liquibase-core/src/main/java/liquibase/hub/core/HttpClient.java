@@ -59,7 +59,7 @@ class HttpClient {
 
     protected <T> ListResponse doGet(String url, Map<String, String> parameters, Class<ListResponse> listResponseClass, Class<T> contentType) throws LiquibaseHubException {
         try {
-            if (parameters != null && parameters.size() > 0) {
+            if (parameters != null && !parameters.isEmpty()) {
                 url += "?" + toQueryString(parameters);
             }
             return doRequest("GET", url, null, listResponseClass, contentType);
@@ -70,7 +70,7 @@ class HttpClient {
     }
 
     protected <T> T doGet(String url, Map<String, String> parameters, Class<T> returnType) throws LiquibaseHubException {
-        if (parameters != null && parameters.size() > 0) {
+        if (parameters != null && !parameters.isEmpty()) {
             url += "?" + toQueryString(parameters);
         }
 

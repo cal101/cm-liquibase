@@ -145,7 +145,7 @@ public class DropPrimaryKeyChange extends AbstractChange {
         } catch (DatabaseException e) {
             throw new UnexpectedLiquibaseException(e);
         }
-        if (statements.size() > 0) {
+        if (!statements.isEmpty()) {
             sqlStatements = new SqlStatement[statements.size()];
             return statements.toArray(sqlStatements);
         }

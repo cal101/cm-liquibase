@@ -242,7 +242,7 @@ public class SequenceSnapshotGenerator extends JdbcSnapshotGenerator {
                                                         "from information_schema.TABLES " +
                                                         "where TABLE_SCHEMA = '" + schema.getName() +"' " +
                                                         "and TABLE_TYPE = 'SEQUENCE' order by table_name;"));
-                if (res.size() == 0) {
+                if (res.isEmpty()) {
                     return "SELECT 'name' AS SEQUENCE_NAME from dual WHERE 1=0";
                 }
                 for (Map<String, ?> e : res) {

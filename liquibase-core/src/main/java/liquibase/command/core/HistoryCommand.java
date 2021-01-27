@@ -109,7 +109,7 @@ public class HistoryCommand extends AbstractCommand {
         }
 
         String getDeploymentId() {
-            if (changeSets.size() == 0) {
+            if (changeSets.isEmpty()) {
                 return null;
             }
             return changeSets.get(0).getDeploymentId();

@@ -218,7 +218,7 @@ public class OnlineHubService implements HubService {
                 throw new LiquibaseHubObjectNotFoundException("Connection not found");
             }
         }
-        if (connections.size() == 0) {
+        if (connections.isEmpty()) {
             if (createIfNotExists) {
                 return createConnection(exampleConnection);
             } else {

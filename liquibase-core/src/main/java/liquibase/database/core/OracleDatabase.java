@@ -621,7 +621,7 @@ public class OracleDatabase extends AbstractJdbcDatabase {
      * The maximum length of an identifier differs by Oracle version and object type.
      */
     public boolean isValidOracleIdentifier(String identifier, Class<? extends DatabaseObject> type) {
-        if ((identifier == null) || (identifier.length() < 1))
+        if ((identifier == null) || (identifier.isEmpty()))
             return false;
 
         if (!identifier.matches("^(i?)[A-Z][A-Z0-9\\$\\_\\#]*$"))

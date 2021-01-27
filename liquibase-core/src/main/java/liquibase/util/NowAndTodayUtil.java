@@ -78,7 +78,7 @@ public final class NowAndTodayUtil {
 
         Date today = c.getTime();
 
-        if (colType == null || colType.length() == 0) {
+        if (colType == null || colType.isEmpty()) {
             throw new DateParseException("Must supply non-null column type when using 'NOW' or 'TODAY' value.");
         } else if (colType.equalsIgnoreCase("timestamp")) {
             return new java.sql.Timestamp(today.getTime());

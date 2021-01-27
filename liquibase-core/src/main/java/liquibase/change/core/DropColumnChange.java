@@ -213,7 +213,7 @@ public class DropColumnChange extends AbstractChange implements ChangeWithColumn
             }
         };
         List<SqlStatement> statements = SQLiteDatabase.getAlterTableStatements(alterTableVisitor, database, getCatalogName(), getSchemaName(), getTableName());
-        if (statements.size() > 0) {
+        if (!statements.isEmpty()) {
             sqlStatements = new SqlStatement[statements.size()];
             return statements.toArray(sqlStatements);
         }
