@@ -78,7 +78,7 @@ public class SpringLiquibase implements InitializingBean, BeanNameAware, Resourc
 	protected boolean shouldRun = true;
 	protected File rollbackFile;
 
-	protected boolean testRollbackOnUpdate = false;
+	protected boolean testRollbackOnUpdate;
 
 	public SpringLiquibase() {
 		super();

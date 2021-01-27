@@ -84,7 +84,7 @@ public final class CheckSum {
         InputStream newStream = stream;
         if (standardizeLineEndings) {
             newStream = new InputStream() {
-                private boolean isPrevR = false;
+                private boolean isPrevR;
 
                 @Override
                 public int read() throws IOException {

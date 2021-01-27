@@ -7,7 +7,7 @@ import liquibase.util.ObjectUtil;
 import java.util.Arrays;
 
 public abstract class AbstractChangeGenerator implements ChangeGenerator {
-    private boolean respectSchemaAndCatalogCase = false;
+    private boolean respectSchemaAndCatalogCase;
 
     @Override
     public Change[] fixSchema(Change[] changes, CompareControl.SchemaComparison[] schemaComparisons) {

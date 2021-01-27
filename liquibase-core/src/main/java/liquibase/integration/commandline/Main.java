@@ -122,11 +122,11 @@ public class Main {
     protected String schemas;
     protected String snapshotFormat;
     protected String liquibaseProLicenseKey;
-    private boolean liquibaseProLicenseValid = false;
+    private boolean liquibaseProLicenseValid;
     protected String liquibaseHubApiKey;
     protected String liquibaseHubUrl;
-    private Boolean managingLogConfig = null;
-    private boolean outputsLogMessages = false;
+    private Boolean managingLogConfig;
+    private boolean outputsLogMessages;
     protected String sqlFile;
     protected String delimiter;
     protected String rollbackScript;

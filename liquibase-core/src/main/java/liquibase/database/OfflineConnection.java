@@ -33,8 +33,8 @@ import java.util.regex.Pattern;
 
 @LiquibaseService(skip=true)
 public class OfflineConnection implements DatabaseConnection {
-    private String url=null;
-    private String databaseShortName=null;
+    private String url;
+    private String databaseShortName;
     private final Map<String, String> databaseParams = new HashMap<>();
     private DatabaseSnapshot snapshot;
     private OutputLiquibaseSql outputLiquibaseSql = OutputLiquibaseSql.NONE;

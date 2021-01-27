@@ -118,7 +118,7 @@ public abstract class AbstractJdbcDatabase implements Database {
     private String liquibaseSchemaName;
     private String liquibaseCatalogName;
     private Boolean previousAutoCommit;
-    private boolean canCacheLiquibaseTableInfo = false;
+    private boolean canCacheLiquibaseTableInfo;
     private DatabaseConnection connection;
     private boolean outputDefaultSchema = true;
     private boolean outputDefaultCatalog = true;

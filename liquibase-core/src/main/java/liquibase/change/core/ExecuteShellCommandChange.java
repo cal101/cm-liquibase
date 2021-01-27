@@ -51,7 +51,7 @@ public class ExecuteShellCommandChange extends AbstractChange {
     private static final Long MIN_IN_MILLIS = SECS_IN_MILLIS * 60;
     private static final Long HOUR_IN_MILLIS = MIN_IN_MILLIS * 60;
 
-    protected Integer maxStreamGobblerOutput = null;
+    protected Integer maxStreamGobblerOutput;
 
     @Override
     public boolean generateStatementsVolatile(Database database) {
@@ -376,8 +376,8 @@ public class ExecuteShellCommandChange extends AbstractChange {
         private static final int THREAD_SLEEP_MILLIS = 100;
         private final OutputStream outputStream;
         private InputStream processStream;
-        boolean loggedTruncated = false;
-        long copiedSize = 0;
+        boolean loggedTruncated;
+        long copiedSize;
 
         private StreamGobbler(InputStream processStream, ByteArrayOutputStream outputStream) {
             this.processStream = processStream;
