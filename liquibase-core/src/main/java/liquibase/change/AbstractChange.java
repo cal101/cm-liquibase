@@ -772,7 +772,7 @@ public abstract class AbstractChange extends AbstractPlugin implements Change {
     @Override
     public String getDescription() {
         ChangeMetaData metaData = Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(this);
-        String description = metaData.getName();
+        StringBuilder description = new StringBuilder(metaData.getName());
 
         SortedSet<String> names = new TreeSet<>();
         for (Map.Entry<String, ChangeParameterMetaData> entry : metaData.getParameters().entrySet()) {
@@ -788,9 +788,9 @@ public abstract class AbstractChange extends AbstractPlugin implements Change {
         }
 
         if (!names.isEmpty()) {
-            description += " "+ StringUtil.join(names, ", ");
+            description.append(" ").append(StringUtil.join(names, ", "));
         }
 
-        return description;
+        return description.toString();
     }
 }

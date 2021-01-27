@@ -38,32 +38,32 @@ public class DatabaseTestTemplate {
             try {
                 test.performTest(database);
             } catch (ComparisonFailure e) {
-                String newMessage = "Database Test Failure on " + database;
+                StringBuilder newMessage = new StringBuilder("Database Test Failure on " + database);
                 if (e.getMessage() != null) {
-                    newMessage += ": " + e.getMessage();
+                    newMessage.append(": ").append(e.getMessage());
                 }
 
-                ComparisonFailure newError = new ComparisonFailure(newMessage, e.getExpected(), e.getActual());
+                ComparisonFailure newError = new ComparisonFailure(newMessage.toString(), e.getExpected(), e.getActual());
                 newError.setStackTrace(e.getStackTrace());
                 throw newError;
             } catch (AssertionError | MigrationFailedException e) {
                 e.printStackTrace();
-                String newMessage = "Database Test Failure on " + database;
+                StringBuilder newMessage = new StringBuilder("Database Test Failure on " + database);
                 if (e.getMessage() != null) {
-                    newMessage += ": " + e.getMessage();
+                    newMessage.append(": ").append(e.getMessage());
                 }
 
-                AssertionError newError = new AssertionError(newMessage);
+                AssertionError newError = new AssertionError(newMessage.toString());
                 newError.setStackTrace(e.getStackTrace());
                 throw newError;
             } catch (Exception e) {
                 e.printStackTrace();
-                String newMessage = "Database Test Exception on " + database;
+                StringBuilder newMessage = new StringBuilder("Database Test Exception on " + database);
                 if (e.getMessage() != null) {
-                    newMessage += ": " + e.getMessage();
+                    newMessage.append(": ").append(e.getMessage());
                 }
                 
-                Exception newError = e.getClass().getConstructor(String.class).newInstance(newMessage);
+                Exception newError = e.getClass().getConstructor(String.class).newInstance(newMessage.toString());
                 if (e.getCause() == null) {
                     newError.setStackTrace(e.getStackTrace());
                 } else {

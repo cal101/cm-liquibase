@@ -78,36 +78,36 @@ public class ExecuteSqlCommand extends AbstractCommand {
             sqlText = FileUtil.getContents(file);
         }
 
-        String out = "";
+        StringBuilder out = new StringBuilder();
         String[] sqlStrings = StringUtil.processMutliLineSQL(sqlText, true, true, delimiter);
         for (String sql : sqlStrings) {
             if (sql.toLowerCase().matches("\\s*select .*")) {
                 List<Map<String, ?>> rows = executor.queryForList(new RawSqlStatement(sql));
-                out += "Output of "+sql+":\n";
+                out.append("Output of ").append(sql).append(":\n");
                 if (rows.isEmpty()) {
-                    out += "-- Empty Resultset --\n";
+                    out.append("-- Empty Resultset --\n");
                 } else {
                     SortedSet<String> keys = new TreeSet<>();
                     for (Map<String, ?> row : rows) {
                         keys.addAll(row.keySet());
                     }
-                    out += StringUtil.join(keys, " | ")+" |\n";
+                    out.append(StringUtil.join(keys, " | ")).append(" |\n");
 
                     for (Map<String, ?> row : rows) {
                         for (String key : keys) {
-                            out += row.get(key)+" | ";
+                            out.append(row.get(key)).append(" | ");
                         }
-                        out += "\n";
+                        out.append("\n");
                     }
                 }
             } else {
                 executor.execute(new RawSqlStatement(sql));
-                out += "Successfully Executed: "+ sql+"\n";
+                out.append("Successfully Executed: ").append(sql).append("\n");
             }
-            out += "\n";
+            out.append("\n");
         }
         database.commit();
-        return new CommandResult(out.trim());
+        return new CommandResult(out.toString().trim());
     }
 
 }

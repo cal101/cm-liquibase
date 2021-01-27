@@ -101,20 +101,20 @@ public class IndexExistsPrecondition extends AbstractPrecondition {
                 }
             }
             if (!SnapshotGeneratorFactory.getInstance().has(example, database)) {
-                String name = "";
+                StringBuilder name = new StringBuilder();
 
                 if (getIndexName() != null) {
-                    name += database.escapeObjectName(getIndexName(), Index.class);
+                    name.append(database.escapeObjectName(getIndexName(), Index.class));
                 }
 
                 if (tableName != null) {
-                    name += " on "+database.escapeObjectName(getTableName(), Table.class);
+                    name.append(" on ").append(database.escapeObjectName(getTableName(), Table.class));
 
                     if (StringUtil.trimToNull(getColumnNames()) != null) {
-                        name += " columns "+getColumnNames();
+                        name.append(" columns ").append(getColumnNames());
                     }
                 }
-                throw new PreconditionFailedException("Index "+ name +" does not exist", changeLog, this);
+                throw new PreconditionFailedException("Index "+ name.toString() +" does not exist", changeLog, this);
             }
         } catch (Exception e) {
             if (e instanceof PreconditionFailedException) {
@@ -131,20 +131,20 @@ public class IndexExistsPrecondition extends AbstractPrecondition {
 
     @Override
     public String toString() {
-        String string = "Index Exists Precondition: ";
+        StringBuilder string = new StringBuilder("Index Exists Precondition: ");
 
         if (getIndexName() != null) {
-            string += getIndexName();
+            string.append(getIndexName());
         }
 
         if (tableName != null) {
-            string += " on "+getTableName();
+            string.append(" on ").append(getTableName());
 
             if (StringUtil.trimToNull(getColumnNames()) != null) {
-                string += " columns "+getColumnNames();
+                string.append(" columns ").append(getColumnNames());
             }
         }
 
-        return string;
+        return string.toString();
     }
 }

@@ -53,51 +53,51 @@ public class AddColumnGeneratorDefaultClauseBeforeNotNull extends AddColumnGener
     @Override
     protected String generateSingleColumnSQL(AddColumnStatement statement,
             Database database) {
-        String alterTable = " ADD " + database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName()) + " " + DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""), database).toDatabaseDataType(database);
+        StringBuilder alterTable = new StringBuilder(" ADD " + database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName()) + " " + DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""), database).toDatabaseDataType(database));
 
-        alterTable += getDefaultClauseBeforeNotNull(statement, database);
+        alterTable.append(getDefaultClauseBeforeNotNull(statement, database));
 
         if (primaryKeyBeforeNotNull(database)) {
             if (statement.isPrimaryKey()) {
-                alterTable += " PRIMARY KEY";
+                alterTable.append(" PRIMARY KEY");
             }
         }
 
         if (statement.isAutoIncrement()) {
             AutoIncrementConstraint autoIncrementConstraint = statement.getAutoIncrementConstraint();
-            alterTable += " " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull());
+            alterTable.append(" ").append(database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull()));
         }
 
         if (!statement.isNullable()) {
-            alterTable += " NOT NULL";
+            alterTable.append(" NOT NULL");
         } else if ((database instanceof SybaseDatabase) || (database instanceof SybaseASADatabase)) {
-            alterTable += " NULL";
+            alterTable.append(" NULL");
         }
 
         if (!primaryKeyBeforeNotNull(database)) {
             if (statement.isPrimaryKey()) {
-                alterTable += " PRIMARY KEY";
+                alterTable.append(" PRIMARY KEY");
             }
         }
 
         if ((statement.getAddAfterColumn() != null) && !statement.getAddAfterColumn().isEmpty()) {
-            alterTable += " AFTER " + statement.getAddAfterColumn() + " ";
+            alterTable.append(" AFTER ").append(statement.getAddAfterColumn()).append(" ");
         }
 
         if (statement.getAddAtPosition() != null) {
-            alterTable += " POSITION " + statement.getAddAtPosition().toString() + " ";
+            alterTable.append(" POSITION ").append(statement.getAddAtPosition().toString()).append(" ");
         }
 
-        return alterTable;
+        return alterTable.toString();
     }
 
     private String getDefaultClauseBeforeNotNull(AddColumnStatement statement, Database database) {
-        String clause = "";
+        StringBuilder clause = new StringBuilder();
         Object defaultValue = statement.getDefaultValue();
         if (defaultValue != null) {
-            clause += " DEFAULT " + DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database);
+            clause.append(" DEFAULT ").append(DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database));
         }
-        return clause;
+        return clause.toString();
     }
 
     private boolean primaryKeyBeforeNotNull(Database database) {

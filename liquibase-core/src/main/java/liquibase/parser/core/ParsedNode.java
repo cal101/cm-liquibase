@@ -283,9 +283,9 @@ public class ParsedNode {
 
     @Override
     public String toString() {
-        String string = name;
+        StringBuilder string = new StringBuilder(name);
         if (!children.isEmpty()) {
-            string += "[" + StringUtil.join(children, ",", new StringUtil.ToStringFormatter(), true) + "]";
+            string.append("[").append(StringUtil.join(children, ",", new StringUtil.ToStringFormatter(), true)).append("]");
         }
         if (value != null) {
             String valueString;
@@ -294,9 +294,9 @@ public class ParsedNode {
             } else {
                 valueString = value.toString();
             }
-            string += "="+valueString;
+            string.append("=").append(valueString);
         }
-        return string;
+        return string.toString();
     }
 
     @Override

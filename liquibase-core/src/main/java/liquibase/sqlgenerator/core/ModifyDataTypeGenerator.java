@@ -47,27 +47,27 @@ public class ModifyDataTypeGenerator extends AbstractSqlGenerator<ModifyDataType
 
     @Override
     public Sql[] generateSql(ModifyDataTypeStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        String alterTable = "ALTER TABLE " + database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName());
+        StringBuilder alterTable = new StringBuilder("ALTER TABLE " + database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName()));
 
         // add "MODIFY"
-        alterTable += " " + getModifyString(database) + " ";
+        alterTable.append(" ").append(getModifyString(database)).append(" ");
 
         // add column name
         String columnName = database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName());
-        alterTable += columnName;
+        alterTable.append(columnName);
 
-        alterTable += getPreDataTypeString(database); // adds a space if nothing else
+        alterTable.append(getPreDataTypeString(database)); // adds a space if nothing else
 
         // add column type
         DatabaseDataType newDataType = DataTypeFactory.getInstance().fromDescription(statement.getNewDataType(), database).toDatabaseDataType(database);
 
-        alterTable += newDataType;
+        alterTable.append(newDataType);
 
         if (database instanceof PostgresDatabase) {
-            alterTable += " USING ("+columnName+"::"+newDataType+")";
+            alterTable.append(" USING (").append(columnName).append("::").append(newDataType).append(")");
         }
 
-        return new Sql[]{new UnparsedSql(alterTable, getAffectedTable(statement))};
+        return new Sql[]{new UnparsedSql(alterTable.toString(), getAffectedTable(statement))};
     }
 
     protected Relation getAffectedTable(ModifyDataTypeStatement statement) {

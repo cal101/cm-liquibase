@@ -91,15 +91,15 @@ public class HistoryCommand extends AbstractCommand {
                 long executionMs = last.getDateExecuted().getTime() - firstChangeSet.getDateExecuted().getTime();
                 executionTime = (executionMs / 1000F) + "s";
             }
-            String message = "- Database updated at " + dateFormat.format(firstChangeSet.getDateExecuted()) + ". Applied " + changeSets.size() + " changeSet(s)";
+            StringBuilder message = new StringBuilder("- Database updated at " + dateFormat.format(firstChangeSet.getDateExecuted()) + ". Applied " + changeSets.size() + " changeSet(s)");
 
             if (executionTime != null) {
-                message += " in " + executionTime;
+                message.append(" in ").append(executionTime);
             }
 
-            message += ", DeploymentId: " + firstChangeSet.getDeploymentId();
+            message.append(", DeploymentId: ").append(firstChangeSet.getDeploymentId());
 
-            outputStream.println(message);
+            outputStream.println(message.toString());
 
             for (RanChangeSet changeSet : changeSets) {
                 outputStream.println("  " + changeSet.toString());

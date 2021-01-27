@@ -27,11 +27,10 @@ public class LicenseServiceUtils {
       ChangeSet changeSet = change.getChangeSet();
       String changeType = Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(change).getName();
       ValidationErrors validationErrors = new ValidationErrors();
-      String message = "Change Set ID: " + changeSet.getId() + " Change Set Author: " + changeSet.getAuthor() + "\n";
-      message += "Change Type 'pro:" + changeType + "' is not allowed without a valid Liquibase Pro License.\n";
-      message += "To purchase or renew a Liquibase Pro license key, please contact sales@liquibase.com or\n" +
-                "go to https://www.liquibase.org/download";
-      validationErrors.addError(message);
+      StringBuilder message = new StringBuilder("Change Set ID: " + changeSet.getId() + " Change Set Author: " + changeSet.getAuthor() + "\n");
+      message.append("Change Type 'pro:").append(changeType).append("' is not allowed without a valid Liquibase Pro License.\n");
+      message.append("To purchase or renew a Liquibase Pro license key, please contact sales@liquibase.com or\n").append("go to https://www.liquibase.org/download");
+      validationErrors.addError(message.toString());
       return validationErrors;
     }
 

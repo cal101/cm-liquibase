@@ -37,7 +37,7 @@ public class SelectFromDatabaseChangeLogGenerator extends AbstractSqlGenerator<S
         ObjectQuotingStrategy currentStrategy = database.getObjectQuotingStrategy();
         database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
         try {
-            String sql = "SELECT " + (database instanceof MSSQLDatabase && statement.getLimit() != null ? "TOP "+statement.getLimit()+" " : "") + StringUtil.join(columnsToSelect, ",", new StringUtil.StringUtilFormatter<ColumnConfig>() {
+            StringBuilder sql = new StringBuilder("SELECT " + (database instanceof MSSQLDatabase && statement.getLimit() != null ? "TOP "+statement.getLimit()+" " : "") + StringUtil.join(columnsToSelect, ",", new StringUtil.StringUtilFormatter<ColumnConfig>() {
                 @Override
                 public String toString(ColumnConfig column) {
                     if ((column.getComputed() != null) && column.getComputed()) {
@@ -47,33 +47,33 @@ public class SelectFromDatabaseChangeLogGenerator extends AbstractSqlGenerator<S
                     }
                 }
             }).toUpperCase() + " FROM " +
-                    database.escapeTableName(database.getLiquibaseCatalogName(), database.getLiquibaseSchemaName(), database.getDatabaseChangeLogTableName());
+                    database.escapeTableName(database.getLiquibaseCatalogName(), database.getLiquibaseSchemaName(), database.getDatabaseChangeLogTableName()));
 
             SelectFromDatabaseChangeLogStatement.WhereClause whereClause = statement.getWhereClause();
             if (whereClause != null) {
                 if (whereClause instanceof SelectFromDatabaseChangeLogStatement.ByTag) {
-                    sql += " WHERE "+database.escapeColumnName(null, null, null, "TAG")+"='" + ((SelectFromDatabaseChangeLogStatement.ByTag) whereClause).getTagName() + "'";
+                    sql.append(" WHERE ").append(database.escapeColumnName(null, null, null, "TAG")).append("='").append(((SelectFromDatabaseChangeLogStatement.ByTag) whereClause).getTagName()).append("'");
                 } else if (whereClause instanceof SelectFromDatabaseChangeLogStatement.ByNotNullCheckSum) {
-                    sql += " WHERE "+database.escapeColumnName(null, null, null, "MD5SUM")+" IS NOT NULL";
+                    sql.append(" WHERE ").append(database.escapeColumnName(null, null, null, "MD5SUM")).append(" IS NOT NULL");
                 } else {
                     throw new UnexpectedLiquibaseException("Unknown where clause type: " + whereClause.getClass().getName());
                 }
             }
 
             if ((statement.getOrderByColumns() != null) && (statement.getOrderByColumns().length > 0)) {
-                sql += " ORDER BY ";
+                sql.append(" ORDER BY ");
                 Iterator<String> orderBy = Arrays.asList(statement.getOrderByColumns()).iterator();
 
                 while (orderBy.hasNext()) {
                     String orderColumn = orderBy.next();
                     String[] orderColumnData = orderColumn.split(" ");
-                    sql += database.escapeColumnName(null, null, null, orderColumnData[0]);
+                    sql.append(database.escapeColumnName(null, null, null, orderColumnData[0]));
                     if (orderColumnData.length == 2) {
-                        sql += " ";
-                        sql += orderColumnData[1].toUpperCase();
+                        sql.append(" ");
+                        sql.append(orderColumnData[1].toUpperCase());
                     }
                     if (orderBy.hasNext()) {
-                        sql += ", ";
+                        sql.append(", ");
                     }
                 }
             }
@@ -81,19 +81,19 @@ public class SelectFromDatabaseChangeLogGenerator extends AbstractSqlGenerator<S
             if (statement.getLimit() != null) {
                 if (database instanceof OracleDatabase) {
                     if (whereClause == null) {
-                        sql += " WHERE ROWNUM="+statement.getLimit();
+                        sql.append(" WHERE ROWNUM=").append(statement.getLimit());
                     } else {
-                        sql += " AND ROWNUM="+statement.getLimit();
+                        sql.append(" AND ROWNUM=").append(statement.getLimit());
                     }
                 } else if ((database instanceof MySQLDatabase) || (database instanceof PostgresDatabase)) {
-                    sql += " LIMIT "+statement.getLimit();
+                    sql.append(" LIMIT ").append(statement.getLimit());
                 } else if (database instanceof AbstractDb2Database) {
-                    sql += " FETCH FIRST "+statement.getLimit()+" ROWS ONLY";
+                    sql.append(" FETCH FIRST ").append(statement.getLimit()).append(" ROWS ONLY");
                 }
             }
 
             return new Sql[]{
-                    new UnparsedSql(sql)
+                    new UnparsedSql(sql.toString())
             };
         } finally {
             database.setObjectQuotingStrategy(currentStrategy);

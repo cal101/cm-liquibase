@@ -71,13 +71,13 @@ public class FileUtil {
     }
 
     public static String getFileNotFoundMessage(String physicalChangeLogLocation) {
-        String message = "The file " + physicalChangeLogLocation + " was not found in" + System.lineSeparator();
+        StringBuilder message = new StringBuilder("The file " + physicalChangeLogLocation + " was not found in" + System.lineSeparator());
         for (String location : Scope.getCurrentScope().getResourceAccessor().describeLocations()) {
-            message += "    - " + location + System.lineSeparator();
+            message.append("    - ").append(location).append(System.lineSeparator());
         }
-        message += "Specifying files by absolute path was removed in Liquibase 4.0. Please use a relative path or add '/' to the classpath parameter.";
+        message.append("Specifying files by absolute path was removed in Liquibase 4.0. Please use a relative path or add '/' to the classpath parameter.");
 
-        return message;
+        return message.toString();
     }
 
 

@@ -29,12 +29,12 @@ public class MigrationFailedException extends LiquibaseException {
 
     @Override
     public String getMessage() {
-        String message = "Migration failed";
+        StringBuilder message = new StringBuilder("Migration failed");
         if (failedChangeSetName != null) {
-            message += " for change set "+ failedChangeSetName;
+            message.append(" for change set ").append(failedChangeSetName);
         }
-        message += ":\n     Reason: "+super.getMessage();
+        message.append(":\n     Reason: ").append(super.getMessage());
 
-        return message;
+        return message.toString();
     }
 }

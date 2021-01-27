@@ -28,17 +28,17 @@ public class ColumnComparator implements DatabaseObjectComparator {
     public String[] hash(DatabaseObject databaseObject, Database accordingTo, DatabaseObjectComparatorChain chain) {
         Column column = (Column) databaseObject;
 
-        String hash = column.getName();
+        StringBuilder hash = new StringBuilder(column.getName());
         if (column.getRelation() != null) {
-            hash += ":" + column.getRelation().getName();
+            hash.append(":").append(column.getRelation().getName());
         }
         if (BooleanUtils.isTrue(column.getComputed())) {
-            hash += ":computed";
+            hash.append(":computed");
         }
         if (BooleanUtils.isTrue(column.getDescending())) {
-            hash += ":descending";
+            hash.append(":descending");
         }
-        return new String[] {hash.toLowerCase(Locale.US)};
+        return new String[] {hash.toString().toLowerCase(Locale.US)};
     }
 
     @Override

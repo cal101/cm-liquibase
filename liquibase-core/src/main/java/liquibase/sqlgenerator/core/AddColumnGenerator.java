@@ -99,14 +99,14 @@ public class AddColumnGenerator extends AbstractSqlGenerator<AddColumnStatement>
     private Sql[] generateMultipleColumns(List<AddColumnStatement> columns, Database database) {
         List<Sql> result = new ArrayList<>();
         if (database instanceof MySQLDatabase) {
-            String alterTable = generateSingleColumBaseSQL(columns.get(0), database);
+            StringBuilder alterTable = new StringBuilder(generateSingleColumBaseSQL(columns.get(0), database));
             for (int i = 0; i < columns.size(); i++) {
-                alterTable += generateSingleColumnSQL(columns.get(i), database);
+                alterTable.append(generateSingleColumnSQL(columns.get(i), database));
                 if (i < (columns.size() - 1)) {
-                    alterTable += ",";
+                    alterTable.append(",");
                 }
             }
-            result.add(new UnparsedSql(alterTable, getAffectedColumns(columns)));
+            result.add(new UnparsedSql(alterTable.toString(), getAffectedColumns(columns)));
 
             for (AddColumnStatement statement : columns) {
                 addUniqueConstraintStatements(statement, database, result);
@@ -122,11 +122,11 @@ public class AddColumnGenerator extends AbstractSqlGenerator<AddColumnStatement>
     }
 
     protected Sql[] generateSingleColumn(AddColumnStatement statement, Database database) {
-        String alterTable = generateSingleColumBaseSQL(statement, database);
-        alterTable += generateSingleColumnSQL(statement, database);
+        StringBuilder alterTable = new StringBuilder(generateSingleColumBaseSQL(statement, database));
+        alterTable.append(generateSingleColumnSQL(statement, database));
 
         List<Sql> returnSql = new ArrayList<>();
-        returnSql.add(new UnparsedSql(alterTable, getAffectedColumn(statement)));
+        returnSql.add(new UnparsedSql(alterTable.toString(), getAffectedColumn(statement)));
 
         addUniqueConstraintStatements(statement, database, returnSql);
         addForeignKeyStatements(statement, database, returnSql);
@@ -141,53 +141,53 @@ public class AddColumnGenerator extends AbstractSqlGenerator<AddColumnStatement>
     protected String generateSingleColumnSQL(AddColumnStatement statement, Database database) {
         DatabaseDataType columnType = DataTypeFactory.getInstance().fromDescription(statement.getColumnType() + (statement.isAutoIncrement() ? "{autoIncrement:true}" : ""), database).toDatabaseDataType(database);
 
-        String alterTable = " ADD " + database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName()) + " " + columnType;
+        StringBuilder alterTable = new StringBuilder(" ADD " + database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName()) + " " + columnType);
 
         if (statement.isAutoIncrement() && database.supportsAutoIncrement()) {
             AutoIncrementConstraint autoIncrementConstraint = statement.getAutoIncrementConstraint();
-            alterTable += " " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull());
+            alterTable.append(" ").append(database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull()));
         }
 
-        alterTable += getDefaultClause(statement, database);
+        alterTable.append(getDefaultClause(statement, database));
 
         if (!statement.isNullable()) {
             for (ColumnConstraint constraint : statement.getConstraints()) {
                 if (constraint instanceof NotNullConstraint) {
                     NotNullConstraint notNullConstraint = (NotNullConstraint) constraint;
                     if (StringUtil.isNotEmpty(notNullConstraint.getConstraintName())) {
-                        alterTable += " CONSTRAINT " + database.escapeConstraintName(notNullConstraint.getConstraintName());
+                        alterTable.append(" CONSTRAINT ").append(database.escapeConstraintName(notNullConstraint.getConstraintName()));
                         break;
                     }
                 }
             }
-            alterTable += " NOT NULL";
+            alterTable.append(" NOT NULL");
             if (database instanceof OracleDatabase) {
-                alterTable += !statement.shouldValidateNullable() ? " ENABLE NOVALIDATE " : "";
+                alterTable.append(!statement.shouldValidateNullable() ? " ENABLE NOVALIDATE " : "");
             }
         } else {
             if ((database instanceof SybaseDatabase) || (database instanceof SybaseASADatabase) || (database
                     instanceof MySQLDatabase) || ((database instanceof MSSQLDatabase) && "timestamp".equalsIgnoreCase
                     (columnType.toString()))) {
-                alterTable += " NULL";
+                alterTable.append(" NULL");
             }
         }
 
         if (statement.isPrimaryKey()) {
-            alterTable += " PRIMARY KEY";
+            alterTable.append(" PRIMARY KEY");
             if (database instanceof OracleDatabase) {
-                alterTable += !statement.shouldValidatePrimaryKey() ? " ENABLE NOVALIDATE " : "";
+                alterTable.append(!statement.shouldValidatePrimaryKey() ? " ENABLE NOVALIDATE " : "");
             }
         }
 
         if ((database instanceof MySQLDatabase) && (statement.getRemarks() != null)) {
-            alterTable += " COMMENT '" + database.escapeStringForDatabase(StringUtil.trimToEmpty(statement.getRemarks())) + "' ";
+            alterTable.append(" COMMENT '").append(database.escapeStringForDatabase(StringUtil.trimToEmpty(statement.getRemarks()))).append("' ");
         }
 
         if ((statement.getAddAfterColumn() != null) && !statement.getAddAfterColumn().isEmpty()) {
-            alterTable += " AFTER `" + statement.getAddAfterColumn() + "` ";
+            alterTable.append(" AFTER `").append(statement.getAddAfterColumn()).append("` ");
         }
 
-        return alterTable;
+        return alterTable.toString();
     }
 
     protected Column[] getAffectedColumns(List<AddColumnStatement> columns) {
@@ -245,26 +245,26 @@ public class AddColumnGenerator extends AbstractSqlGenerator<AddColumnStatement>
     }
 
     private String getDefaultClause(AddColumnStatement statement, Database database) {
-        String clause = "";
+        StringBuilder clause = new StringBuilder();
         Object defaultValue = statement.getDefaultValue();
         if (defaultValue != null) {
             if ((database instanceof OracleDatabase) && defaultValue.toString().startsWith("GENERATED ALWAYS ")) {
-                clause += " " + DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database);
+                clause.append(" ").append(DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database));
             } else {
                 if (database instanceof MSSQLDatabase) {
                     String constraintName = statement.getDefaultValueConstraintName();
                     if (constraintName == null) {
                         constraintName = ((MSSQLDatabase) database).generateDefaultConstraintName(statement.getTableName(), statement.getColumnName());
                     }
-                    clause += " CONSTRAINT " + constraintName;
+                    clause.append(" CONSTRAINT ").append(constraintName);
                 }
                 if (defaultValue instanceof DatabaseFunction) {
-                    clause += " DEFAULT " + DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database);
+                    clause.append(" DEFAULT ").append(DataTypeFactory.getInstance().fromObject(defaultValue, database).objectToSql(defaultValue, database));
                 } else {
-                    clause += " DEFAULT " + DataTypeFactory.getInstance().fromDescription(statement.getColumnType(), database).objectToSql(defaultValue, database);
+                    clause.append(" DEFAULT ").append(DataTypeFactory.getInstance().fromDescription(statement.getColumnType(), database).objectToSql(defaultValue, database));
                 }
             }
         }
-        return clause;
+        return clause.toString();
     }
 }

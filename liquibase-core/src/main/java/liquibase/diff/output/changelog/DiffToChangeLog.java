@@ -554,89 +554,67 @@ public class DiffToChangeLog {
             }
         } else if (database instanceof MSSQLDatabase) {
             Executor executor = Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", database);
-            String sql = "select object_schema_name(referencing_id) as referencing_schema_name, object_name(referencing_id) as referencing_name, object_name(referenced_id) as referenced_name, object_schema_name(referenced_id) as referenced_schema_name  from sys.sql_expression_dependencies depz where (" + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
+            StringBuilder sql = new StringBuilder("select object_schema_name(referencing_id) as referencing_schema_name, object_name(referencing_id) as referencing_name, object_name(referenced_id) as referenced_name, object_schema_name(referenced_id) as referenced_schema_name  from sys.sql_expression_dependencies depz where (" + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
                         @Override
                         public String toString(String obj) {
                             return "object_schema_name(referenced_id)='" + obj + "'";
                         }
                     }
-            ) + ")";
-            sql += " UNION select object_schema_name(object_id) as referencing_schema_name, object_name(object_id) as referencing_name, object_name(parent_object_id) as referenced_name, object_schema_name(parent_object_id) as referenced_schema_name " +
-                    "from sys.objects " +
-                    "where parent_object_id > 0 " +
-                    "and is_ms_shipped=0 " +
-                    "and (" + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
-                        @Override
-                        public String toString(String obj) {
-                            return "object_schema_name(object_id)='" + obj + "'";
-                        }
-                    }
-            ) + ")";
+            ) + ")");
+            sql.append(" UNION select object_schema_name(object_id) as referencing_schema_name, object_name(object_id) as referencing_name, object_name(parent_object_id) as referenced_name, object_schema_name(parent_object_id) as referenced_schema_name ").append("from sys.objects ").append("where parent_object_id > 0 ").append("and is_ms_shipped=0 ").append("and (").append(StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
+			    @Override
+			    public String toString(String obj) {
+			        return "object_schema_name(object_id)='" + obj + "'";
+			    }
+			}
+         )).append(")");
 
-            sql += " UNION select object_schema_name(fk.object_id) as referencing_schema_name, fk.name as referencing_name, i.name as referenced_name, object_schema_name(i.object_id) as referenced_schema_name " +
-                    "from sys.foreign_keys fk " +
-                    "join sys.indexes i on fk.referenced_object_id=i.object_id and fk.key_index_id=i.index_id " +
-                    "where fk.is_ms_shipped=0 " +
-                    "and (" + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
-                        @Override
-                        public String toString(String obj) {
-                            return "object_schema_name(fk.object_id)='" + obj + "'";
-                        }
-                    }
-            ) + ")";
+            sql.append(" UNION select object_schema_name(fk.object_id) as referencing_schema_name, fk.name as referencing_name, i.name as referenced_name, object_schema_name(i.object_id) as referenced_schema_name ").append("from sys.foreign_keys fk ").append("join sys.indexes i on fk.referenced_object_id=i.object_id and fk.key_index_id=i.index_id ").append("where fk.is_ms_shipped=0 ").append("and (").append(StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
+			    @Override
+			    public String toString(String obj) {
+			        return "object_schema_name(fk.object_id)='" + obj + "'";
+			    }
+			}
+         )).append(")");
 
-            sql += " UNION select object_schema_name(i.object_id) as referencing_schema_name, object_name(i.object_id) as referencing_name, s.name as referenced_name, null as referenced_schema_name " +
-                    "from sys.indexes i " +
-                    "join sys.partition_schemes s on i.data_space_id = s.data_space_id";
+            sql.append(" UNION select object_schema_name(i.object_id) as referencing_schema_name, object_name(i.object_id) as referencing_name, s.name as referenced_name, null as referenced_schema_name ").append("from sys.indexes i ").append("join sys.partition_schemes s on i.data_space_id = s.data_space_id");
 
-            sql += " UNION select null as referencing_schema_name, s.name as referencing_name, f.name as referenced_name, null as referenced_schema_name from sys.partition_functions f " +
-                    "join sys.partition_schemes s on s.function_id=f.function_id";
+            sql.append(" UNION select null as referencing_schema_name, s.name as referencing_name, f.name as referenced_name, null as referenced_schema_name from sys.partition_functions f ").append("join sys.partition_schemes s on s.function_id=f.function_id");
 
-            sql += " UNION select null as referencing_schema_name, s.name as referencing_name, fg.name as referenced_name, null as referenced_schema_name from sys.partition_schemes s " +
-                    "join sys.destination_data_spaces ds on s.data_space_id=ds.partition_scheme_id " +
-                    "join sys.filegroups fg on ds.data_space_id=fg.data_space_id";
+            sql.append(" UNION select null as referencing_schema_name, s.name as referencing_name, fg.name as referenced_name, null as referenced_schema_name from sys.partition_schemes s ").append("join sys.destination_data_spaces ds on s.data_space_id=ds.partition_scheme_id ").append("join sys.filegroups fg on ds.data_space_id=fg.data_space_id");
 
             //get data file -> filegroup dependencies
-            sql += " UNION select distinct null as referencing_schema_name, f.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.database_files f " +
-                    "join sys.data_spaces ds on f.data_space_id=ds.data_space_id " +
-                    "where f.data_space_id > 1";
+            sql.append(" UNION select distinct null as referencing_schema_name, f.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.database_files f ").append("join sys.data_spaces ds on f.data_space_id=ds.data_space_id ").append("where f.data_space_id > 1");
 
             //get table -> filestream dependencies
-            sql += " UNION select object_schema_name(t.object_id) as referencing_schema_name, t.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.tables t " +
-                    "join sys.data_spaces ds on t.filestream_data_space_id=ds.data_space_id " +
-                    "where t.filestream_data_space_id > 1";
+            sql.append(" UNION select object_schema_name(t.object_id) as referencing_schema_name, t.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.tables t ").append("join sys.data_spaces ds on t.filestream_data_space_id=ds.data_space_id ").append("where t.filestream_data_space_id > 1");
 
             //get table -> filestream dependencies
-            sql += " UNION select object_schema_name(t.object_id) as referencing_schema_name, t.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.tables t " +
-                    "join sys.data_spaces ds on t.lob_data_space_id=ds.data_space_id " +
-                    "where t.lob_data_space_id > 1";
+            sql.append(" UNION select object_schema_name(t.object_id) as referencing_schema_name, t.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.tables t ").append("join sys.data_spaces ds on t.lob_data_space_id=ds.data_space_id ").append("where t.lob_data_space_id > 1");
 
             //get index -> filegroup dependencies
-            sql += " UNION select object_schema_name(i.object_id) as referencing_schema_name, i.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.indexes i " +
-                    "join sys.data_spaces ds on i.data_space_id=ds.data_space_id " +
-                    "where i.data_space_id > 1";
+            sql.append(" UNION select object_schema_name(i.object_id) as referencing_schema_name, i.name as referencing_name, ds.name as referenced_name, null as referenced_schema_name from sys.indexes i ").append("join sys.data_spaces ds on i.data_space_id=ds.data_space_id ").append("where i.data_space_id > 1");
 
             //get index -> table dependencies
-            sql += " UNION select object_schema_name(i.object_id) as referencing_schema_name, i.name as referencing_name, object_name(i.object_id) as referenced_name, object_schema_name(i.object_id) as referenced_schema_name from sys.indexes i " +
-                    "where " + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
-                @Override
-                public String toString(String obj) {
-                    return "object_schema_name(i.object_id)='" + obj + "'";
-                }
-            });
+            sql.append(" UNION select object_schema_name(i.object_id) as referencing_schema_name, i.name as referencing_name, object_name(i.object_id) as referenced_name, object_schema_name(i.object_id) as referenced_schema_name from sys.indexes i ").append("where ").append(StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
+            @Override
+            public String toString(String obj) {
+			return "object_schema_name(i.object_id)='" + obj + "'";
+            }
+         }));
 
             //get schema -> base object dependencies
-            sql += " UNION SELECT SCHEMA_NAME(SCHEMA_ID) as referencing_schema_name, name as referencing_name, PARSENAME(BASE_OBJECT_NAME,1) AS referenced_name, (CASE WHEN PARSENAME(BASE_OBJECT_NAME,2) IS NULL THEN schema_name(schema_id) else PARSENAME(BASE_OBJECT_NAME,2) END) AS referenced_schema_name FROM SYS.SYNONYMS WHERE is_ms_shipped='false' AND " + StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
+            sql.append(" UNION SELECT SCHEMA_NAME(SCHEMA_ID) as referencing_schema_name, name as referencing_name, PARSENAME(BASE_OBJECT_NAME,1) AS referenced_name, (CASE WHEN PARSENAME(BASE_OBJECT_NAME,2) IS NULL THEN schema_name(schema_id) else PARSENAME(BASE_OBJECT_NAME,2) END) AS referenced_schema_name FROM SYS.SYNONYMS WHERE is_ms_shipped='false' AND ").append(StringUtil.join(schemas, " OR ", new StringUtil.StringUtilFormatter<String>() {
                 @Override
                 public String toString(String obj) {
                     return "SCHEMA_NAME(SCHEMA_ID)='" + obj + "'";
                 }
-            });
+            }));
 
             //get non-clustered indexes -> unique clustered indexes on views dependencies
-            sql += " UNION select object_schema_name(c.object_id) as referencing_schema_name, c.name as referencing_name, object_schema_name(nc.object_id) as referenced_schema_name, nc.name as referenced_name from sys.indexes c join sys.indexes nc on c.object_id=nc.object_id JOIN sys.objects o ON c.object_id = o.object_id where  c.index_id != nc.index_id and c.type_desc='CLUSTERED' and c.is_unique='true' and (not(nc.type_desc='CLUSTERED') OR nc.is_unique='false') AND o.type_desc='VIEW' AND o.name='AR_DETAIL_OPEN'";
+            sql.append(" UNION select object_schema_name(c.object_id) as referencing_schema_name, c.name as referencing_name, object_schema_name(nc.object_id) as referenced_schema_name, nc.name as referenced_name from sys.indexes c join sys.indexes nc on c.object_id=nc.object_id JOIN sys.objects o ON c.object_id = o.object_id where  c.index_id != nc.index_id and c.type_desc='CLUSTERED' and c.is_unique='true' and (not(nc.type_desc='CLUSTERED') OR nc.is_unique='false') AND o.type_desc='VIEW' AND o.name='AR_DETAIL_OPEN'");
 
-            List<Map<String, ?>> rs = executor.queryForList(new RawSqlStatement(sql));
+            List<Map<String, ?>> rs = executor.queryForList(new RawSqlStatement(sql.toString()));
             if (!rs.isEmpty()) {
                 for (Map<String, ?> row : rs) {
                     String bName = StringUtil.trimToNull((String) row.get("REFERENCED_SCHEMA_NAME")) + "." + StringUtil.trimToNull((String) row.get("REFERENCED_NAME"));
@@ -747,11 +725,11 @@ public class DiffToChangeLog {
         }
         List<Class<? extends DatabaseObject>> types = graph.sort(comparisonDatabase, generatorType);
         if (!loggedOrderFor.contains(generatorType)) {
-            String log = generatorType.getSimpleName() + " type order: ";
+            StringBuilder log = new StringBuilder(generatorType.getSimpleName() + " type order: ");
             for (Class<? extends DatabaseObject> type : types) {
-                log += "    " + type.getName();
+                log.append("    ").append(type.getName());
             }
-            Scope.getCurrentScope().getLog(getClass()).fine(log);
+            Scope.getCurrentScope().getLog(getClass()).fine(log.toString());
             loggedOrderFor.add(generatorType);
         }
 
@@ -987,8 +965,8 @@ public class DiffToChangeLog {
             //Check to see if all edges are removed
             for (Node n : allNodes.values()) {
                 if (!n.inEdges.isEmpty()) {
-                    String message = "Could not resolve " + generatorType.getSimpleName() + " dependencies due " +
-                            "to dependency cycle. Dependencies: \n";
+                    StringBuilder message = new StringBuilder("Could not resolve " + generatorType.getSimpleName() + " dependencies due " +
+                            "to dependency cycle. Dependencies: \n");
 
                     for (Node node : allNodes.values()) {
                         SortedSet<String> fromTypes = new TreeSet<>();
@@ -1001,10 +979,11 @@ public class DiffToChangeLog {
                         }
                         String from = StringUtil.join(fromTypes, ",");
                         String to = StringUtil.join(toTypes, ",");
-                        message += "    [" + from + "] -> " + node.type.getSimpleName() + " -> [" + to + "]\n";
+                        message.append("    [").append(from).append("] -> ").append(node.type.getSimpleName()).append(" -> [").append(to)
+								.append("]\n");
                     }
 
-                    throw new UnexpectedLiquibaseException(message);
+                    throw new UnexpectedLiquibaseException(message.toString());
                 }
             }
         }

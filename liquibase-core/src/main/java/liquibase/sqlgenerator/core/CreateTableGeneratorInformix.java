@@ -191,13 +191,13 @@ public class CreateTableGeneratorInformix extends CreateTableGenerator {
          * ( column1, ..., columnN, constraint1, ..., constraintN,
          * ends. We cannot leave an expression like ", )", so we remove the last comma.
          */
-        String sql = buffer.toString().replaceFirst(",\\s*$", "") + ")";
+        StringBuilder sql = new StringBuilder(buffer.toString().replaceFirst(",\\s*$", "") + ")");
 
         if ((statement.getTablespace() != null) && database.supportsTablespaces()) {
-            sql += " IN " + statement.getTablespace();
+            sql.append(" IN ").append(statement.getTablespace());
         }
 
-        return new Sql[] { new UnparsedSql(sql, new Table().setName(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(), statement.getSchemaName()))) };
+        return new Sql[] { new UnparsedSql(sql.toString(), new Table().setName(statement.getTableName()).setSchema(new Schema(statement.getCatalogName(), statement.getSchemaName()))) };
     }
 
     private boolean constraintNameAfterUnique(Database database) {

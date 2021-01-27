@@ -77,14 +77,14 @@ public class ChangeStatus {
 
     @Override
     public String toString() {
-        String out = getStatus().name;
+        StringBuilder out = new StringBuilder(getStatus().name);
 
         String message = getMessage();
         if (message != null) {
-            out += ": "+ message;
+            out.append(": ").append(message);
         }
 
-        return out;
+        return out.toString();
     }
 
     public enum Status {

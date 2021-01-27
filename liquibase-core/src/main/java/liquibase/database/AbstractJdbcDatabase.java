@@ -551,30 +551,30 @@ public abstract class AbstractJdbcDatabase implements Database {
 
         // generate an SQL:2003 STANDARD compliant auto increment clause by default
 
-        String autoIncrementClause = getAutoIncrementClause(generationType, defaultOnNull);
+        StringBuilder autoIncrementClause = new StringBuilder(getAutoIncrementClause(generationType, defaultOnNull));
 
         boolean generateStartWith = generateAutoIncrementStartWith(startWith);
         boolean generateIncrementBy = generateAutoIncrementBy(incrementBy);
 
         if (generateStartWith || generateIncrementBy) {
-            autoIncrementClause += getAutoIncrementOpening();
+            autoIncrementClause.append(getAutoIncrementOpening());
 
             if (generateStartWith) {
-                autoIncrementClause += String.format(getAutoIncrementStartWithClause(), (startWith == null) ? defaultAutoIncrementStartWith : startWith);
+                autoIncrementClause.append(String.format(getAutoIncrementStartWithClause(), (startWith == null) ? defaultAutoIncrementStartWith : startWith));
             }
 
             if (generateIncrementBy) {
                 if (generateStartWith) {
-                    autoIncrementClause += ", ";
+                    autoIncrementClause.append(", ");
                 }
 
-                autoIncrementClause += String.format(getAutoIncrementByClause(), (incrementBy == null) ? defaultAutoIncrementBy : incrementBy);
+                autoIncrementClause.append(String.format(getAutoIncrementByClause(), (incrementBy == null) ? defaultAutoIncrementBy : incrementBy));
             }
 
-            autoIncrementClause += getAutoIncrementClosing();
+            autoIncrementClause.append(getAutoIncrementClosing());
         }
 
-        return autoIncrementClause;
+        return autoIncrementClause.toString();
     }
 
     protected String getAutoIncrementClause() {

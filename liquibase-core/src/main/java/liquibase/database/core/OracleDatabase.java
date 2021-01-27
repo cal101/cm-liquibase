@@ -217,11 +217,11 @@ public class OracleDatabase extends AbstractJdbcDatabase {
         }
 
         String autoIncrementClause = "GENERATED %s AS IDENTITY"; // %s -- [ ALWAYS | BY DEFAULT [ ON NULL ] ]
-        String generationStrategy = generationType;
+        StringBuilder generationStrategy = new StringBuilder(generationType);
         if (Boolean.TRUE.equals(defaultOnNull) && generationType.toUpperCase().equals("BY DEFAULT")) {
-            generationStrategy += " ON NULL";
+            generationStrategy.append(" ON NULL");
         }
-        return String.format(autoIncrementClause, generationStrategy);
+        return String.format(autoIncrementClause, generationStrategy.toString());
     }
 
     @Override

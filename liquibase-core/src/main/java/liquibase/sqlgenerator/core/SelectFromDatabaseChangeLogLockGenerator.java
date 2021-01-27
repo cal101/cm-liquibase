@@ -32,7 +32,7 @@ public class SelectFromDatabaseChangeLogLockGenerator extends AbstractSqlGenerat
         ObjectQuotingStrategy currentStrategy = database.getObjectQuotingStrategy();
         database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
         try {
-            String sql = "SELECT " + StringUtil.join(statement.getColumnsToSelect(), ",", new StringUtil.StringUtilFormatter<ColumnConfig>() {
+            StringBuilder sql = new StringBuilder("SELECT " + StringUtil.join(statement.getColumnsToSelect(), ",", new StringUtil.StringUtilFormatter<ColumnConfig>() {
                 @Override
                 public String toString(ColumnConfig col) {
                     if ((col.getComputed() != null) && col.getComputed()) {
@@ -43,13 +43,13 @@ public class SelectFromDatabaseChangeLogLockGenerator extends AbstractSqlGenerat
                 }
             }) + " FROM " +
                     database.escapeTableName(database.getLiquibaseCatalogName(), liquibaseSchema, database.getDatabaseChangeLogLockTableName()) +
-                " WHERE " + database.escapeColumnName(database.getLiquibaseCatalogName(), liquibaseSchema, database.getDatabaseChangeLogLockTableName(), "ID") + "=1";
+                " WHERE " + database.escapeColumnName(database.getLiquibaseCatalogName(), liquibaseSchema, database.getDatabaseChangeLogLockTableName(), "ID") + "=1");
 
             if (database instanceof OracleDatabase) {
-                sql += " FOR UPDATE";
+                sql.append(" FOR UPDATE");
             }
             return new Sql[] {
-                    new UnparsedSql(sql)
+                    new UnparsedSql(sql.toString())
             };
         } finally {
             database.setObjectQuotingStrategy(currentStrategy);

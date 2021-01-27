@@ -26,16 +26,16 @@ public class DropSequenceGenerator extends AbstractSqlGenerator<DropSequenceStat
 
     @Override
     public Sql[] generateSql(DropSequenceStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        String sql = "DROP SEQUENCE ";
-        sql += database.escapeSequenceName(statement.getCatalogName(), statement.getSchemaName(), statement.getSequenceName());
+        StringBuilder sql = new StringBuilder("DROP SEQUENCE ");
+        sql.append(database.escapeSequenceName(statement.getCatalogName(), statement.getSchemaName(), statement.getSequenceName()));
         if (database instanceof PostgresDatabase) {
-            sql += " CASCADE";
+            sql.append(" CASCADE");
         }
         if (database instanceof DerbyDatabase) {
-            sql += " RESTRICT";
+            sql.append(" RESTRICT");
         }
         return new Sql[] {
-                new UnparsedSql(sql, getAffectedSequence(statement))
+                new UnparsedSql(sql.toString(), getAffectedSequence(statement))
         };
     }
 

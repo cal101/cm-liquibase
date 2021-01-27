@@ -341,27 +341,27 @@ public class CreateTableGenerator extends AbstractSqlGenerator<CreateTableStatem
          * ( column1, ..., columnN, constraint1, ..., constraintN,
          * ends. We cannot leave an expression like ", )", so we remove the last comma.
          */
-        String sql = buffer.toString().replaceFirst(",\\s*$", "") + ")";
+        StringBuilder sql = new StringBuilder(buffer.toString().replaceFirst(",\\s*$", "") + ")");
 
         if ((database instanceof MySQLDatabase) && (mysqlTableOptionStartWith != null)) {
             Scope.getCurrentScope().getLog(getClass()).info("[MySQL] Using last startWith statement ("+mysqlTableOptionStartWith.toString()+") as table option.");
-            sql += " " + ((MySQLDatabase) database).getTableOptionAutoIncrementStartWithClause(mysqlTableOptionStartWith);
+            sql.append(" ").append(((MySQLDatabase) database).getTableOptionAutoIncrementStartWithClause(mysqlTableOptionStartWith));
         }
 
         if ((statement.getTablespace() != null) && database.supportsTablespaces()) {
             if ((database instanceof MSSQLDatabase) || (database instanceof SybaseASADatabase)) {
-                sql += " ON " + statement.getTablespace();
+                sql.append(" ON ").append(statement.getTablespace());
             } else if ((database instanceof AbstractDb2Database) || (database instanceof InformixDatabase)) {
-                sql += " IN " + statement.getTablespace();
+                sql.append(" IN ").append(statement.getTablespace());
             } else {
-                sql += " TABLESPACE " + statement.getTablespace();
+                sql.append(" TABLESPACE ").append(statement.getTablespace());
             }
         }
 
         if ((database instanceof MySQLDatabase) && (statement.getRemarks() != null)) {
-            sql += " COMMENT='" + database.escapeStringForDatabase(statement.getRemarks()) + "' ";
+            sql.append(" COMMENT='").append(database.escapeStringForDatabase(statement.getRemarks())).append("' ");
         }
-        additionalSql.add(0, new UnparsedSql(sql, getAffectedTable(statement)));
+        additionalSql.add(0, new UnparsedSql(sql.toString(), getAffectedTable(statement)));
         return additionalSql.toArray(new Sql[additionalSql.size()]);
     }
 

@@ -70,11 +70,11 @@ public class ConsoleUIService extends AbstractExtensibleObject implements UIServ
             inputHandler = new DefaultInputHandler<>();
         }
 
-        String initialMessage = prompt;
+        StringBuilder initialMessage = new StringBuilder(prompt);
         if (defaultValue != null) {
-            initialMessage += " (default \"" + defaultValue + "\")";
+            initialMessage.append(" (default \"").append(defaultValue).append("\")");
         }
-        this.sendMessage(initialMessage + ": ");
+        this.sendMessage(initialMessage.toString() + ": ");
 
         while (true) {
             String input = StringUtil.trimToNull(console.readLine());
