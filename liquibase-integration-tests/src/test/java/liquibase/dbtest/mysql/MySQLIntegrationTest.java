@@ -53,12 +53,6 @@ public class MySQLIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Override
-    public void testRunChangeLog() throws Exception {
-        super.testRunChangeLog();    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    @Test
     public void snapshot() throws Exception {
         if (getDatabase() == null) {
             return;

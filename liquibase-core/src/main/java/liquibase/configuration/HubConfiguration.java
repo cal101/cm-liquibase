@@ -32,11 +32,6 @@ public class HubConfiguration extends AbstractConfigurationContainer {
                 .setDefaultValue("all");
     }
 
-    @Override
-    public void setValue(String propertyName, Object value) {
-        super.setValue(propertyName, value);
-    }
-
     /**
      * Output {@link #getLiquibaseHubApiKey()} but in a way that is secure for message output.
      *

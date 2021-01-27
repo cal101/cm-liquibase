@@ -138,13 +138,6 @@ public class H2IntegrationTest extends AbstractIntegrationTest {
         }
     }
 
-    @Test
-    @Override
-    public void testGenerateChangeLogWithNoChanges() throws Exception {
-        super.testGenerateChangeLogWithNoChanges();    //To change body of overridden methods use File | Settings |
-        // File Templates.
-    }
-
     @Override
     public void setUp() throws Exception {
         super.setUp();

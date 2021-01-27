@@ -238,11 +238,6 @@ public class UniqueConstraint extends AbstractDatabaseObject {
 	}
 
     @Override
-    public void load(ParsedNode parsedNode, ResourceAccessor resourceAccessor) throws ParsedNodeException {
-        super.load(parsedNode, resourceAccessor);
-    }
-
-    @Override
 	public int hashCode() {
 		int result = 0;
 		if (this.getRelation() != null) {

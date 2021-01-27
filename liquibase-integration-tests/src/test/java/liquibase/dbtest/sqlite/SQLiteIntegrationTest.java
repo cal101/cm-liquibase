@@ -29,12 +29,6 @@ public class SQLiteIntegrationTest extends AbstractIntegrationTest {
         return true;
     }
 
-    @Override
-    @Test
-    public void testRunChangeLog() throws Exception {
-        super.testRunChangeLog();    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
     @Test
     public void smartDataLoad() throws Exception {
         if (this.getDatabase() == null) {
