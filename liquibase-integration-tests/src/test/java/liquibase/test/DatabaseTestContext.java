@@ -114,7 +114,7 @@ public class DatabaseTestContext {
             boolean shouldTest = false;
             String[] databasesToTest = System.getProperty(TEST_DATABASES_PROPERTY).split("\\s*,\\s*");
             for (String database : databasesToTest) {
-                if (url.indexOf(database) >= 0) {
+                if (url.contains(database)) {
                     shouldTest = true;
                 }
             }
