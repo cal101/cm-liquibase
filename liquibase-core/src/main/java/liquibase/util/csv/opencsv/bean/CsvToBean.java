@@ -35,12 +35,6 @@ public class CsvToBean<T> extends AbstractCSVToBean {
    private Map<Class<?>, PropertyEditor> editorMap;
 
    /**
-    * Default constructor.
-    */
-   public CsvToBean() {
-   }
-
-   /**
     * parse the values from a csvReader constructed from the passed in Reader.
     * @param mapper - mapping strategy for the bean.
     * @param reader - Reader used to construct a CSVReader

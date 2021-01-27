@@ -7,10 +7,6 @@ import java.util.Map;
 
 public class TestScopeManager extends SingletonScopeManager {
 
-    public TestScopeManager() {
-
-    }
-
     @Override
     protected Scope init(Scope scope) throws Exception {
         Map<String, Object> data = new HashMap<>();

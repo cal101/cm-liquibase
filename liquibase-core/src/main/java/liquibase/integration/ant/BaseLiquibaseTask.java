@@ -43,10 +43,6 @@ public abstract class BaseLiquibaseTask extends Task {
     private ChangeLogParametersType changeLogParameters;
     private boolean promptOnNonLocalDatabase;
 
-    public BaseLiquibaseTask() {
-        super();
-    }
-
     @Override
     public void init() throws BuildException {
         scopeValues.put(Scope.Attr.logService.name(), new AntTaskLogService(this));

@@ -46,9 +46,6 @@ public class StandardLockService implements LockService {
     private ObjectQuotingStrategy quotingStrategy;
 
 
-    public StandardLockService() {
-    }
-
     @Override
     public int getPriority() {
         return PRIORITY_DEFAULT;

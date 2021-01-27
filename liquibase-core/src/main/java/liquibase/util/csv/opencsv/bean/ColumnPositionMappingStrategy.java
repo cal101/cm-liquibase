@@ -17,12 +17,6 @@ public class ColumnPositionMappingStrategy<T> extends HeaderColumnNameMappingStr
    private String[] columnMapping = new String[]{};
 
    /**
-    * Default Constructor.
-    */
-   public ColumnPositionMappingStrategy() {
-   }
-
-   /**
     * Captures the header from the reader - required by the MappingStrategy interface and is a do
     * nothing method for the ColumnPositionMappingStrategy.
     *

@@ -13,10 +13,6 @@ public class OperationEvent implements HubModel {
     private OperationEventLog operationEventLog;
     private OperationEventStatus operationEventStatus;
 
-    public OperationEvent() {
-
-    }
-
     @Override
     public UUID getId() {
         return id;

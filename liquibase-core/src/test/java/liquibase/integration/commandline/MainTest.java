@@ -77,26 +77,6 @@ public class MainTest {
 //    @Mock
 //    private SnapshotCommand.SnapshotCommandResult snapshotCommandResult;
 
-    public MainTest() throws Exception {
-//        PowerMockito.mockStatic(CommandFactory.class);
-//
-//        commandFactory = PowerMockito.mock(CommandFactory.class);
-//        snapshotCommand = PowerMockito.mock(SnapshotCommand.class);
-//        snapshotCommandResult = PowerMockito.mock(SnapshotCommand.SnapshotCommandResult.class);
-//
-//        // Do not do actual database snapshots.
-//        when(CommandFactory.getInstance()).thenReturn(commandFactory);
-//        when(commandFactory.getCommand("snapshot")).thenReturn(snapshotCommand);
-//        when(snapshotCommand.execute()).thenReturn(snapshotCommandResult);
-//        when(snapshotCommandResult.print()).thenReturn("<?xml version=\"1.0\" encoding=\"UTF-8\"?>...");
-//
-//        // This one is not so much for JUnit, but for people working with IntelliJ. It seems that IntelliJ's
-//        // test runner can get confused badly if tests open an OutputStreamWriter in STDOUT.
-//        PowerMockito.stub(method(Main.class, "getOutputWriter"))
-//                .toReturn(new OutputStreamWriter(System.err));
-
-    }
-
     @Test
     public void testLocalProperties() throws Exception {
 

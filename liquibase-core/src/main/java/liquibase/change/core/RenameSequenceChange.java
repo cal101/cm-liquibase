@@ -20,9 +20,6 @@ public class RenameSequenceChange extends AbstractChange {
 
     private String newSequenceName;
 
-    public RenameSequenceChange() {
-    }
-
     @DatabaseChangeProperty(mustEqualExisting ="sequence.catalog", since = "3.0")
     public String getCatalogName() {
         return catalogName;

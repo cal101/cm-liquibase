@@ -137,13 +137,6 @@ public class FilenameUtils {
         }
     }
 
-    /**
-     * Instances should NOT be constructed in standard programming.
-     */
-    public FilenameUtils() {
-        super();
-    }
-
     //-----------------------------------------------------------------------
     /**
      * Determines if Windows file system is in use.

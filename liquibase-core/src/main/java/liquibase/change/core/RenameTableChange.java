@@ -24,9 +24,6 @@ public class RenameTableChange extends AbstractChange {
 
     private String newTableName;
 
-    public RenameTableChange() {
-    }
-
     @DatabaseChangeProperty(mustEqualExisting ="table.catalog")
     public String getCatalogName() {
         return catalogName;

@@ -29,12 +29,6 @@ public class HeaderColumnNameTranslateMappingStrategy<T> extends HeaderColumnNam
    private Map<String, String> columnMapping = new HashMap<>();
 
    /**
-    * Default constructor.
-    */
-   public HeaderColumnNameTranslateMappingStrategy() {
-   }
-
-   /**
     * Retrieves the column name for a given column position
     *
     * @param col - column position.

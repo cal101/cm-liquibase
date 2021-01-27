@@ -37,9 +37,6 @@ public abstract class AbstractChange extends AbstractPlugin implements Change {
 
     private ChangeSet changeSet;
 
-    public AbstractChange() {
-    }
-
     /**
      * Default implementation is a no-op
      */

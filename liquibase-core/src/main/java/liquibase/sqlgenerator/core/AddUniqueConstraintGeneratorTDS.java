@@ -10,10 +10,6 @@ import liquibase.statement.core.AddUniqueConstraintStatement;
 
 public class AddUniqueConstraintGeneratorTDS extends AddUniqueConstraintGenerator {
 
-    public AddUniqueConstraintGeneratorTDS() {
-
-    }
-
     @Override
     public int getPriority() {
         return PRIORITY_DATABASE;

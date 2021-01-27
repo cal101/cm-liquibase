@@ -6,9 +6,6 @@ public class ChangeStatus {
     private String message;
     private Status status;
 
-    public ChangeStatus() {
-    }
-
     public ChangeStatus assertComplete(boolean complete, String incompleteMessage) {
         if (complete) {
             if (status == null) {

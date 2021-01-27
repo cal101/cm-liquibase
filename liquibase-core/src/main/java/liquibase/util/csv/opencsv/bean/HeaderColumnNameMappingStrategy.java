@@ -47,12 +47,6 @@ public class HeaderColumnNameMappingStrategy<T> implements MappingStrategy<T> {
    protected boolean determinedIfAnnotationDriven;
 
    /**
-    * Default constructor.
-    */
-   public HeaderColumnNameMappingStrategy() {
-   }
-
-   /**
     * Retrieves the header from the CSVReader.
     *
     * @param reader the CSVReader to use for header parsing

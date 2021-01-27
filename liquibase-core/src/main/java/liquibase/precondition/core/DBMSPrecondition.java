@@ -19,9 +19,6 @@ public class DBMSPrecondition extends AbstractPrecondition {
     private String type;
 
 
-    public DBMSPrecondition() {
-    }
-
     @Override
     public String getSerializedObjectNamespace() {
         return STANDARD_CHANGELOG_NAMESPACE;
