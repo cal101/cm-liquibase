@@ -62,7 +62,7 @@ public class ChangedIndexChangeGenerator extends AbstractChangeGenerator impleme
 
         Index index = (Index) changedObject;
 
-        if (index.getRelation() != null  && index.getRelation() instanceof Table) {
+        if (index.getRelation() instanceof Table) {
             if ((((Table) index.getRelation()).getPrimaryKey() != null) && DatabaseObjectComparatorFactory.getInstance()
                 .isSameObject(((Table) index.getRelation()).getPrimaryKey().getBackingIndex(), changedObject, differences
                     .getSchemaComparisons(), comparisonDatabase)) {

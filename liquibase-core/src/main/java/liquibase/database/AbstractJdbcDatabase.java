@@ -831,7 +831,7 @@ public abstract class AbstractJdbcDatabase implements Database {
         if (example == null) {
             return false;
         }
-        if ((example.getSchema() != null) && (example.getSchema().getName() != null) && "information_schema"
+        if ((example.getSchema() != null) && "information_schema"
             .equalsIgnoreCase(example.getSchema().getName())) {
             return true;
         }
