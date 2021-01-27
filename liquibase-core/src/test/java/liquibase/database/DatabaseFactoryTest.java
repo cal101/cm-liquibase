@@ -129,7 +129,6 @@ public class DatabaseFactoryTest {
     private static class CustomProperties extends Properties {
         // Default constructor needed for reflective construction
         public CustomProperties() {
-            super();
         }
     }
 }

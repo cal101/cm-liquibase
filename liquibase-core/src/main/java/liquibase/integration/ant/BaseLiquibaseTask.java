@@ -44,7 +44,6 @@ public abstract class BaseLiquibaseTask extends Task {
     private boolean promptOnNonLocalDatabase;
 
     public BaseLiquibaseTask() {
-        super();
     }
 
     @Override

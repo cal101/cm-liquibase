@@ -8,7 +8,6 @@ public class ClearDatabaseChangeLogTableStatement extends AbstractSqlStatement {
     private String schemaName;
 
     public ClearDatabaseChangeLogTableStatement(String catalogName, String schemaName) {
-        super();
         this.catalogName = catalogName;
         this.schemaName = schemaName;
     }

@@ -35,7 +35,6 @@ public class CreateTableChange extends AbstractChange implements ChangeWithColum
     private String remarks;
 
     public CreateTableChange() {
-        super();
         columns = new ArrayList<>();
     }
 

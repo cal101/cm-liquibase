@@ -81,7 +81,6 @@ public class SpringLiquibase implements InitializingBean, BeanNameAware, Resourc
 	protected boolean testRollbackOnUpdate = false;
 
 	public SpringLiquibase() {
-		super();
 	}
 
 	public boolean isDropFirst() {
