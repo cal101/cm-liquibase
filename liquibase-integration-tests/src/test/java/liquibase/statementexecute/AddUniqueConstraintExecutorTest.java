@@ -24,7 +24,7 @@ public class AddUniqueConstraintExecutorTest extends AbstractExecuteTest {
 
     @Override
     protected List<? extends SqlStatement> setupStatements(Database database) {
-        List<CreateTableStatement> statements = new ArrayList<CreateTableStatement>();
+        List<CreateTableStatement> statements = new ArrayList<>();
         CreateTableStatement table = new CreateTableStatement(null, null, TABLE_NAME);
         table
                 .addColumn("id", DataTypeFactory.getInstance().fromDescription("int", database), null, new ColumnConstraint[]{ new NotNullConstraint()})

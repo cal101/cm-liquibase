@@ -22,7 +22,7 @@ public class AddAutoIncrementExecuteTest extends AbstractExecuteTest {
 
     @Override
     protected List<? extends SqlStatement> setupStatements(Database database) {
-        ArrayList<CreateTableStatement> statements = new ArrayList<CreateTableStatement>();
+        ArrayList<CreateTableStatement> statements = new ArrayList<>();
         CreateTableStatement table = new CreateTableStatement(null, null, TABLE_NAME);
         if (database instanceof MySQLDatabase) {
             table.addPrimaryKeyColumn("id", DataTypeFactory.getInstance().fromDescription("int", database), null, "pk_", null);

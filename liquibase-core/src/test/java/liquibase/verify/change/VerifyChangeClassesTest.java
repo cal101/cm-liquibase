@@ -73,7 +73,7 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
 
                 // Prepare a list of required parameters, plus a few extra for complicated cases (e.g. where at least
                 // one of two parameters in a group is required.
-                TreeSet<String> requiredParams = new TreeSet<String>(changeMetaData.getRequiredParameters(database).keySet());
+                TreeSet<String> requiredParams = new TreeSet<>(changeMetaData.getRequiredParameters(database).keySet());
                 /* dropColumn allows either one column or a list of columns; we choose to test with a single column. */
                 if ("dropColumn".equalsIgnoreCase(changeName)) requiredParams.add("columnName");
                 /* When testing table and column remarks, do not test with an empty remark. */
@@ -166,7 +166,7 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
                 }
                 ChangeMetaData changeMetaData = Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(change);
 
-                ArrayList<String> requiredParams = new ArrayList<String>(changeMetaData.getRequiredParameters(database).keySet());
+                ArrayList<String> requiredParams = new ArrayList<>(changeMetaData.getRequiredParameters(database).keySet());
                 for (String paramName : requiredParams) {
                     ChangeParameterMetaData param = changeMetaData.getParameters().get(paramName);
                     Object paramValue = param.getExampleValue(database);
@@ -215,7 +215,7 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
                     continue;
                 }
                 ChangeMetaData changeMetaData = Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(baseChange);
-                ArrayList<String> optionalParameters = new ArrayList<String>(changeMetaData.getOptionalParameters(database).keySet());
+                ArrayList<String> optionalParameters = new ArrayList<>(changeMetaData.getOptionalParameters(database).keySet());
                 Collections.sort(optionalParameters);
 
                 List<List<String>> paramLists = powerSet(optionalParameters);
@@ -275,17 +275,17 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
     }
 
     private List<List<String>> powerSet(List<String> baseSet) {
-        List<List<String>> returnList = new LinkedList<List<String>>();
+        List<List<String>> returnList = new LinkedList<>();
 
         if (baseSet.isEmpty()) {
             returnList.add(new ArrayList<String>());
             return returnList;
         }
-        List<String> list = new ArrayList<String>(baseSet);
+        List<String> list = new ArrayList<>(baseSet);
         String head = list.get(0);
-        List<String> rest = new ArrayList<String>(list.subList(1, list.size()));
+        List<String> rest = new ArrayList<>(list.subList(1, list.size()));
         for (List<String> set : powerSet(rest)) {
-            List<String> newSet = new ArrayList<String>();
+            List<String> newSet = new ArrayList<>();
             newSet.add(head);
             newSet.addAll(set);
             returnList.add(newSet);

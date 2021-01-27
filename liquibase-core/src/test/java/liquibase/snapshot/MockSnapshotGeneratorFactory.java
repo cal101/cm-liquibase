@@ -14,7 +14,7 @@ public class MockSnapshotGeneratorFactory extends SnapshotGeneratorFactory{
     private List<DatabaseObject> objects;
 
     public MockSnapshotGeneratorFactory(DatabaseObject... objects) {
-        this.objects = new ArrayList<DatabaseObject>();
+        this.objects = new ArrayList<>();
         if (objects != null) {
             this.objects.addAll(Arrays.asList(objects));
         }

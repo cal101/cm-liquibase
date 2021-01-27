@@ -33,7 +33,7 @@ public class AddDefaultValueGeneratorInformixTest {
 
         AddDefaultValueStatement statement = new AddDefaultValueStatement(null, null, "tbl1", "id", "BIGINT", 1);
         InformixDatabase database = new InformixDatabase();
-        SortedSet<SqlGenerator> sqlGenerators = new TreeSet<SqlGenerator>();
+        SortedSet<SqlGenerator> sqlGenerators = new TreeSet<>();
         SqlGeneratorChain sqlGenerationChain = new SqlGeneratorChain(sqlGenerators);
         Sql[] sqls = informix.generateSql(statement, database, sqlGenerationChain);
         assertEquals("ALTER TABLE tbl1 MODIFY (id INT8 DEFAULT 1)", sqls[0].toSql());

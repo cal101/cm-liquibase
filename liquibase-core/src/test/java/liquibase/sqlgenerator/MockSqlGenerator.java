@@ -69,7 +69,7 @@ public class MockSqlGenerator implements SqlGenerator {
 
     @Override
     public Sql[] generateSql(SqlStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        List<Sql> sql = new ArrayList<Sql>();
+        List<Sql> sql = new ArrayList<>();
         for (String returnSql  : this.returnSql) {
             sql.add(new UnparsedSql(returnSql));
         }

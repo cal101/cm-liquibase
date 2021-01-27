@@ -37,7 +37,7 @@ import static org.junit.Assert.assertNotNull;
 public abstract class AbstractExecuteTest {
 
     protected SqlStatement statementUnderTest;
-    private Set<Class<? extends Database>> testedDatabases = new HashSet<Class<? extends Database>>();
+    private Set<Class<? extends Database>> testedDatabases = new HashSet<>();
 
     @After
     public void reset() {
@@ -50,7 +50,7 @@ public abstract class AbstractExecuteTest {
                 }
             }
         }
-        testedDatabases = new HashSet<Class<? extends Database>>();
+        testedDatabases = new HashSet<>();
         this.statementUnderTest = null;
 
         SnapshotGeneratorFactory.resetAll();

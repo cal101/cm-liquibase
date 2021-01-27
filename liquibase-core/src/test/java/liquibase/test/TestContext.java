@@ -32,11 +32,11 @@ public class TestContext {
 
     public Set<Database> getAllDatabases() {
         if (allDatabases == null) {
-            allDatabases = new HashSet<Database>();
+            allDatabases = new HashSet<>();
 
             allDatabases.addAll(DatabaseFactory.getInstance().getImplementedDatabases());
 
-            List<Database> toRemove = new ArrayList<Database>();
+            List<Database> toRemove = new ArrayList<>();
             for (Database database : allDatabases) {
                 if ((database instanceof SQLiteDatabase) //todo: re-enable sqlite testing
                     || (database instanceof MockDatabase)) {

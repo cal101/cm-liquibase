@@ -55,7 +55,7 @@ public class DropIndexGeneratorTest {
 		DropIndexGenerator dropIndexGenerator = new DropIndexGenerator();
 		DropIndexStatement statement = new DropIndexStatement("indexName", "defaultCatalog", "defaultSchema", "aTable", null);
 		Database database = new PostgresDatabase();
-		SortedSet<SqlGenerator> sqlGenerators = new TreeSet<SqlGenerator>();
+		SortedSet<SqlGenerator> sqlGenerators = new TreeSet<>();
 		SqlGeneratorChain sqlGenerationChain = new SqlGeneratorChain(sqlGenerators);
 		Sql[] sqls = dropIndexGenerator.generateSql(statement, database, sqlGenerationChain);
 		assertEquals("DROP INDEX \"defaultSchema\".\"indexName\"", sqls[0].toSql());

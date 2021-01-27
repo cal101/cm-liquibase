@@ -111,7 +111,7 @@ public abstract class AbstractJdbcDatabaseTest {
 
         Scope.getCurrentScope().getSingleton(ExecutorService.class).setExecutor("jdbc", database, mockExecutor);
 
-        final List<SqlVisitor> sqlVisitors = new ArrayList<SqlVisitor>();
+        final List<SqlVisitor> sqlVisitors = new ArrayList<>();
 
         final SqlStatement dropTableStatement = new DropTableStatement(null, null, "test_table", false);
 
@@ -134,7 +134,7 @@ public abstract class AbstractJdbcDatabaseTest {
 
         Scope.getCurrentScope().getSingleton(ExecutorService.class).setExecutor("jdbc", database, mockExecutor);
 
-        final List<SqlVisitor> sqlVisitors = new ArrayList<SqlVisitor>();
+        final List<SqlVisitor> sqlVisitors = new ArrayList<>();
 
         final SqlStatement dropTableStatement = new DropTableStatement(null, null, "test_table", false);
 
@@ -158,7 +158,7 @@ public abstract class AbstractJdbcDatabaseTest {
 
         Scope.getCurrentScope().getSingleton(ExecutorService.class).setExecutor("jdbc", database, mockExecutor);
 
-        final List<SqlVisitor> sqlVisitors = new ArrayList<SqlVisitor>();
+        final List<SqlVisitor> sqlVisitors = new ArrayList<>();
 
         final CreateTableChange change = new CreateTableChange();
         change.setTableName("test_table");
@@ -182,7 +182,7 @@ public abstract class AbstractJdbcDatabaseTest {
 
         Scope.getCurrentScope().getSingleton(ExecutorService.class).setExecutor("jdbc", database, mockExecutor);
 
-        final List<SqlVisitor> sqlVisitors = new ArrayList<SqlVisitor>();
+        final List<SqlVisitor> sqlVisitors = new ArrayList<>();
 
         final CreateTableChange change = new CreateTableChange();
         change.setTableName("test_table");

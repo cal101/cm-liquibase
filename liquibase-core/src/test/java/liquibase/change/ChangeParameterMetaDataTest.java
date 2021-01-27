@@ -20,7 +20,7 @@ public class ChangeParameterMetaDataTest {
 
     @Test
     public void constructor() {
-        Map<String, Object> examples = new HashMap<String, Object>();
+        Map<String, Object> examples = new HashMap<>();
         examples.put("all", "examp");
 
         ChangeParameterMetaData metaData = new ChangeParameterMetaData(new ExampleAbstractChange(), "x", "y", "desc", examples, "2.1", Integer.class, new String[]{"mysql", "mssql"}, new String[] {"h2", "mysql","mssql"}, "column", LiquibaseSerializable.SerializationType.NESTED_OBJECT);

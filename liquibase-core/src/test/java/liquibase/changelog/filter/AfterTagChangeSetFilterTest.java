@@ -25,7 +25,7 @@ public class AfterTagChangeSetFilterTest {
 
     @Test
     public void accepts() throws Exception {
-        ArrayList<RanChangeSet> ranChanges = new ArrayList<RanChangeSet>();
+        ArrayList<RanChangeSet> ranChanges = new ArrayList<>();
         ranChanges.add(new RanChangeSet("path/changelog", "1", "testAuthor", CheckSum.parse("12345"), new Date(), null, null, null, null, null, null, null));
         ranChanges.add(new RanChangeSet("path/changelog", "2", "testAuthor", CheckSum.parse("12345"), new Date(), "tag1", null, null, null, null, null, null));
         ranChanges.add(new RanChangeSet("path/changelog", "3", "testAuthor", CheckSum.parse("12345"), new Date(), null, null, null, null, null, null, null));

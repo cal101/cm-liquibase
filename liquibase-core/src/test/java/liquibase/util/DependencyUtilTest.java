@@ -11,7 +11,7 @@ import liquibase.util.DependencyUtil.*;
 public class DependencyUtilTest {
 
     private DependencyGraph<String> graph;
-    private List<String> dependencyOrder = new ArrayList<String>();
+    private List<String> dependencyOrder = new ArrayList<>();
 
     @Before
     public void setup() {

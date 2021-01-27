@@ -22,7 +22,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void generateSql_noGenerators() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         SqlGeneratorChain chain = new SqlGeneratorChain(generators);
 
         assertEquals(0, chain.generateSql(new MockSqlStatement(), new MockDatabase()).length);
@@ -30,7 +30,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void generateSql_oneGenerators() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
         SqlGeneratorChain chain = new SqlGeneratorChain(generators);
 
@@ -42,7 +42,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void generateSql_twoGenerators() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(2, "B1", "B2"));
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
         SqlGeneratorChain chain = new SqlGeneratorChain(generators);
@@ -57,7 +57,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void generateSql_threeGenerators() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(2, "B1", "B2"));
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
         generators.add(new MockSqlGenerator(3, "C1", "C2"));
@@ -82,7 +82,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void validate_oneGenerators_noErrors() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
 
         SqlGeneratorChain chain = new SqlGeneratorChain(generators);
@@ -92,7 +92,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void validate_oneGenerators_hasErrors() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(1, "A1", "A2").addValidationError("E1"));
 
         SqlGeneratorChain chain = new SqlGeneratorChain(generators);
@@ -102,7 +102,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void validate_twoGenerators_noErrors() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(2, "B1", "B2"));
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
 
@@ -113,7 +113,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void validate_twoGenerators_firstHasErrors() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(2, "B1", "B2").addValidationError("E1"));
         generators.add(new MockSqlGenerator(1, "A1", "A2"));
 
@@ -124,7 +124,7 @@ public class SqlGeneratorChainTest {
 
     @Test
     public void validate_twoGenerators_secondHasErrors() {
-        SortedSet<SqlGenerator> generators = new TreeSet<SqlGenerator>(new SqlGeneratorComparator());
+        SortedSet<SqlGenerator> generators = new TreeSet<>(new SqlGeneratorComparator());
         generators.add(new MockSqlGenerator(2, "B1", "B2"));
         generators.add(new MockSqlGenerator(1, "A1", "A2").addValidationError("E1"));
 

@@ -108,7 +108,7 @@ public class ChangeLogIteratorTest {
 
     private static class TestChangeSetVisitor implements ChangeSetVisitor {
 
-        public List<ChangeSet> visitedChangeSets = new ArrayList<ChangeSet>();
+        public List<ChangeSet> visitedChangeSets = new ArrayList<>();
 
 
         @Override

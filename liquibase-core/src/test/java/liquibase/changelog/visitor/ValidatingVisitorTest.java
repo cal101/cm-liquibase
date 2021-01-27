@@ -98,7 +98,7 @@ public class ValidatingVisitorTest {
             }
         });
 
-        List<RanChangeSet> ran = new ArrayList<RanChangeSet>();
+        List<RanChangeSet> ran = new ArrayList<>();
         ValidatingVisitor handler = new ValidatingVisitor(ran);
         handler.visit(changeSet1, new DatabaseChangeLog(), null, null);
 
@@ -120,7 +120,7 @@ public class ValidatingVisitorTest {
             }
         });
 
-        List<RanChangeSet> ran = new ArrayList<RanChangeSet>();
+        List<RanChangeSet> ran = new ArrayList<>();
         ran.add(new RanChangeSet(changeSet1));
         ValidatingVisitor handler = new ValidatingVisitor(ran);
         handler.visit(changeSet1, new DatabaseChangeLog(), null, null);

@@ -29,7 +29,7 @@ public class XMLChangeLogSAXParserTest {
         DatabaseChangeLog changeLog = xmlParser.parse("liquibase/parser/core/xml/ignoreDuplicatedChangeLogs/master.changelog.xml", 
             new ChangeLogParameters(), new JUnitResourceAccessor());
 
-        final List<ChangeSet> changeSets = new ArrayList<ChangeSet>();
+        final List<ChangeSet> changeSets = new ArrayList<>();
 
         new ChangeLogIterator(changeLog).run(new ChangeSetVisitor() {
             @Override

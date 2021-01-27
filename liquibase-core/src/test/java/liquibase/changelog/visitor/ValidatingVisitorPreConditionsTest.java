@@ -67,7 +67,7 @@ public class ValidatingVisitorPreConditionsTest {
         OracleDatabase oracleDb = new OracleDatabase() {
             @Override
             public List<RanChangeSet> getRanChangeSetList() throws DatabaseException {
-                return new ArrayList<RanChangeSet>();
+                return new ArrayList<>();
             }
 
             @Override
@@ -107,7 +107,7 @@ public class ValidatingVisitorPreConditionsTest {
         MSSQLDatabase mssqlDb = new MSSQLDatabase() {
             @Override
             public List<RanChangeSet> getRanChangeSetList() throws DatabaseException {
-                return new ArrayList<RanChangeSet>();
+                return new ArrayList<>();
             }
 
             @Override
@@ -150,7 +150,7 @@ public class ValidatingVisitorPreConditionsTest {
         MSSQLDatabase mssqlDb = new MSSQLDatabase() {
             @Override
             public List<RanChangeSet> getRanChangeSetList() throws DatabaseException {
-                return new ArrayList<RanChangeSet>();
+                return new ArrayList<>();
             }
 
             @Override

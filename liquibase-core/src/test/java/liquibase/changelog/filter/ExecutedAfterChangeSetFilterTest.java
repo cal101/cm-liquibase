@@ -22,7 +22,7 @@ public class ExecutedAfterChangeSetFilterTest {
 
     @Test
     public void accepts_nullDate() throws Exception {
-        ArrayList<RanChangeSet> ranChanges = new ArrayList<RanChangeSet>();
+        ArrayList<RanChangeSet> ranChanges = new ArrayList<>();
         ranChanges.add(new RanChangeSet("path/changelog", "1", "testAuthor", CheckSum.parse("12345"), new Date(), null, null, null, null, null, null, null));
         ranChanges.add(new RanChangeSet("path/changelog", "2", "testAuthor", CheckSum.parse("12345"), null, null, null, null, null, null, null, null));
         ranChanges.add(new RanChangeSet("path/changelog", "3", "testAuthor", CheckSum.parse("12345"), new Date(), null, null, null, null, null, null, null));
@@ -33,7 +33,7 @@ public class ExecutedAfterChangeSetFilterTest {
 
     @Test
     public void accepts() throws Exception {
-        ArrayList<RanChangeSet> ranChanges = new ArrayList<RanChangeSet>();
+        ArrayList<RanChangeSet> ranChanges = new ArrayList<>();
         ranChanges.add(new RanChangeSet("path/changelog", "1", "testAuthor", CheckSum.parse("12345"), new Date(new
             Date().getTime() - (10 * 1000 * 60 * 60)), null, null, null, null, null, null, null));
         ranChanges.add(new RanChangeSet("path/changelog", "2", "testAuthor", CheckSum.parse("12345"), new Date(new
