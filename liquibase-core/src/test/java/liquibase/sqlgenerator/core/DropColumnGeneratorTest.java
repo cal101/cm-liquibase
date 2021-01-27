@@ -38,7 +38,7 @@ public class DropColumnGeneratorTest extends AbstractSqlGeneratorTest<DropColumn
         Assert.assertEquals(1, sql.length);
         Assert.assertEquals("ALTER TABLE TEST_TABLE DROP col1, DROP col2", sql[0].toSql());
 
-        List<String> actualNames = sql[0].getAffectedDatabaseObjects().stream().map(o -> o.toString()).collect(Collectors.toList());
+        List<String> actualNames = sql[0].getAffectedDatabaseObjects().stream().map(Object::toString).collect(Collectors.toList());
         List<String> expectedNames = Arrays.asList(new String[]{"TEST_TABLE.col1", "TEST_TABLE.col2", "TEST_TABLE", "DEFAULT"});
         assertTrue(actualNames.containsAll(expectedNames));
         assertTrue(expectedNames.containsAll(actualNames));
