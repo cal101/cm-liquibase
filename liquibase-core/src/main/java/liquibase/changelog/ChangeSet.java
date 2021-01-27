@@ -730,7 +730,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
             }
 
             if (hasCustomRollbackChanges()) {
-                final List<SqlStatement> statements = new LinkedList<>();
+                final List<SqlStatement> statements = new ArrayList<>();
                 for (Change change : rollback.getChanges()) {
                     if (((change instanceof DbmsTargetedChange)) && !DatabaseList.definitionMatches(((DbmsTargetedChange) change).getDbms(), database, true)) {
                         continue;

@@ -298,7 +298,7 @@ public class CreateTableGenerator extends AbstractSqlGenerator<CreateTableStatem
          * To alleviate this problem we combine the columns of unique constraints that have the same name.
          */
         LinkedHashMap<String, UniqueConstraint> namedUniqueConstraints = new LinkedHashMap<>();
-        List<UniqueConstraint> unnamedUniqueConstraints = new LinkedList<>();
+        List<UniqueConstraint> unnamedUniqueConstraints = new ArrayList<>();
         for (UniqueConstraint uniqueConstraint : statement.getUniqueConstraints()) {
             if (uniqueConstraint.getConstraintName() == null) {  // Only combine uniqueConstraints that have a name.
                 unnamedUniqueConstraints.add(uniqueConstraint);
