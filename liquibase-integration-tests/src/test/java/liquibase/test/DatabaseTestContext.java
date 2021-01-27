@@ -44,11 +44,11 @@ public class DatabaseTestContext {
                     new DatabaseTestURL("SybaseJtds","jdbc:sybase:Tds:"+AbstractIntegrationTest.getDatabaseServerHostname("sybase")+":9810/servicename=prior")
                     */
     };
-    private Set<Database> availableDatabases = new HashSet<Database>();
+    private Set<Database> availableDatabases = new HashSet<>();
     private Set<Database> allDatabases;
     private Set<DatabaseConnection> availableConnections;
-    private Map<String, DatabaseConnection> connectionsByUrl = new HashMap<String, DatabaseConnection>();
-    private Map<String, Boolean> connectionsAttempted = new HashMap<String, Boolean>();
+    private Map<String, DatabaseConnection> connectionsByUrl = new HashMap<>();
+    private Map<String, Boolean> connectionsAttempted = new HashMap<>();
     private ResourceAccessor resourceAccessor;
 
     public static DatabaseTestContext getInstance() {
@@ -238,11 +238,11 @@ public class DatabaseTestContext {
 
     public Set<Database> getAllDatabases() {
         if (allDatabases == null) {
-            allDatabases = new HashSet<Database>();
+            allDatabases = new HashSet<>();
 
             allDatabases.addAll(DatabaseFactory.getInstance().getImplementedDatabases());
 
-            List<Database> toRemove = new ArrayList<Database>();
+            List<Database> toRemove = new ArrayList<>();
             for (Database database : allDatabases) {
                 if ((database instanceof SQLiteDatabase) //todo: re-enable sqlite testing
                         || (database instanceof MockDatabase) || (database instanceof ExampleCustomDatabase)) {
@@ -275,7 +275,7 @@ public class DatabaseTestContext {
 
     public Set<DatabaseConnection> getAvailableConnections() throws Exception {
         if (availableConnections == null) {
-            availableConnections = new HashSet<DatabaseConnection>();
+            availableConnections = new HashSet<>();
             for (DatabaseTestURL url : getTestUrls()) {
                 DatabaseConnection connection = openConnection(url.getUrl(), url.getUsername(), url.getPassword());
 

@@ -31,7 +31,7 @@ public class JUnitJDBCDriverClassLoader extends URLClassLoader {
 
     private static URL[] getDriverClasspath() {
         try {
-            List<URL> urls = new ArrayList<URL>();
+            List<URL> urls = new ArrayList<>();
 
             addUrlsFromPath(urls,  "jdbc-drivers/all");
 
