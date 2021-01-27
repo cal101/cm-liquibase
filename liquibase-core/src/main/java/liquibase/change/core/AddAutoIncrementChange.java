@@ -26,9 +26,9 @@ import java.util.Locale;
 @DatabaseChange(name = "addAutoIncrement",
     description = "Converts an existing column to be an auto-increment (a.k.a 'identity') column",
     priority = ChangeMetaData.PRIORITY_DEFAULT, appliesTo = "column",
-    databaseNotes = {@DatabaseChangeNote(
+    databaseNotes = @DatabaseChangeNote(
         database = "sqlite", notes = "If the column type is not INTEGER it is converted to INTEGER"
-    )}
+    )
 )
 public class AddAutoIncrementChange extends AbstractChange {
 

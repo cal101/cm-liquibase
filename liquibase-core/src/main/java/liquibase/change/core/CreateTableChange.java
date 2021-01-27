@@ -236,7 +236,7 @@ public class CreateTableChange extends AbstractChange implements ChangeWithColum
         this.schemaName = schemaName;
     }
 
-    @DatabaseChangeProperty()
+    @DatabaseChangeProperty
     public String getTableName() {
         return tableName;
     }

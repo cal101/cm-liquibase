@@ -81,7 +81,7 @@ public class ModifyDataTypeChange extends AbstractChange {
         this.columnName = columnName;
     }
 
-    @DatabaseChangeProperty()
+    @DatabaseChangeProperty
     public String getNewDataType() {
         return newDataType;
     }

@@ -58,7 +58,7 @@ public class DropDefaultValueChange extends AbstractChange {
         this.columnName = columnName;
     }
 
-    @DatabaseChangeProperty()
+    @DatabaseChangeProperty
     public String getColumnDataType() {
 		return columnDataType;
 	}
