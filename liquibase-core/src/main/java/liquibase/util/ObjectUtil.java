@@ -298,7 +298,7 @@ public class ObjectUtil {
                     if (string.contains(".")) {
                         string = string.replaceFirst("\\.0+$", "");
                     }
-                    if (string.equals("")) {
+                    if ("".equals(string)) {
                         string = "0";
                     }
                     if (targetClass.equals(Byte.class)) {
@@ -325,7 +325,7 @@ public class ObjectUtil {
                 }
             } else if (targetClass.isAssignableFrom(Boolean.class)) {
                 String lowerCase = object.toString().toLowerCase();
-                return (T) (Boolean) (lowerCase.equals("true") || lowerCase.equals("t") || lowerCase.equals("1") || lowerCase.equals("1.0") || lowerCase.equals("yes"));
+                return (T) (Boolean) ("true".equals(lowerCase) || "t".equals(lowerCase) || "1".equals(lowerCase) || "1.0".equals(lowerCase) || "yes".equals(lowerCase));
             } else if (targetClass.isAssignableFrom(String.class)) {
                 return (T) object.toString();
             } else if (targetClass.isAssignableFrom(List.class)) {

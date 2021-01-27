@@ -30,7 +30,7 @@ public class HsqlIntegrationTest extends AbstractIntegrationTest {
                     "CREATE SCHEMA LBCAT2"
             );
         } catch (SQLSyntaxErrorException e) {
-            if (e.getSQLState().equals(OBJECT_ALREADY_EXISTS)) {
+            if (OBJECT_ALREADY_EXISTS.equals(e.getSQLState())) {
                 // do nothing
             }
         }

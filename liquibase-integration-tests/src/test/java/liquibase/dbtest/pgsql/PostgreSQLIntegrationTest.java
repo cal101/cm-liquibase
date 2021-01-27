@@ -82,7 +82,7 @@ public class PostgreSQLIntegrationTest extends AbstractIntegrationTest {
                 if (! (change instanceof CreateTableChange)) {
                     continue;
                 }
-                found = ((CreateTableChange) change).getTableName().equals("FIRST_TABLE");
+                found = "FIRST_TABLE".equals(((CreateTableChange) change).getTableName());
                 if (found) {
                     break;
                 }

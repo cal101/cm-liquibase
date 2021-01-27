@@ -155,7 +155,7 @@ public class H2IntegrationTest extends AbstractIntegrationTest {
                     "CREATE SCHEMA LBCAT2"
             );
         } catch (SQLException e) {
-            if (e.getSQLState().equals(H2_SQLSTATE_OBJECT_ALREADY_EXISTS)) {
+            if (H2_SQLSTATE_OBJECT_ALREADY_EXISTS.equals(e.getSQLState())) {
                 // do nothing
             } else {
                 throw e;

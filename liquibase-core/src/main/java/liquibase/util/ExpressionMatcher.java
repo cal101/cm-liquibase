@@ -45,10 +45,10 @@ public final class ExpressionMatcher {
             return true;
         }
 
-        if (expression.equals(":TRUE")) {
+        if (":TRUE".equals(expression)) {
             return true;
         }
-        if (expression.equals(":FALSE")) {
+        if (":FALSE".equals(expression)) {
             return false;
         }
 
@@ -94,10 +94,10 @@ public final class ExpressionMatcher {
             expression = expression.substring(4).trim();
         }
 
-        if (expression.trim().equals(":TRUE")) {
+        if (":TRUE".equals(expression.trim())) {
             return !notExpression;
         }
-        if (expression.trim().equals(":FALSE")) {
+        if (":FALSE".equals(expression.trim())) {
             return notExpression;
         }
 

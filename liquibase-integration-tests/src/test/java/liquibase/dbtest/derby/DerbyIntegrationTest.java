@@ -34,7 +34,7 @@ public class DerbyIntegrationTest extends AbstractIntegrationTest {
                     "CREATE SCHEMA LIQUIBASE"
             );
         } catch (SQLException e) {
-            if (e.getSQLState().equals(DERBY_SQLSTATE_OBJECT_ALREADY_EXISTS)) {
+            if (DERBY_SQLSTATE_OBJECT_ALREADY_EXISTS.equals(e.getSQLState())) {
                 // do nothing
             } else {
                 throw e;
