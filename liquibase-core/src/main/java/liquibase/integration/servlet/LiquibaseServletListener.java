@@ -290,8 +290,7 @@ public class LiquibaseServletListener implements ServletContextListener {
             // Try to get value from JNDI
             try {
                 Context envCtx = (Context) initialContext.lookup(JAVA_COMP_ENV);
-                String valueFromJndi = (String) envCtx.lookup(prefixAndProperty);
-                return valueFromJndi;
+                return (String) envCtx.lookup(prefixAndProperty);
             }
             catch (NamingException e) {
                 // Ignore

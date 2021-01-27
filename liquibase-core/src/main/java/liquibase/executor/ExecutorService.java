@@ -35,8 +35,7 @@ public class ExecutorService extends AbstractPluginFactory<Executor>  {
     }
 
     private String createKey(String executorName, Database database) {
-        String key = executorName.toLowerCase() + "#" + System.identityHashCode(database);
-        return key;
+        return executorName.toLowerCase() + "#" + System.identityHashCode(database);
     }
 
     private Executor getExecutorValue(String executorName, Database database) throws UnexpectedLiquibaseException {
@@ -63,7 +62,7 @@ public class ExecutorService extends AbstractPluginFactory<Executor>  {
      *
      */
     public Executor getExecutor(final String name, final Database database) {
-        Executor returnExecutor = executors.computeIfAbsent(createKey(name, database), db -> {
+        return executors.computeIfAbsent(createKey(name, database), db -> {
             try {
                 Executor executor = getExecutorValue(name, database);
                 executor.setDatabase(database);
@@ -72,7 +71,6 @@ public class ExecutorService extends AbstractPluginFactory<Executor>  {
                 throw new UnexpectedLiquibaseException(e);
             }
         });
-        return returnExecutor;
     }
 
     /**

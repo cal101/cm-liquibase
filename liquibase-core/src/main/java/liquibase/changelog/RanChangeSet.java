@@ -181,8 +181,7 @@ public class RanChangeSet {
         int result;
         result = changeLog.hashCode();
         result = (29 * result) + id.hashCode();
-        result = (29 * result) + author.hashCode();
-        return result;
+        return (29 * result) + author.hashCode();
     }
 
     @Override

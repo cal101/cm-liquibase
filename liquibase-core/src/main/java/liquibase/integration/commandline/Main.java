@@ -2054,8 +2054,7 @@ public class Main {
         if (outputFile != null) {
             FileOutputStream fileOut;
             try {
-                fileOut = new FileOutputStream(outputFile, false);
-                return fileOut;
+                return new FileOutputStream(outputFile, false);
             } catch (IOException e) {
                 Scope.getCurrentScope().getLog(getClass()).severe(String.format(
                         coreBundle.getString("could.not.create.output.file"),
@@ -2096,8 +2095,7 @@ public class Main {
         public boolean isLoggable(LogRecord record) {
             final String filteredMessage = filter.filterMessage(record.getMessage());
 
-            final boolean equals = filteredMessage.equals(record.getMessage());
-            return equals;
+            return filteredMessage.equals(record.getMessage());
         }
     }
 

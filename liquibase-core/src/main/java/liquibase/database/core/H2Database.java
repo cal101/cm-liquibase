@@ -188,8 +188,7 @@ public class H2Database extends AbstractJdbcDatabase {
             definition = definition.replaceFirst(".*?\\n", ""); //some h2 versions return "create view....as\nselect
         }
 
-        definition = definition.replaceFirst("/\\*.*",""); //sometimes includes comments at the end
-        return definition;
+        return definition.replaceFirst("/\\*.*","");
     }
 
     @Override
@@ -207,11 +206,10 @@ public class H2Database extends AbstractJdbcDatabase {
             return true;
         }
         String url = getConnection().getURL();
-        boolean isLocalURL = (
+        return (
                 super.isSafeToRunUpdate()
                         || (!url.startsWith("jdbc:h2:tcp:") && (!url.startsWith("jdbc:h2:ssl:"))) // exclude remote URLs
         );
-        return isLocalURL;
     }
 
     @Override

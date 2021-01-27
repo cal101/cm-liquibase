@@ -68,10 +68,8 @@ public class AddAutoIncrementGeneratorSQLite extends AddAutoIncrementGenerator {
                 return true;
             }
         };
-        generatedSqls = SQLiteDatabase.getAlterTableSqls(database, alterTableVisitor, statement.getCatalogName(),
+        return SQLiteDatabase.getAlterTableSqls(database, alterTableVisitor, statement.getCatalogName(),
                 statement.getSchemaName(), statement.getTableName());
-
-        return generatedSqls;
     }
 
     private void setPrimaryKeyAndAutoIncrement(ColumnConfig column, AddAutoIncrementStatement statement) {

@@ -650,9 +650,8 @@ public class MockDatabase implements Database, InternalDatabase {
             return null;
         }
         String finalName = name.toLowerCase();
-        finalName = finalName.substring(0, finalName.length()-1)
+        return finalName.substring(0, finalName.length()-1)
             + finalName.substring(finalName.length()-1, finalName.length()).toUpperCase();
-        return finalName;
     }
 
     public String correctObjectName(final String name, final Class<? extends DatabaseObject> objectType,

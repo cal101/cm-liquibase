@@ -158,12 +158,11 @@ public abstract class AbstractIntegrationTest {
             if (url == null)
                 return null;
 
-            DatabaseTestURL testUrl = new DatabaseTestURL(databaseManager, url,
+            return new DatabaseTestURL(databaseManager, url,
                 // These may be set to null if not defined as properties.
                 integrationTestProperties.getProperty("integration.test." + databaseManager + ".username"),
                 integrationTestProperties.getProperty("integration.test." + databaseManager + ".password")
             );
-            return testUrl;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

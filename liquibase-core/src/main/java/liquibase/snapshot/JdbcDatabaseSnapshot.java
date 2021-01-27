@@ -79,7 +79,7 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
         }
 
         public List<CachedRow> getIndexInfo(final String catalogName, final String schemaName, final String tableName, final String indexName) throws DatabaseException, SQLException {
-            List<CachedRow> indexes =  getResultSetCache("getIndexInfo").get(new ResultSetCache.UnionResultSetExtractor(database) {
+            return getResultSetCache("getIndexInfo").get(new ResultSetCache.UnionResultSetExtractor(database) {
 
                 public boolean isBulkFetchMode;
 
@@ -262,8 +262,6 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
                     return false;
                 }
             });
-
-            return indexes;
         }
 
         protected void warnAboutDbaRecycleBin() {
@@ -1327,36 +1325,34 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
 
                 private String mssqlSql(CatalogAndSchema catalogAndSchema, String tableName) throws DatabaseException {
                         String sql;
-                        sql =
-                                "SELECT " +
-                                        "DB_NAME() AS [TABLE_CAT], " +
-                                        "[s].[name] AS [TABLE_SCHEM], " +
-                                        "[t].[name] AS [TABLE_NAME], " +
-                                        "[c].[name] AS [COLUMN_NAME], " +
-                                        "CASE [ic].[is_descending_key] WHEN 0 THEN N'A' WHEN 1 THEN N'D' END AS [ASC_OR_DESC], " +
-                                        "[ic].[key_ordinal] AS [KEY_SEQ], " +
-                                        "[kc].[name] AS [PK_NAME] " +
-                                        "FROM [sys].[schemas] AS [s] " +
-                                        "INNER JOIN [sys].[tables] AS [t] " +
-                                        "ON [t].[schema_id] = [s].[schema_id] " +
-                                        "INNER JOIN [sys].[key_constraints] AS [kc] " +
-                                        "ON [kc].[parent_object_id] = [t].[object_id] " +
-                                        "INNER JOIN [sys].[indexes] AS [i] " +
-                                        "ON [i].[object_id] = [kc].[parent_object_id] " +
-                                        "AND [i].[index_id] = [kc].[unique_index_id] " +
-                                        "INNER JOIN [sys].[index_columns] AS [ic] " +
-                                        "ON [ic].[object_id] = [i].[object_id] " +
-                                        "AND [ic].[index_id] = [i].[index_id] " +
-                                        "INNER JOIN [sys].[columns] AS [c] " +
-                                        "ON [c].[object_id] = [ic].[object_id] " +
-                                        "AND [c].[column_id] = [ic].[column_id] " +
-                                        "WHERE [s].[name] = N'" + database.escapeStringForDatabase(catalogAndSchema.getSchemaName()) + "' " + // The schema name was corrected in the customized CatalogAndSchema
-                                        (tableName == null ? "" : "AND [t].[name] = N'" + database.escapeStringForDatabase(database.correctObjectName(tableName, Table.class)) + "' ") +
-                                        "AND [kc].[type] = 'PK' " +
-                                        "AND [ic].[key_ordinal] > 0 " +
-                                        "ORDER BY " +
-                                        "[ic].[key_ordinal]";
-                    return sql;
+                        return "SELECT " +
+					        "DB_NAME() AS [TABLE_CAT], " +
+					        "[s].[name] AS [TABLE_SCHEM], " +
+					        "[t].[name] AS [TABLE_NAME], " +
+					        "[c].[name] AS [COLUMN_NAME], " +
+					        "CASE [ic].[is_descending_key] WHEN 0 THEN N'A' WHEN 1 THEN N'D' END AS [ASC_OR_DESC], " +
+					        "[ic].[key_ordinal] AS [KEY_SEQ], " +
+					        "[kc].[name] AS [PK_NAME] " +
+					        "FROM [sys].[schemas] AS [s] " +
+					        "INNER JOIN [sys].[tables] AS [t] " +
+					        "ON [t].[schema_id] = [s].[schema_id] " +
+					        "INNER JOIN [sys].[key_constraints] AS [kc] " +
+					        "ON [kc].[parent_object_id] = [t].[object_id] " +
+					        "INNER JOIN [sys].[indexes] AS [i] " +
+					        "ON [i].[object_id] = [kc].[parent_object_id] " +
+					        "AND [i].[index_id] = [kc].[unique_index_id] " +
+					        "INNER JOIN [sys].[index_columns] AS [ic] " +
+					        "ON [ic].[object_id] = [i].[object_id] " +
+					        "AND [ic].[index_id] = [i].[index_id] " +
+					        "INNER JOIN [sys].[columns] AS [c] " +
+					        "ON [c].[object_id] = [ic].[object_id] " +
+					        "AND [c].[column_id] = [ic].[column_id] " +
+					        "WHERE [s].[name] = N'" + database.escapeStringForDatabase(catalogAndSchema.getSchemaName()) + "' " + // The schema name was corrected in the customized CatalogAndSchema
+					        (tableName == null ? "" : "AND [t].[name] = N'" + database.escapeStringForDatabase(database.correctObjectName(tableName, Table.class)) + "' ") +
+					        "AND [kc].[type] = 'PK' " +
+					        "AND [ic].[key_ordinal] > 0 " +
+					        "ORDER BY " +
+					        "[ic].[key_ordinal]";
                             }
 
                 @Override

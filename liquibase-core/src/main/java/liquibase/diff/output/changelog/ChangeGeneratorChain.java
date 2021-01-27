@@ -54,9 +54,7 @@ public class ChangeGeneratorChain {
         }
         changes = changeGenerator.fixSchema(changes, control.getSchemaComparisons());
         respectSchemaAndCatalogCaseIfNeeded(control, changeGenerator);
-        changes = changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
-
-        return changes;
+        return changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
     }
 
     public Change[] fixUnexpected(DatabaseObject unexpectedObject, DiffOutputControl control, Database referenceDatabase, Database comparisionDatabase) {
@@ -95,9 +93,7 @@ public class ChangeGeneratorChain {
         }
         changes = changeGenerator.fixSchema(changes, control.getSchemaComparisons());
         respectSchemaAndCatalogCaseIfNeeded(control, changeGenerator);
-        changes = changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
-
-        return changes;
+        return changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
     }
 
     private void respectSchemaAndCatalogCaseIfNeeded(DiffOutputControl control, ChangeGenerator changeGenerator) {
@@ -143,7 +139,6 @@ public class ChangeGeneratorChain {
         }
         changes = changeGenerator.fixSchema(changes, control.getSchemaComparisons());
         respectSchemaAndCatalogCaseIfNeeded(control, changeGenerator);
-        changes = changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
-        return changes;
+        return changeGenerator.fixOutputAsSchema(changes, control.getSchemaComparisons());
     }
 }

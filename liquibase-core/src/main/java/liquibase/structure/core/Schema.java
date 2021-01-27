@@ -79,8 +79,7 @@ public class Schema extends AbstractDatabaseObject {
     @Override
     public int hashCode() {
         int result = (shouldIncludeCatalogInSpecification() && getCatalog() != null) ? getCatalog().hashCode() : 0;
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        return result;
+        return 31 * result + (getName() != null ? getName().hashCode() : 0);
     }
 
     public String getCatalogName() {

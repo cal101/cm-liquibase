@@ -80,10 +80,8 @@ public class AddColumnGeneratorSQLite extends AddColumnGenerator {
                 return true;
             }
         };
-        generatedSqls = SQLiteDatabase.getAlterTableSqls(database, alterTableVisitor, statement.getCatalogName(),
+        return SQLiteDatabase.getAlterTableSqls(database, alterTableVisitor, statement.getCatalogName(),
                 statement.getSchemaName(), statement.getTableName());
-
-        return generatedSqls;
     }
 
     @Override

@@ -103,8 +103,7 @@ public class AlterSequenceGeneratorTest extends AbstractSqlGeneratorTest<AlterSe
 
 	@Override
     protected AlterSequenceStatement createSampleSqlStatement() {
-        AlterSequenceStatement statement = new AlterSequenceStatement(CATALOG_NAME, SCHEMA_NAME, SEQUENCE_NAME);
-        return statement;
+        return new AlterSequenceStatement(CATALOG_NAME, SCHEMA_NAME, SEQUENCE_NAME);
     }
 
     @Override

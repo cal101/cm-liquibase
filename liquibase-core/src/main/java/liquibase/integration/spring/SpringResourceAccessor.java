@@ -151,12 +151,10 @@ public class SpringResourceAccessor extends AbstractResourceAccessor {
      */
     protected String finalizeSearchPath(String searchPath) {
         searchPath = "classpath:"+searchPath;
-        searchPath = searchPath
+        return searchPath
                 .replace("\\", "/")
                 .replaceAll("//+", "/")
                 .replace("classpath:classpath:", "classpath:");
-
-        return searchPath;
     }
 
 }
