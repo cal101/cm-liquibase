@@ -58,7 +58,7 @@ public class OnlineHubService implements HubService {
             final Logger log = Scope.getCurrentScope().getLog(getClass());
             final HubServiceFactory hubServiceFactory = Scope.getCurrentScope().getSingleton(HubServiceFactory.class);
 
-            if (LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode().equalsIgnoreCase("OFF")) {
+            if ("OFF".equalsIgnoreCase(LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode())) {
                 hubServiceFactory.setOfflineReason("property liquibase.hub.mode is 'OFF'. To send data to Liquibase Hub, please set it to \"all\"");
                 this.available = false;
             } else if (getApiKey() == null) {
@@ -405,7 +405,7 @@ public class OnlineHubService implements HubService {
         }
 
         if (operationEvent.getOperationEventLog() != null) {
-            if (!LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode().equalsIgnoreCase("meta")) {
+            if (!"meta".equalsIgnoreCase(LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode())) {
                 requestParams.put("logs", operationEvent.getOperationEventLog().getLogMessage());
                 requestParams.put("logsTimestamp", operationEvent.getOperationEventLog().getTimestampLog());
             }
@@ -426,7 +426,7 @@ public class OnlineHubService implements HubService {
         String[] generatedSql = null;
         String logs = null;
         Date logsTimestamp = operationChangeEvent.getLogsTimestamp();
-        if (!LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode().equalsIgnoreCase("meta")) {
+        if (!"meta".equalsIgnoreCase(LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode())) {
             changesetBody = operationChangeEvent.getChangesetBody();
             generatedSql = operationChangeEvent.getGeneratedSql();
 

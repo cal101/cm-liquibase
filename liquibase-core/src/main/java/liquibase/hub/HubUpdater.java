@@ -104,7 +104,7 @@ public class HubUpdater {
     // If the operation type is DROPALL then we send no changes
     //
     ListVisitor listVisitor;
-    if (operationType.toUpperCase().equals("ROLLBACK")) {
+    if ("ROLLBACK".equals(operationType.toUpperCase())) {
         listVisitor = new RollbackListVisitor();
     }
     else {

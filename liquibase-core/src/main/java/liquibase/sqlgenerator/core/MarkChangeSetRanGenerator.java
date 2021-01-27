@@ -50,7 +50,7 @@ public class MarkChangeSetRanGenerator extends AbstractSqlGenerator<MarkChangeSe
         database.setObjectQuotingStrategy(ObjectQuotingStrategy.LEGACY);
         try {
             try {
-                if (statement.getExecType().equals(ChangeSet.ExecType.FAILED) || statement.getExecType().equals(ChangeSet.ExecType.SKIPPED)) {
+                if (ChangeSet.ExecType.FAILED.equals(statement.getExecType()) || ChangeSet.ExecType.SKIPPED.equals(statement.getExecType())) {
                     return new Sql[0]; //don't mark
                 }
 

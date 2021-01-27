@@ -563,19 +563,19 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     message.append(StreamUtil.getLineSeparator());
                 }
 
-                if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.HALT)) {
+                if (PreconditionContainer.FailOption.HALT.equals(preconditions.getOnFail())) {
                     throw new MigrationFailedException(this, message.toString(), e);
-                } else if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.CONTINUE)) {
+                } else if (PreconditionContainer.FailOption.CONTINUE.equals(preconditions.getOnFail())) {
                     skipChange = true;
                     execType = ExecType.SKIPPED;
 
                     Scope.getCurrentScope().getLog(getClass()).info("Continuing past: " + toString() + " despite precondition failure due to onFail='CONTINUE': " + message);
-                } else if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.MARK_RAN)) {
+                } else if (PreconditionContainer.FailOption.MARK_RAN.equals(preconditions.getOnFail())) {
                     execType = ExecType.MARK_RAN;
                     skipChange = true;
 
                     log.info("Marking ChangeSet: " + toString() + " ran despite precondition failure due to onFail='MARK_RAN': " + message);
-                } else if (preconditions.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
+                } else if (PreconditionContainer.FailOption.WARN.equals(preconditions.getOnFail())) {
                     execType = null; //already warned
                 } else {
                     throw new UnexpectedLiquibaseException("Unexpected precondition onFail attribute: " + preconditions.getOnFail(), e);
@@ -592,18 +592,18 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     message.append(StreamUtil.getLineSeparator());
                 }
 
-                if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.HALT)) {
+                if (PreconditionContainer.ErrorOption.HALT.equals(preconditions.getOnError())) {
                     throw new MigrationFailedException(this, message.toString(), e);
-                } else if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
+                } else if (PreconditionContainer.ErrorOption.CONTINUE.equals(preconditions.getOnError())) {
                     skipChange = true;
                     execType = ExecType.SKIPPED;
 
-                } else if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.MARK_RAN)) {
+                } else if (PreconditionContainer.ErrorOption.MARK_RAN.equals(preconditions.getOnError())) {
                     execType = ExecType.MARK_RAN;
                     skipChange = true;
 
                     log.info("Marking ChangeSet: " + toString() + " ran despite precondition error: " + message);
-                } else if (preconditions.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
+                } else if (PreconditionContainer.ErrorOption.WARN.equals(preconditions.getOnError())) {
                     execType = null; //already logged
                 } else {
                     throw new UnexpectedLiquibaseException("Unexpected precondition onError attribute: " + preconditions.getOnError(), e);

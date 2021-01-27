@@ -107,8 +107,8 @@ public class ValidatingVisitor implements ChangeSetVisitor {
                 try {
                     ValidationErrors foundErrors = change.validate(database);
                     if ((foundErrors != null)) {
-                        if (foundErrors.hasErrors() && (changeSet.getOnValidationFail().equals
-                                (ChangeSet.ValidationFailOption.MARK_RAN))) {
+                        if (foundErrors.hasErrors() && (ChangeSet.ValidationFailOption.MARK_RAN.equals
+                                (changeSet.getOnValidationFail()))) {
                             Scope.getCurrentScope().getLog(getClass()).info(
                                     "Skipping change set " + changeSet + " due to validation error(s): " +
                                             StringUtil.join(foundErrors.getErrorMessages(), ", "));

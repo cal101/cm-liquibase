@@ -148,7 +148,7 @@ public class DropAllCommand extends AbstractCommand<CommandResult> {
         String hubMode = StringUtil.trimToNull(hubConfiguration.getLiquibaseHubMode());
         String changeLogId = changeLog.getChangeLogId();
         final HubServiceFactory hubServiceFactory = Scope.getCurrentScope().getSingleton(HubServiceFactory.class);
-        if (apiKey == null || hubMode.equals("off") || ! hubServiceFactory.isOnline()) {
+        if (apiKey == null || "off".equals(hubMode) || ! hubServiceFactory.isOnline()) {
             return false;
         }
         final HubService service = Scope.getCurrentScope().getSingleton(HubServiceFactory.class).getService();

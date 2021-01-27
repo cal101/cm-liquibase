@@ -124,7 +124,7 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
             while (!done) {
                 input = readProjectFromConsole(projects);
                 try {
-                    if (input.equalsIgnoreCase("C")) {
+                    if ("C".equalsIgnoreCase(input)) {
                         String projectName = readProjectNameFromConsole();
                         if (StringUtil.isEmpty(projectName)) {
                             outputStream.print("\nNo project created\n\n");
@@ -141,7 +141,7 @@ public class RegisterChangeLogCommand extends AbstractSelfConfiguratingCommand<C
                         projects = getProjectsFromHub();
                         done = true;
                         continue;
-                    } else if (input.equalsIgnoreCase("N")) {
+                    } else if ("N".equalsIgnoreCase(input)) {
                         return new CommandResult("Your changelog " + changeLogFile + " was not registered to any Liquibase Hub project. You can still run Liquibase commands, but no data will be saved in your Liquibase Hub account for monitoring or reports.  Learn more at https://hub.liquibase.com.", false);
                     }
                     int projectIdx = Integer.parseInt(input);

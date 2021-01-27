@@ -102,7 +102,7 @@ public class CustomPreconditionWrapper extends AbstractPrecondition {
 
     @Override
     public Object getSerializableFieldValue(String field) {
-        return field.equals("param") ? paramValues
+        return "param".equals(field) ? paramValues
                                      : super.getSerializableFieldValue(field);
     }
 

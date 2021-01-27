@@ -177,9 +177,9 @@ public class CompareControl {
     public CatalogAndSchema[] getSchemas(DatabaseRole databaseRole) {
         CatalogAndSchema[] schemas = new CatalogAndSchema[schemaComparisons.length];
         for (int i=0; i<schemaComparisons.length; i++) {
-            if (databaseRole.equals(DatabaseRole.COMPARISON)) {
+            if (DatabaseRole.COMPARISON.equals(databaseRole)) {
                 schemas[i] = schemaComparisons[i].getComparisonSchema();
-            } else if (databaseRole.equals(DatabaseRole.REFERENCE)) {
+            } else if (DatabaseRole.REFERENCE.equals(databaseRole)) {
                 schemas[i] = schemaComparisons[i].getReferenceSchema();
             } else {
                 throw new UnexpectedLiquibaseException("Unknkown diff type: " + databaseRole);

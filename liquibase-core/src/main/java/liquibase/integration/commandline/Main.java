@@ -439,11 +439,11 @@ public class Main {
     private static Level parseLogLevel(String logLevelName, ConsoleUIService ui) {
         logLevelName = logLevelName.toUpperCase();
         Level logLevel;
-        if (logLevelName.equals("DEBUG")) {
+        if ("DEBUG".equals(logLevelName)) {
             logLevel = Level.FINE;
-        } else if (logLevelName.equals("WARN")) {
+        } else if ("WARN".equals(logLevelName)) {
             logLevel = Level.WARNING;
-        } else if (logLevelName.equals("ERROR")) {
+        } else if ("ERROR".equals(logLevelName)) {
             logLevel = Level.SEVERE;
         } else {
             try {
@@ -545,8 +545,8 @@ public class Main {
     private static boolean isChangeLogRequired(String command) {
         return command.toLowerCase().startsWith(COMMANDS.UPDATE)
                 || (command.toLowerCase().startsWith(COMMANDS.ROLLBACK) &&
-                (!command.equalsIgnoreCase(COMMANDS.ROLLBACK_ONE_CHANGE_SET) &&
-                        !command.equalsIgnoreCase(COMMANDS.ROLLBACK_ONE_UPDATE)))
+                (!COMMANDS.ROLLBACK_ONE_CHANGE_SET.equalsIgnoreCase(command) &&
+                        !COMMANDS.ROLLBACK_ONE_UPDATE.equalsIgnoreCase(command)))
                 || COMMANDS.REGISTER_CHANGELOG.equalsIgnoreCase(command)
                 || COMMANDS.CALCULATE_CHECKSUM.equalsIgnoreCase(command)
                 || COMMANDS.STATUS.equalsIgnoreCase(command)
@@ -826,7 +826,7 @@ public class Main {
         } else if (COMMANDS.STATUS.equalsIgnoreCase(command)
                 || COMMANDS.UNEXPECTED_CHANGESETS.equalsIgnoreCase(command)) {
             if ((!commandParams.isEmpty())
-                    && !commandParams.iterator().next().equalsIgnoreCase("--" + OPTIONS.VERBOSE)) {
+                    && !("--" + OPTIONS.VERBOSE).equalsIgnoreCase(commandParams.iterator().next())) {
                 messages.add(coreBundle.getString(ERRORMSG_UNEXPECTED_PARAMETERS) + commandParams);
             }
         } else if (COMMANDS.DIFF.equalsIgnoreCase(command)
@@ -1015,7 +1015,7 @@ public class Main {
                     final String[] splitKey = ((String) entry.getKey()).split("\\.", 3);
                     String namespace="";
                     for (int i=0; i < splitKey.length-1; i++) {
-                        if (! namespace.equals("")) {
+                        if (! "".equals(namespace)) {
                             namespace += ".";
                         }
                         namespace += splitKey[i];
@@ -1127,9 +1127,9 @@ public class Main {
 
             if (isCommand(arg)) {
                 this.command = arg;
-                if (this.command.equalsIgnoreCase(COMMANDS.MIGRATE)) {
+                if (COMMANDS.MIGRATE.equalsIgnoreCase(this.command)) {
                     this.command = COMMANDS.UPDATE;
-                } else if (this.command.equalsIgnoreCase(COMMANDS.MIGRATE_SQL)) {
+                } else if (COMMANDS.MIGRATE_SQL.equalsIgnoreCase(this.command)) {
                     this.command = COMMANDS.UPDATE_SQL;
                 }
                 seenCommand = true;
@@ -1175,7 +1175,7 @@ public class Main {
             return;
         }
 
-        if (arg.toLowerCase().equals("--" + OPTIONS.FORCE) || arg.toLowerCase().equals("--" + OPTIONS.HELP)) {
+        if (("--" + OPTIONS.FORCE).equals(arg.toLowerCase()) || ("--" + OPTIONS.HELP).equals(arg.toLowerCase())) {
             arg = arg + "=true";
         }
 
@@ -1372,7 +1372,7 @@ public class Main {
         String formatValue = getCommandParam(OPTIONS.FORMAT, null);
         if (isLicenseableCommand(formatValue)) {
             if (isFormattedDiff()) {
-                if (formatValue != null && ! formatValue.equalsIgnoreCase("json")) {
+                if (formatValue != null && ! "json".equalsIgnoreCase(formatValue)) {
                     String messageString =
                         "\nWARNING: The diff command optional Pro parameter '--format' " +
                         "currently supports only 'TXT' or 'JSON' as values.  (Blank defaults to 'TXT')";
@@ -1381,7 +1381,7 @@ public class Main {
             }
             if (!commandParams.contains("--help") && !liquibaseProLicenseValid) {
                 String warningAboutCommand = command;
-                if (command.equalsIgnoreCase(COMMANDS.DIFF) && formatValue != null && !formatValue.isEmpty()) {
+                if (COMMANDS.DIFF.equalsIgnoreCase(command) && formatValue != null && !formatValue.isEmpty()) {
                     warningAboutCommand = "diff --format=" + formatValue;
                 }
                 String messageString = String.format(coreBundle.getString("no.pro.license.found"), warningAboutCommand);
@@ -1688,7 +1688,7 @@ public class Main {
             } else if (COMMANDS.DROP_ALL.equals(command)) {
                 String liquibaseHubApiKey = hubConfiguration.getLiquibaseHubApiKey();
                 String hubMode = hubConfiguration.getLiquibaseHubMode();
-                if (liquibaseHubApiKey != null && ! hubMode.toLowerCase().equals("off")) {
+                if (liquibaseHubApiKey != null && ! "off".equals(hubMode.toLowerCase())) {
                     if (hubConnectionId == null && changeLogFile == null) {
                         String warningMessage =
                            "The dropAll command used with a hub.ApiKey and hub.mode='" + hubMode + "'\n" +
@@ -1915,7 +1915,7 @@ public class Main {
                COMMANDS.ROLLBACK_ONE_CHANGE_SET_SQL.equalsIgnoreCase(command) ||
                COMMANDS.ROLLBACK_ONE_UPDATE.equalsIgnoreCase(command) ||
                COMMANDS.ROLLBACK_ONE_UPDATE_SQL.equalsIgnoreCase(command) ||
-               (COMMANDS.DIFF.equalsIgnoreCase(command) && formatValue != null && ! formatValue.toLowerCase().equals("txt"));
+               (COMMANDS.DIFF.equalsIgnoreCase(command) && formatValue != null && ! "txt".equals(formatValue.toLowerCase()));
     }
 
     private void loadChangeSetInfoToMap(Map<String, Object> argsMap) throws CommandLineParsingException {
@@ -1926,7 +1926,7 @@ public class Main {
 
     private boolean isFormattedDiff() throws CommandLineParsingException {
         String formatValue = getCommandParam(OPTIONS.FORMAT, "txt");
-        return ! formatValue.equalsIgnoreCase("txt") && ! formatValue.isEmpty();
+        return ! "txt".equalsIgnoreCase(formatValue) && ! formatValue.isEmpty();
     }
 
     private String getSchemaParams(Database database) throws CommandLineParsingException {

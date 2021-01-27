@@ -139,14 +139,14 @@ public abstract class HTMLWriter {
                     writeTD(fileWriter, "<a href='../authors/"+DBDocUtil.toFileName(change.getChangeSet().getAuthor().toLowerCase())+".html'>"+ StringUtil.escapeHtml(change.getChangeSet().getAuthor().toLowerCase())+"</a>");
 
                     ChangeSet.RunStatus runStatus = database.getRunStatus(change.getChangeSet());
-                    if (runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
+                    if (ChangeSet.RunStatus.NOT_RAN.equals(runStatus)) {
                         String anchor = change.getChangeSet().toString(false).replaceAll("\\W","_");
                         writeTD(fileWriter, "NOT YET RAN [<a href='../pending/sql.html#"+ anchor +"'>SQL</a>]");
-                    } else if (runStatus.equals(ChangeSet.RunStatus.INVALID_MD5SUM)) {
+                    } else if (ChangeSet.RunStatus.INVALID_MD5SUM.equals(runStatus)) {
                         writeTD(fileWriter, "INVALID MD5SUM");
-                    } else if (runStatus.equals(ChangeSet.RunStatus.ALREADY_RAN)) {
+                    } else if (ChangeSet.RunStatus.ALREADY_RAN.equals(runStatus)) {
                         writeTD(fileWriter, "Executed "+ DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(database.getRanDate(change.getChangeSet())));
-                    } else if (runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
+                    } else if (ChangeSet.RunStatus.RUN_AGAIN.equals(runStatus)) {
                         writeTD(fileWriter, "Executed, WILL RUN AGAIN");
                     } else {
                         throw new RuntimeException("Unknown run status: "+runStatus);

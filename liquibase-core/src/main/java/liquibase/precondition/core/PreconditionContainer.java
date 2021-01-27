@@ -200,11 +200,11 @@ public class PreconditionContainer extends AndPrecondition implements ChangeLogC
             if (executor.updatesDatabase()) {
                 testPrecondition = true;
             } else {
-                if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.TEST)) {
+                if (PreconditionContainer.OnSqlOutputOption.TEST.equals(this.getOnSqlOutput())) {
                     testPrecondition = true;
-                } else if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.FAIL)) {
+                } else if (PreconditionContainer.OnSqlOutputOption.FAIL.equals(this.getOnSqlOutput())) {
                     throw new PreconditionFailedException("Unexpected precondition in updateSQL mode with onUpdateSQL value: "+this.getOnSqlOutput(), changeLog, this);
-                } else if (this.getOnSqlOutput().equals(PreconditionContainer.OnSqlOutputOption.IGNORE)) {
+                } else if (PreconditionContainer.OnSqlOutputOption.IGNORE.equals(this.getOnSqlOutput())) {
                     testPrecondition = false;
                 }
             }
@@ -223,7 +223,7 @@ public class PreconditionContainer extends AndPrecondition implements ChangeLogC
             if (getOnFailMessage() != null) {
                 message = new StringBuilder(getOnFailMessage());
             }
-            if (this.getOnFail().equals(PreconditionContainer.FailOption.WARN)) {
+            if (PreconditionContainer.FailOption.WARN.equals(this.getOnFail())) {
                 final String exceptionMessage = "Executing " + ranOn + " despite precondition failure due to onFail='WARN':\n " + message;
                 Scope.getCurrentScope().getUI().sendMessage("WARNING: " + exceptionMessage);
                 Scope.getCurrentScope().getLog(getClass()).warning(exceptionMessage);
@@ -245,10 +245,10 @@ public class PreconditionContainer extends AndPrecondition implements ChangeLogC
                 message.append(StreamUtil.getLineSeparator());
             }
 
-            if (this.getOnError().equals(PreconditionContainer.ErrorOption.CONTINUE)) {
+            if (PreconditionContainer.ErrorOption.CONTINUE.equals(this.getOnError())) {
                 Scope.getCurrentScope().getLog(getClass()).info("Continuing past: " + toString() + " despite precondition error:\n " + message);
                 throw e;
-            } else if (this.getOnError().equals(PreconditionContainer.ErrorOption.WARN)) {
+            } else if (PreconditionContainer.ErrorOption.WARN.equals(this.getOnError())) {
                 Scope.getCurrentScope().getLog(getClass()).warning("Continuing past: " + toString() + " despite precondition error:\n " + message);
                 if (changeExecListener != null) {
                     changeExecListener.preconditionErrored(e, ErrorOption.WARN);

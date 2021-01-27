@@ -222,7 +222,7 @@ public class XMLChangeLogSerializer implements ChangeLogSerializer {
         } else if (value instanceof LiquibaseSerializable) {
             node.appendChild(createNode((LiquibaseSerializable) value));
         } else if (value instanceof Object[]) {
-            if (serializationType.equals(LiquibaseSerializable.SerializationType.NESTED_OBJECT)) {
+            if (LiquibaseSerializable.SerializationType.NESTED_OBJECT.equals(serializationType)) {
                 String namespace = LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE;
                 Element newNode = createNode(namespace, objectName, "");
                 for (Object child : (Object[]) value) {
@@ -235,10 +235,10 @@ public class XMLChangeLogSerializer implements ChangeLogSerializer {
                 }
             }
         } else {
-            if (serializationType.equals(LiquibaseSerializable.SerializationType.NESTED_OBJECT)) {
+            if (LiquibaseSerializable.SerializationType.NESTED_OBJECT.equals(serializationType)) {
                 String namespace = LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE;
                 node.appendChild(createNode(namespace, objectName, value.toString()));
-            } else if (serializationType.equals(LiquibaseSerializable.SerializationType.DIRECT_VALUE)) {
+            } else if (LiquibaseSerializable.SerializationType.DIRECT_VALUE.equals(serializationType)) {
                 try {
                     node.setTextContent(checkString(value.toString()));
                 } catch (UnexpectedLiquibaseException e) {
@@ -300,7 +300,7 @@ public class XMLChangeLogSerializer implements ChangeLogSerializer {
     }
 
     private String qualifyName(String objectName, String objectNamespace, String parentNamespace) {
-        if ((objectNamespace != null) && !objectNamespace.equals(LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE)
+        if ((objectNamespace != null) && !LiquibaseSerializable.STANDARD_CHANGELOG_NAMESPACE.equals(objectNamespace)
             && !objectNamespace.equals(parentNamespace)) {
             NamespaceDetails details = NamespaceDetailsFactory.getInstance().getNamespaceDetails(this, objectNamespace);
             return details.getShortName(objectNamespace) + ":" + objectName;

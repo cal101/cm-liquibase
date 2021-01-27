@@ -158,7 +158,7 @@ public class InformixDatabase extends AbstractJdbcDatabase {
 			throws DatabaseException {
 		Boolean correct = false;
 		String name = conn.getDatabaseProductName();
-		if (name != null && (name.equals(PRODUCT_NAME) || name.startsWith(PRODUCT_NAME_DB2JCC_PREFIX))) {
+		if (name != null && (PRODUCT_NAME.equals(name) || name.startsWith(PRODUCT_NAME_DB2JCC_PREFIX))) {
 				correct = true;
 		}
 		return correct;

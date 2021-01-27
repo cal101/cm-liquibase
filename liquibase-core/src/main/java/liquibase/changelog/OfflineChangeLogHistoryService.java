@@ -281,7 +281,7 @@ public class OfflineChangeLogHistoryService extends AbstractChangeLogHistoryServ
             getDatabase().commit();
         }
 
-        if (execType.equals(ChangeSet.ExecType.FAILED) || execType.equals(ChangeSet.ExecType.SKIPPED)) {
+        if (ChangeSet.ExecType.FAILED.equals(execType) || ChangeSet.ExecType.SKIPPED.equals(execType)) {
             return; //do nothing
         } else  if (execType.ranBefore) {
             replaceChangeSet(changeSet, new ReplaceChangeSetLogic() {

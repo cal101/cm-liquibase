@@ -187,7 +187,7 @@ class HttpClient {
                 }
 
                 String contentType = connection.getContentType();
-                if (! contentType.equals("application/json")) {
+                if (! "application/json".equals(contentType)) {
                     throw new LiquibaseHubException("\nUnexpected content type '" + contentType +
                             "' returned from Hub.  Response code is " + responseCode);
                 }

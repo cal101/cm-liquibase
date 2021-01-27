@@ -88,9 +88,9 @@ public class DataType extends AbstractLiquibaseSerializable {
         } else if (subtypeData != null) {
             value += "(";
             value += columnSize;
-            if (columnSizeUnit != null && (typeName.equalsIgnoreCase("VARCHAR")
-                    || typeName.equalsIgnoreCase("VARCHAR2")
-                    || typeName.equalsIgnoreCase("CHAR"))) {
+            if (columnSizeUnit != null && ("VARCHAR".equalsIgnoreCase(typeName)
+                    || "VARCHAR2".equalsIgnoreCase(typeName)
+                    || "CHAR".equalsIgnoreCase(typeName))) {
                 value += " " + columnSizeUnit;
             }
             value +=")";

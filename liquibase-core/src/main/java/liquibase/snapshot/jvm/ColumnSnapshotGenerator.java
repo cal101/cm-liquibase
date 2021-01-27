@@ -335,11 +335,11 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
                         isAutoincrement = StringUtil.trimToNull(isAutoincrement);
                         if (isAutoincrement == null) {
                             column.setAutoIncrementInformation(null);
-                        } else if (isAutoincrement.equals("YES")) {
+                        } else if ("YES".equals(isAutoincrement)) {
                             column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
-                        } else if (isAutoincrement.equals("NO")) {
+                        } else if ("NO".equals(isAutoincrement)) {
                             column.setAutoIncrementInformation(null);
-                        } else if (isAutoincrement.equals("")) {
+                        } else if ("".equals(isAutoincrement)) {
                             Scope.getCurrentScope().getLog(getClass()).info("Unknown auto increment state for column " + column.toString() + ". Assuming not auto increment");
                             column.setAutoIncrementInformation(null);
                         } else {
@@ -424,7 +424,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
             DataType type = new DataType(dataType);
             type.setDataTypeId(columnMetadataResultSet.getInt("DATA_TYPE"));
-            if (dataType.equalsIgnoreCase("NUMBER")) {
+            if ("NUMBER".equalsIgnoreCase(dataType)) {
                 type.setColumnSize(columnMetadataResultSet.getInt("DATA_PRECISION"));
 //                if (type.getColumnSize() == null) {
 //                    type.setColumnSize(38);
@@ -443,9 +443,9 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
                 boolean isTimeStampDataType = dataType.toUpperCase().contains("TIMESTAMP");
 
-                if (isTimeStampDataType || dataType.equalsIgnoreCase("NCLOB") || dataType.equalsIgnoreCase("BLOB") || dataType.equalsIgnoreCase("CLOB")) {
+                if (isTimeStampDataType || "NCLOB".equalsIgnoreCase(dataType) || "BLOB".equalsIgnoreCase(dataType) || "CLOB".equalsIgnoreCase(dataType)) {
                     type.setColumnSize(null);
-                } else if (dataType.equalsIgnoreCase("NVARCHAR") || dataType.equalsIgnoreCase("NCHAR")) {
+                } else if ("NVARCHAR".equalsIgnoreCase(dataType) || "NCHAR".equalsIgnoreCase(dataType)) {
                     type.setColumnSize(columnMetadataResultSet.getInt("CHAR_LENGTH"));
                     type.setColumnSizeUnit(DataType.ColumnSizeUnit.CHAR);
                 } else {

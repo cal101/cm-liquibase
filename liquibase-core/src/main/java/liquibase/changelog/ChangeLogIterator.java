@@ -68,7 +68,7 @@ public class ChangeLogIterator {
                 public void run() throws Exception {
 
                     List<ChangeSet> changeSetList = new ArrayList<>(databaseChangeLog.getChangeSets());
-                    if (visitor.getDirection().equals(ChangeSetVisitor.Direction.REVERSE)) {
+                    if (ChangeSetVisitor.Direction.REVERSE.equals(visitor.getDirection())) {
                         Collections.reverse(changeSetList);
                     }
                     for (ChangeSet changeSet : changeSetList) {

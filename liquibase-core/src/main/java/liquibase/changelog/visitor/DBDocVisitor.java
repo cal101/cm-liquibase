@@ -72,7 +72,7 @@ public class DBDocVisitor implements ChangeSetVisitor {
             changesToRunByAuthor.put(changeSet.getAuthor(), new ArrayList<Change>());
         }
 
-        boolean toRun = runStatus.equals(ChangeSet.RunStatus.NOT_RAN) || runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN);
+        boolean toRun = ChangeSet.RunStatus.NOT_RAN.equals(runStatus) || ChangeSet.RunStatus.RUN_AGAIN.equals(runStatus);
         for (Change change : changeSet.getChanges()) {
             if (toRun) {
                 changesToRunByAuthor.get(changeSet.getAuthor()).add(change);

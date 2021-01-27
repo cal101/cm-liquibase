@@ -163,7 +163,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
             HubConfiguration hubConfiguration = LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class);
             String apiKey = StringUtil.trimToNull(hubConfiguration.getLiquibaseHubApiKey());
             boolean hubOn =
-                    ! (LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode().equalsIgnoreCase("off"));
+                    ! ("off".equalsIgnoreCase(LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode()));
             if (apiKey != null && hubOn) {
                 String message =
                         "Hub communication failure.\n" +
@@ -305,7 +305,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
             HubConfiguration hubConfiguration = LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class);
             String apiKey = StringUtil.trimToNull(hubConfiguration.getLiquibaseHubApiKey());
             boolean hubOn =
-                ! (LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode().equalsIgnoreCase("off"));
+                ! ("off".equalsIgnoreCase(LiquibaseConfiguration.getInstance().getConfiguration(HubConfiguration.class).getLiquibaseHubMode()));
             if (apiKey != null && hubOn) {
                 String message;
                 if (databaseChangeLog.getChangeLogId() == null) {
@@ -343,7 +343,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
         //
         OperationChangeEvent operationChangeEvent = new OperationChangeEvent();
         List<String> sqlList = new ArrayList<>();
-        if (! eventType.equals("SYNC")) {
+        if (! "SYNC".equals(eventType)) {
             List<Change> changes = changeSet.getChanges();
             for (Change change : changes) {
                 try {
