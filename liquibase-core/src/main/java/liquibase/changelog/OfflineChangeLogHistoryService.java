@@ -376,7 +376,7 @@ public class OfflineChangeLogHistoryService extends AbstractChangeLogHistoryServ
     }
 
     private interface ReplaceChangeSetLogic {
-        public String[] execute(String[] line);
+        String[] execute(String[] line);
     }
 
     @Override

@@ -26,14 +26,14 @@ public interface LiquibaseSerializable {
 
     Object getSerializableFieldValue(String field);
 
-    public SerializationType getSerializableFieldType(String field);
+    SerializationType getSerializableFieldType(String field);
 
     String getSerializableFieldNamespace(String field);
 
     String getSerializedObjectNamespace();
 
-    public void load(ParsedNode parsedNode, ResourceAccessor resourceAccessor) throws ParsedNodeException;
+    void load(ParsedNode parsedNode, ResourceAccessor resourceAccessor) throws ParsedNodeException;
 
-    public ParsedNode serialize() throws ParsedNodeException;
+    ParsedNode serialize() throws ParsedNodeException;
 
 }

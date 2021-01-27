@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class BooleanParser {
 
-    private final static Set<String> trueValues = new HashSet<>(Arrays.asList("true", "t", "yes", "y", "1"));
-    private final static Set<String> falseValues = new HashSet<>(Arrays.asList("false", "f", "no", "n", "0"));
+    private static final Set<String> trueValues = new HashSet<>(Arrays.asList("true", "t", "yes", "y", "1"));
+    private static final Set<String> falseValues = new HashSet<>(Arrays.asList("false", "f", "no", "n", "0"));
 
     /**
      * @param booleanStr not trimmed string

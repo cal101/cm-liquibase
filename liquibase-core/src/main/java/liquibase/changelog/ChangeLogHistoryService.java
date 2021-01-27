@@ -22,12 +22,12 @@ public interface ChangeLogHistoryService extends PrioritizedService {
     /**
      * Ensures the change log history container is correctly initialized for use. This method may be called multiple times so it should check state as needed.
      */
-    public void init() throws DatabaseException;
+    void init() throws DatabaseException;
 
     /**
      * Upgrades any existing checksums with an out of date version
      */
-    void upgradeChecksums(final DatabaseChangeLog databaseChangeLog, final Contexts contexts, LabelExpression labels) throws DatabaseException;
+    void upgradeChecksums(DatabaseChangeLog databaseChangeLog, Contexts contexts, LabelExpression labels) throws DatabaseException;
 
     List<RanChangeSet> getRanChangeSets() throws DatabaseException;
 
@@ -54,10 +54,10 @@ public interface ChangeLogHistoryService extends PrioritizedService {
 
     void destroy() throws DatabaseException;
 
-    public String getDeploymentId();
+    String getDeploymentId();
 
-    public void resetDeploymentId();
+    void resetDeploymentId();
 
-    public void generateDeploymentId();
+    void generateDeploymentId();
 
     }

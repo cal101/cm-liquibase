@@ -41,8 +41,8 @@ public class BufferedLogService extends AbstractLogService {
                 returnLog.append("\n");
 
                 if (message.getThrowable() != null) {
-                    try (final StringWriter stringWriter = new StringWriter();
-                         final PrintWriter printWriter = new PrintWriter(stringWriter)) {
+                    try (StringWriter stringWriter = new StringWriter();
+                         PrintWriter printWriter = new PrintWriter(stringWriter)) {
 
                         message.getThrowable().printStackTrace(printWriter);
                         printWriter.flush();

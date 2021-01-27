@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MockConsoleWrapper extends ConsoleUIService.ConsoleWrapper {
 
-    final private List<String> responses;
+    private final List<String> responses;
 
     public MockConsoleWrapper(String... responses) {
         super(null);

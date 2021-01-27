@@ -14,22 +14,22 @@ import java.util.Properties;
  */
 public interface DatabaseConnection extends PrioritizedService {
 
-    public void open(String url, Driver driverObject, Properties driverProperties)
+    void open(String url, Driver driverObject, Properties driverProperties)
             throws DatabaseException;
 
-    public void close() throws DatabaseException;
+    void close() throws DatabaseException;
 
-    public void commit() throws DatabaseException;
+    void commit() throws DatabaseException;
 
-    public boolean getAutoCommit() throws DatabaseException;
+    boolean getAutoCommit() throws DatabaseException;
 
-    public String getCatalog() throws DatabaseException;
+    String getCatalog() throws DatabaseException;
 
-    public String nativeSQL(String sql) throws DatabaseException;
+    String nativeSQL(String sql) throws DatabaseException;
 
-    public void rollback() throws DatabaseException;
+    void rollback() throws DatabaseException;
 
-    public void setAutoCommit(boolean autoCommit) throws DatabaseException;
+    void setAutoCommit(boolean autoCommit) throws DatabaseException;
 
     String getDatabaseProductName() throws DatabaseException;
 
