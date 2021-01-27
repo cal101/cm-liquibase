@@ -88,7 +88,7 @@ public class StreamUtil {
      */
     public static InputStream openStream(String path, Boolean relativeToChangelogFile, ChangeSet changeSet, ResourceAccessor resourceAccessor) throws IOException {
         String relativeTo = null;
-        if (relativeToChangelogFile != null && relativeToChangelogFile) {
+        if (Boolean.TRUE.equals(relativeToChangelogFile)) {
             relativeTo = changeSet.getChangeLog().getPhysicalFilePath();
         }
         return Scope.getCurrentScope().getResourceAccessor().openStream(relativeTo, path);

@@ -420,7 +420,7 @@ public class MSSQLDatabase extends AbstractJdbcDatabase {
                 Scope.getCurrentScope().getLog(getClass()).warning("Cannot determine case sensitivity from MSSQL", e);
             }
         }
-        return (caseSensitive != null) && caseSensitive;
+        return Boolean.TRUE.equals(caseSensitive);
     }
 
     @Override

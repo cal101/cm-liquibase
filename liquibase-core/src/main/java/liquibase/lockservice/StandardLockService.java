@@ -389,7 +389,7 @@ public class StandardLockService implements LockService {
                 } else {
                     locked = (Boolean) lockedValue;
                 }
-                if ((locked != null) && locked) {
+                if (Boolean.TRUE.equals(locked)) {
                     allLocks.add(
                             new DatabaseChangeLogLock(
                                     ((Number) columnMap.get("ID")).intValue(),

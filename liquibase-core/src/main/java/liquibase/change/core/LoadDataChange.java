@@ -323,7 +323,7 @@ public class LoadDataChange extends AbstractChange implements ChangeWithColumns<
                 }
 
                 boolean needsPreparedStatement = false;
-                if (usePreparedStatements != null && usePreparedStatements) {
+                if (Boolean.TRUE.equals(usePreparedStatements)) {
                     needsPreparedStatement = true;
                 }
 
