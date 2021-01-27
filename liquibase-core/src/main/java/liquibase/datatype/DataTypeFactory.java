@@ -151,7 +151,7 @@ public class DataTypeFactory {
                 if ((indexOfCloseQuote != -1) && (dataTypeName.indexOf(closeQuote, indexOfCloseQuote + closeQuote
                     .length()) == -1)) {
                     dataTypeName = dataTypeName.substring(openQuote.length(), indexOfCloseQuote) +
-                            dataTypeName.substring(indexOfCloseQuote + closeQuote.length(), dataTypeName.length());
+                            dataTypeName.substring(indexOfCloseQuote + closeQuote.length());
                     break;
                 }
             }
