@@ -156,7 +156,7 @@ public class InformixDatabase extends AbstractJdbcDatabase {
 	@Override
     public boolean isCorrectDatabaseImplementation(final DatabaseConnection conn)
 			throws DatabaseException {
-		Boolean correct = false;
+		boolean correct = false;
 		String name = conn.getDatabaseProductName();
 		if (name != null && (name.equals(PRODUCT_NAME) || name.startsWith(PRODUCT_NAME_DB2JCC_PREFIX))) {
 				correct = true;
