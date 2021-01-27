@@ -109,7 +109,7 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
 
                 ValidationErrors errors = change.validate(database);
                 assertFalse("Validation errors for " + changeMetaData.getName() + " on "
-                        + database.getShortName() + ": " + errors.toString(), errors.hasErrors());
+                        + database.getShortName() + ": " + errors, errors.hasErrors());
 
                 SqlStatement[] sqlStatements = {};
                 try {
@@ -255,7 +255,7 @@ public class VerifyChangeClassesTest extends AbstractVerifyTest {
                     }
 
                     ValidationErrors errors = change.validate(database);
-                    assertFalse("Validation errors for " + changeMetaData.getName() + " on "+database.getShortName()+": " +errors.toString(), errors.hasErrors());
+                    assertFalse("Validation errors for " + changeMetaData.getName() + " on "+database.getShortName()+": " +errors, errors.hasErrors());
 //
 //                    SqlStatement[] sqlStatements = change.generateStatements(database);
 //                    for (SqlStatement statement : sqlStatements) {

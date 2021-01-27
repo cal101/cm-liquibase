@@ -66,7 +66,7 @@ public class InsertOrUpdateGeneratorInformix extends InsertOrUpdateGenerator {
       values.delete(lastComma, lastComma + 2);
     }
 
-    return "INSERT (" + columns.toString() + ") VALUES (" + values.toString() + ")\n";
+    return "INSERT (" + columns + ") VALUES (" + values + ")\n";
   }
 
   @Override

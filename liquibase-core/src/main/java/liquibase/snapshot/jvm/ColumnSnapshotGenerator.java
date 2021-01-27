@@ -305,7 +305,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
                     column.setNullable(true);
                 } else if (nullable == DatabaseMetaData.columnNullableUnknown) {
                     Scope.getCurrentScope().getLog(getClass()).info("Unknown nullable state for column "
-                            + column.toString() + ". Assuming nullable");
+                            + column + ". Assuming nullable");
                     column.setNullable(true);
                 }
             }
@@ -340,7 +340,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
                         } else if (isAutoincrement.equals("NO")) {
                             column.setAutoIncrementInformation(null);
                         } else if (isAutoincrement.equals("")) {
-                            Scope.getCurrentScope().getLog(getClass()).info("Unknown auto increment state for column " + column.toString() + ". Assuming not auto increment");
+                            Scope.getCurrentScope().getLog(getClass()).info("Unknown auto increment state for column " + column + ". Assuming not auto increment");
                             column.setAutoIncrementInformation(null);
                         } else {
                             throw new UnexpectedLiquibaseException("Unknown is_autoincrement value: '" + isAutoincrement + "'");

@@ -142,7 +142,7 @@ public class OnlineHubService implements HubService {
         final UUID organizationId = getOrganization().getId();
 
         try {
-            return http.doGet("/api/v1/organizations/" + organizationId.toString() + "/projects/"+projectId, Project.class);
+            return http.doGet("/api/v1/organizations/" + organizationId + "/projects/"+projectId, Project.class);
         } catch (LiquibaseHubObjectNotFoundException lbe) {
             Scope.getCurrentScope().getLog(getClass()).severe(lbe.getMessage(), lbe);
             return null;
@@ -153,7 +153,7 @@ public class OnlineHubService implements HubService {
     public List<Project> getProjects() throws LiquibaseHubException {
         final UUID organizationId = getOrganization().getId();
 
-        final Map<String, List<Map>> response = http.doGet("/api/v1/organizations/" + organizationId.toString() + "/projects", Map.class);
+        final Map<String, List<Map>> response = http.doGet("/api/v1/organizations/" + organizationId + "/projects", Map.class);
         List<Map> contentList = response.get("content");
         List<Project> returnList = new ArrayList<>();
         for (int i = 0; i < contentList.size(); i++) {
@@ -180,14 +180,14 @@ public class OnlineHubService implements HubService {
     public Project createProject(Project project) throws LiquibaseException {
         final UUID organizationId = getOrganization().getId();
 
-        return http.doPost("/api/v1/organizations/" + organizationId.toString() + "/projects", project, Project.class);
+        return http.doPost("/api/v1/organizations/" + organizationId + "/projects", project, Project.class);
     }
 
     @Override
     public HubChangeLog createChangeLog(HubChangeLog hubChangeLog) throws LiquibaseException {
         final UUID organizationId = getOrganization().getId();
 
-        return http.doPost("/api/v1/organizations/" + organizationId.toString() + "/projects/" + hubChangeLog.getProject().getId() + "/changelogs", hubChangeLog, HubChangeLog.class);
+        return http.doPost("/api/v1/organizations/" + organizationId + "/projects/" + hubChangeLog.getProject().getId() + "/changelogs", hubChangeLog, HubChangeLog.class);
     }
 
     @Override
@@ -204,7 +204,7 @@ public class OnlineHubService implements HubService {
     public Connection getConnection(Connection exampleConnection, boolean createIfNotExists) throws LiquibaseHubException {
         if (exampleConnection.getId() != null) {
             //do not auto-create if specifying the exact id
-            return http.doGet("/api/v1/connections/" + exampleConnection.getId().toString(), null, Connection.class);
+            return http.doGet("/api/v1/connections/" + exampleConnection.getId(), null, Connection.class);
         }
 
         final List<Connection> connections;
@@ -310,7 +310,7 @@ public class OnlineHubService implements HubService {
             return hubChangeLog;
         } catch (LiquibaseHubObjectNotFoundException lbe) {
             final String message = lbe.getMessage();
-            String uiMessage = "Retrieving Hub Change Log failed for Changelog ID " + changeLogId.toString();
+            String uiMessage = "Retrieving Hub Change Log failed for Changelog ID " + changeLogId;
             Scope.getCurrentScope().getUI().sendMessage(uiMessage + ": " + message);
             Scope.getCurrentScope().getLog(getClass()).severe(message, lbe);
             return null;
@@ -450,9 +450,9 @@ public class OnlineHubService implements HubService {
               .setStatusMessage(operationChangeEvent.getStatusMessage())
               .setLogsTimestamp(logsTimestamp);
         http.doPost("/api/v1" +
-                        "/organizations/" + getOrganization().getId().toString() +
-                        "/projects/" + operationChangeEvent.getProject().getId().toString() +
-                        "/operations/" + operationChangeEvent.getOperation().getId().toString() +
+                        "/organizations/" + getOrganization().getId() +
+                        "/projects/" + operationChangeEvent.getProject().getId() +
+                        "/operations/" + operationChangeEvent.getOperation().getId() +
                         "/change-events",
                 sendOperationChangeEvent, OperationChangeEvent.class);
     }
@@ -465,9 +465,9 @@ public class OnlineHubService implements HubService {
         }
 
         http.doPost("/api/v1" +
-                        "/organizations/" + getOrganization().getId().toString() +
-                        "/projects/" + operationChange.getProject().getId().toString() +
-                        "/operations/" + operationChange.getOperation().getId().toString() +
+                        "/organizations/" + getOrganization().getId() +
+                        "/projects/" + operationChange.getProject().getId() +
+                        "/operations/" + operationChange.getOperation().getId() +
                         "/changes",
                 hubChangeList, ArrayList.class);
     }

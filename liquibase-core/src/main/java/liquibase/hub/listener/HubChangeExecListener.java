@@ -275,7 +275,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
         }
         catch (LiquibaseException lbe) {
             logger.warning(lbe.getMessage(), lbe);
-            logger.warning("Unable to send Operation Change Event for operation '" + operation.getId().toString() +
+            logger.warning("Unable to send Operation Change Event for operation '" + operation.getId() +
                     " change set '" + changeSet.toString(false));
         }
     }
@@ -410,7 +410,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
         }
         catch (LiquibaseException lbe) {
             logger.warning(lbe.getMessage(), lbe);
-            logger.warning("Unable to send Operation Change Event for operation '" + operation.getId().toString() +
+            logger.warning("Unable to send Operation Change Event for operation '" + operation.getId() +
                     " change set '" + changeSet.toString(false));
             failedToPostCount++;
         }

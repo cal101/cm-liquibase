@@ -231,7 +231,7 @@ public class AddColumnGenerator extends AbstractSqlGenerator<AddColumnStatement>
                     refColName = ((ForeignKeyConstraint) constraint).getReferencedColumnNames();
                 }
 
-                if (refTableName.indexOf(".") > 0) {
+                if (refTableName.indexOf('.') > 0) {
                     refSchemaName = refTableName.split("\\.")[0];
                     refTableName = refTableName.split("\\.")[1];
                 }

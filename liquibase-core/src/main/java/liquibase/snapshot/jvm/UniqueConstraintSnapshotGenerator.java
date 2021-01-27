@@ -145,7 +145,7 @@ public class UniqueConstraintSnapshotGenerator extends JdbcSnapshotGenerator {
         boolean bulkQuery;
         String sql;
 
-        String cacheKey = "uniqueConstraints-" + example.getClass().getSimpleName() + "-" + example.getSchema().toCatalogAndSchema().customize(database).toString();
+        String cacheKey = "uniqueConstraints-" + example.getClass().getSimpleName() + "-" + example.getSchema().toCatalogAndSchema().customize(database);
         String queryCountKey = "uniqueConstraints-" + example.getClass().getSimpleName() + "-queryCount";
 
         Map<String, List<Map<String, ?>>> columnCache = (Map<String, List<Map<String, ?>>>) snapshot.getScratchData(cacheKey);

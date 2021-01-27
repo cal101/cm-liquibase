@@ -121,7 +121,7 @@ public class FileSystemResourceAccessor extends AbstractResourceAccessor {
                 if (entry != null) {
                     // closing this stream will close zipFile
                     stream = new CloseChildWillCloseParentStream(zipFile.getInputStream(entry), zipFile);
-                    streamURI = URI.create(rootPath.normalize().toUri() + "!" + entry.toString());
+                    streamURI = URI.create(rootPath.normalize().toUri() + "!" + entry);
                 } else {
                     zipFile.close();
                 }

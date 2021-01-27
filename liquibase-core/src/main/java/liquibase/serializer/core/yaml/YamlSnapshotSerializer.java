@@ -67,11 +67,11 @@ public class YamlSnapshotSerializer extends YamlSerializer implements SnapshotSe
                         table = ((DatabaseObject) object).getAttribute("relation", Object.class);
                     }
                     if (table != null) {
-                        name = table.toString() + "." + name;
+                        name = table + "." + name;
                     }
 
                     if (((DatabaseObject) object).getSchema() != null) {
-                        name = ((DatabaseObject) object).getSchema().toString() + "." + name;
+                        name = ((DatabaseObject) object).getSchema() + "." + name;
                     }
 
                     throw new UnexpectedLiquibaseException("Found a null snapshotId for " + StringUtil.lowerCaseFirst(object.getClass().getSimpleName()) + " " + name);

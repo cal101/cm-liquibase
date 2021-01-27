@@ -113,7 +113,7 @@ public class StringUtil {
                     returnList.add(obj);
                 }
             } else {
-                String possibleMergeString = StringUtil.join(possibleMerge, "") + obj.toString();
+                String possibleMergeString = StringUtil.join(possibleMerge, "") + obj;
                 if (endDelimiter.equals(possibleMergeString)) {
                     returnList.add(possibleMergeString);
                     possibleMerge.clear();
@@ -149,7 +149,7 @@ public class StringUtil {
                         return false;
                     }
                 }
-                return piece.toLowerCase().equalsIgnoreCase(endDelimiter.toLowerCase());
+                return piece.equalsIgnoreCase(endDelimiter);
             } else {
                 return piece.toLowerCase().matches(endDelimiter.toLowerCase()) || (previousPiece+piece).toLowerCase().matches("[\\s\n\r]*"+endDelimiter.toLowerCase());
             }
@@ -235,7 +235,7 @@ public class StringUtil {
     public static String join(Map map, String delimiter, StringUtilFormatter formatter) {
         List<String> list = new ArrayList<>();
         for (Map.Entry entry : (Set<Map.Entry>) map.entrySet()) {
-            list.add(entry.getKey().toString()+"="+formatter.toString(entry.getValue()));
+            list.add(entry.getKey()+"="+formatter.toString(entry.getValue()));
         }
         return join(list, delimiter);
     }

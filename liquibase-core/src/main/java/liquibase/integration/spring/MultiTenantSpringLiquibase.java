@@ -105,7 +105,7 @@ public class MultiTenantSpringLiquibase implements InitializingBean, ResourceLoa
 		Logger log = Scope.getCurrentScope().getLog(getClass());
 
 		Context context = new InitialContext();
-		int lastIndexOf = jndiBase.lastIndexOf("/");
+		int lastIndexOf = jndiBase.lastIndexOf('/');
 		String jndiRoot = jndiBase.substring(0, lastIndexOf);
 		String jndiParent = jndiBase.substring(lastIndexOf + 1);
 		Context base = (Context) context.lookup(jndiRoot);

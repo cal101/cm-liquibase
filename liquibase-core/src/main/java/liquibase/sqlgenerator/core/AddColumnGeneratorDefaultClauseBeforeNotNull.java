@@ -85,7 +85,7 @@ public class AddColumnGeneratorDefaultClauseBeforeNotNull extends AddColumnGener
         }
 
         if (statement.getAddAtPosition() != null) {
-            alterTable += " POSITION " + statement.getAddAtPosition().toString() + " ";
+            alterTable += " POSITION " + statement.getAddAtPosition() + " ";
         }
 
         return alterTable;

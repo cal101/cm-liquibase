@@ -150,8 +150,8 @@ public abstract class AbstractExecuteTest {
     }
 
     private String replaceType(String type, String baseString, Database database) {
-        return baseString.replaceAll(" " + type + " ", " " + DataTypeFactory.getInstance().fromDescription(type, database).toDatabaseDataType(database).toString() + " ")
-                .replaceAll(" " + type + ",", " " + DataTypeFactory.getInstance().fromDescription(type, database).toDatabaseDataType(database).toString() + ",");
+        return baseString.replaceAll(" " + type + " ", " " + DataTypeFactory.getInstance().fromDescription(type, database).toDatabaseDataType(database) + " ")
+                .replaceAll(" " + type + ",", " " + DataTypeFactory.getInstance().fromDescription(type, database).toDatabaseDataType(database) + ",");
     }
 
     private String replaceDatabaseClauses(String convertedSql, Database database) {
@@ -186,8 +186,8 @@ public abstract class AbstractExecuteTest {
     private String replaceEscaping(String expectedSql, Database database) {
         String convertedSql = expectedSql;
         int lastIndex = 0;
-        while ((lastIndex = convertedSql.indexOf("[", lastIndex)) >= 0) {
-            String objectName = convertedSql.substring(lastIndex + 1, convertedSql.indexOf("]", lastIndex));
+        while ((lastIndex = convertedSql.indexOf('[', lastIndex)) >= 0) {
+            String objectName = convertedSql.substring(lastIndex + 1, convertedSql.indexOf(']', lastIndex));
             try {
                 convertedSql = convertedSql.replace("[" + objectName + "]", database.escapeObjectName(objectName, Table.class));
             } catch (Exception e) {
