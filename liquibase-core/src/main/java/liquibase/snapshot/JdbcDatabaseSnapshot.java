@@ -626,9 +626,9 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
             public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
                 CatalogAndSchema catalogAndSchema = new CatalogAndSchema(catalogName, schemaName).customize(database);
 
-                List<CachedRow> returnList = new ArrayList<CachedRow>();
+                List<CachedRow> returnList = new ArrayList<>();
 
-                List<String> tables = new ArrayList<String>();
+                List<String> tables = new ArrayList<>();
                 String jdbcCatalogName = ((AbstractJdbcDatabase) database).getJdbcCatalogName(catalogAndSchema);
                 String jdbcSchemaName = ((AbstractJdbcDatabase) database).getJdbcSchemaName(catalogAndSchema);
 
@@ -902,7 +902,7 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
 
             @Override
             protected List<CachedRow> extract(ResultSet resultSet, boolean informixIndexTrimHint) throws SQLException {
-                List<CachedRow> cachedRowList = new ArrayList<CachedRow>();
+                List<CachedRow> cachedRowList = new ArrayList<>();
                 if (!(database instanceof OracleDatabase)) {
                     return cachedRowList;
                 }

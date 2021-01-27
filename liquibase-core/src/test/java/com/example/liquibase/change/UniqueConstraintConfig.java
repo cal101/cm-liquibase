@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UniqueConstraintConfig extends AbstractLiquibaseSerializable {
     private String name;
-    private List<KeyColumnConfig> keyColumns = new ArrayList<KeyColumnConfig>();
+    private List<KeyColumnConfig> keyColumns = new ArrayList<>();
 
     @Override
     public String getSerializedObjectNamespace() {

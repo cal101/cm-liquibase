@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PrimaryKeyConfig extends AbstractLiquibaseSerializable {
     private String name;
-    private List<KeyColumnConfig> keyColumns = new ArrayList<KeyColumnConfig>();
+    private List<KeyColumnConfig> keyColumns = new ArrayList<>();
 
     @Override
     public String getSerializedObjectNamespace() {

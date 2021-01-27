@@ -866,7 +866,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
     }
 
     public Collection<LabelExpression> getInheritableLabels() {
-        Collection<LabelExpression> expressions = new ArrayList<LabelExpression>();
+        Collection<LabelExpression> expressions = new ArrayList<>();
         DatabaseChangeLog changeLog = getChangeLog();
         while (changeLog != null) {
             LabelExpression expression = changeLog.getIncludeLabels();

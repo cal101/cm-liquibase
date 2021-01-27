@@ -83,7 +83,7 @@ public abstract class DatabaseSnapshot implements LiquibaseSerializable {
             this.setScratchData("DatabaseSnapshot.allCatalogs", catalogs);
 
             if (catalogs.size() > 1) {
-                List<String> quotedCatalogs = new ArrayList<String>();
+                List<String> quotedCatalogs = new ArrayList<>();
                 for (Catalog catalog : catalogs) {
                     quotedCatalogs.add("'" + catalog.getName() + "'");
                 }

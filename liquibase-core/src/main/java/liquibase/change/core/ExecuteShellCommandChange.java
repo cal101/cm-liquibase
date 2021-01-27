@@ -44,7 +44,7 @@ public class ExecuteShellCommandChange extends AbstractChange {
     protected List<String> finalCommandArray;
     private String executable;
     private List<String> os;
-    private List<String> args = new ArrayList<String>();
+    private List<String> args = new ArrayList<>();
     private String timeout;
     private static final Pattern TIMEOUT_PATTERN = Pattern.compile("^\\s*(\\d+)\\s*([sSmMhH]?)\\s*$");
     private static final Long SECS_IN_MILLIS = 1000L;

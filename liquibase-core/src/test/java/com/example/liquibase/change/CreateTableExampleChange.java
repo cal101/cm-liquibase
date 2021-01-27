@@ -18,9 +18,9 @@ import java.util.List;
 public class CreateTableExampleChange extends AbstractChange {
     private String schemaName;
     private String tableName;
-    private List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
+    private List<ColumnConfig> columns = new ArrayList<>();
     private PrimaryKeyConfig primaryKey;
-    private List<UniqueConstraintConfig> uniqueConstraints = new ArrayList<UniqueConstraintConfig>();
+    private List<UniqueConstraintConfig> uniqueConstraints = new ArrayList<>();
     private BigDecimal decimalValue;
 
     @Override

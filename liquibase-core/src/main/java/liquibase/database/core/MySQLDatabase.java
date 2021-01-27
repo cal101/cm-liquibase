@@ -342,7 +342,7 @@ public class MySQLDatabase extends AbstractJdbcDatabase {
      * list from http://dev.mysql.com/doc/refman/5.6/en/reserved-words.html
      */
     private static Set<String> createReservedWords() {
-        return new HashSet<String>(Arrays.asList("ACCESSIBLE",
+        return new HashSet<>(Arrays.asList("ACCESSIBLE",
             "ADD",
             "ADMIN",
                 "ALL",

@@ -1471,7 +1471,7 @@ public class Main {
                             createReferenceDatabaseFromCommandParams(commandParams, fileOpener),
                             database,
                             StringUtil.trimToNull(diffTypes), finalSchemaComparisons, objectChangeFilter, new PrintStream(getOutputStream()));
-                    Map<String, Object> argsMap = new HashMap<String, Object>();
+                    Map<String, Object> argsMap = new HashMap<>();
                     argsMap.put("format", getCommandParam(OPTIONS.FORMAT, "JSON"));
                     argsMap.put("diffCommand", diffCommand);
                     ((AbstractSelfConfiguratingCommand) liquibaseCommand).configure(argsMap);

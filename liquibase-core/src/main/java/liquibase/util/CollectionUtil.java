@@ -60,7 +60,7 @@ public class CollectionUtil {
      */
     public static <T> List<T> createIfNull(List<T> currentValue) {
         if (currentValue == null) {
-            return new ArrayList<T>();
+            return new ArrayList<>();
         } else {
             return currentValue;
         }

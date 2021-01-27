@@ -86,7 +86,7 @@ public class InsertOrUpdateGeneratorInformix extends InsertOrUpdateGenerator {
       StringBuilder sql = new StringBuilder("WHEN MATCHED THEN\n");
       sql.append("UPDATE SET ");
 
-      HashSet<String> hashPkFields = new HashSet<String>(Arrays.asList(pkFields));
+      HashSet<String> hashPkFields = new HashSet<>(Arrays.asList(pkFields));
 
       for (String columnKey : columnValues.keySet()) {
         // Do not include Primary Key fields within the update
