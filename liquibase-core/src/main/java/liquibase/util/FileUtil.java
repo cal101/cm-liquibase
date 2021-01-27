@@ -51,7 +51,7 @@ public class FileUtil {
             return null;
         }
         try (
-            FileInputStream fileInputStream = new FileInputStream(file);
+            FileInputStream fileInputStream = new FileInputStream(file)
         ) {
             
             return StreamUtil.readStreamAsString(fileInputStream);
@@ -64,7 +64,7 @@ public class FileUtil {
         file.getParentFile().mkdirs();
         
         try (
-            FileOutputStream output = new FileOutputStream(file);
+            FileOutputStream output = new FileOutputStream(file)
         ){
             StreamUtil.copy(new ByteArrayInputStream(contents.getBytes(LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding())), output);
         }

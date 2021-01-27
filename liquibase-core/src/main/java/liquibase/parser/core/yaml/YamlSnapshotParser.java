@@ -25,7 +25,7 @@ public class YamlSnapshotParser extends YamlParser implements SnapshotParser {
         Yaml yaml = new Yaml(new SafeConstructor());
 
         try (
-                InputStream stream = resourceAccessor.openStream(null, path);
+                InputStream stream = resourceAccessor.openStream(null, path)
         ) {
             if (stream == null) {
                 throw new LiquibaseParseException(path + " does not exist");
@@ -68,7 +68,7 @@ public class YamlSnapshotParser extends YamlParser implements SnapshotParser {
         try (
             InputStreamReader inputStreamReader = new InputStreamReader(
                 stream, LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class).getOutputEncoding()
-            );
+            )
         ) {
             parsedYaml = (Map) yaml.load(inputStreamReader);
         } catch (Exception e) {

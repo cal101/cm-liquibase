@@ -50,7 +50,7 @@ public class MissingDataExternalFileChangeGenerator extends MissingDataChangeGen
         ResultSet rs = null;
         try (
             Statement stmt = ((JdbcConnection) referenceDatabase.getConnection()).createStatement(
-                ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+                ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)
         )
         {
             Data data = (Data) missingObject;
@@ -93,7 +93,7 @@ public class MissingDataExternalFileChangeGenerator extends MissingDataChangeGen
                                 LiquibaseConfiguration.getInstance().getConfiguration(GlobalConfiguration.class)
                                         .getOutputEncoding()
                         );
-                        CSVWriter outputFile = new CSVWriter(new BufferedWriter(outputStreamWriter));
+                        CSVWriter outputFile = new CSVWriter(new BufferedWriter(outputStreamWriter))
                 ) {
 
                     dataTypes = new String[columnNames.size()];
