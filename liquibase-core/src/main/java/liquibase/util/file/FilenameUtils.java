@@ -1073,12 +1073,7 @@ public class FilenameUtils {
             return (indexOfExtension(filename) == -1);
         }
         String fileExt = getExtension(filename);
-        for (Iterator it = extensions.iterator(); it.hasNext();) {
-            if (fileExt.equals(it.next())) {
-                return true;
-            }
-        }
-        return false;
+        return extensions.contains(fileExt);
     }
 
     //-----------------------------------------------------------------------
